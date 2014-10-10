@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Users_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="GettingStarted">
+<title>Getting Started</title>
+<para>
+The “Cloud Area Padovana” offers for the time being a pre-production service 
+based on the Havana version of the OpenStack middleware.
+</para>
+<para>
+The following explains how to use it.
+	</para>
+
+
+
+<section id="RequestAnAccount">
+<title>Request an account</title>
+<para>
+To be able to use the Cloud Area Padovana service, first of all you need to 
+apply for an account.
+The registration phase will be in the future managed through a web-based 
+application. 
+</para>
+<para>
+For the time being please send your request to: <email>cloud-support@lists.pd.infn.it</email>
+</para>
+<para>
+In your request please specify:
+<itemizedlist>
+<listitem><para>Your name and family name</para></listitem>
+<listitem><para>The experiment(s)/group(s) you are affiliated with</para></listitem>
+</itemizedlist>
+</para>
+</section>
+	
+<section id="AccessTheCloudThroughTheDashboard">
+<title>Access the Cloud through the Dashboard</title>
+<para>
+Once you have been given an account, you can access the functionality 
+provided by the Cloud.
+There are several ways of interacting with the Cloud. The simplest one is the 
+dashboard, a web based GUI.
+</para>
+<para>
+To access the Cloud dell'area Padovana via the dashboard, you must simply go 
+to  <ulink url="https://cloudpp-areapd.pd.infn.it:8443/dashboard">https://cloudpp-areapd.pd.infn.it:8443/dashboard</ulink> in a browser.
+</para>
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/dashboard.png" />
+</imageobject>
+</mediaobject>
+
+
+<para>
+You can now log in using the username and password provided by the Cloud 
+administrators.
+</para>
+</section>
+
+
+<section id="CreatingAKeypair">
+<title>Creating a keypair</title>
+<para>
+You can now proceed to creating a key-pair. This is a secret key which will 
+allow you to interact with your virtual machine once it is created. This key 
+should be handled with similar security to a password or an ssh key so it 
+should only be stored in a secure directory such as a private area in your 
+home folder.
+</para>
+<para>
+The steps are as follows:
+</para>
+<itemizedlist>
+<listitem><para>Go to the <menuchoice><guimenu>Access and Security
+</guimenu></menuchoice> on the left hand side menu</para></listitem>
+<listitem><para>In the <menuchoice><guimenu>keypairs</guimenu></menuchoice> 
+section, select <menuchoice><guimenu>Create a keypair</guimenu></menuchoice>. 
+You will need to give the keypair a name, such as 
+<replaceable>my_key</replaceable>.</para></listitem>
+</itemizedlist>
+
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/create_keypair.png" />
+</imageobject>
+</mediaobject>
+
+
+
+<para>
+On completion of the operation, a file <replaceable>my_key.pem</replaceable> will be downloaded to your browser. This should be stored in a safe location. 
+To keep it private, run:
+<command>
+$ chmod 600 <replaceable>my_key.pem</replaceable>
+</command>
+</para>
+</section>
+
+
+<section id="AccessingtheCloudthroughCLI">
+<title>Accessing the Cloud through the Openstack command line tools</title>
+<para>
+It is possible to access the functionality of the Cloud also using the 
+Openstack command line tools, even if most of the functionality provided by 
+the Cloud can be accessed through the dashboard web interface.
+The <ulink url="http://docs.openstack.org">Openstack End User Guide</ulink>
+contains extended information on the command line tools in OpenStack.
+Documentation at <ulink url="http://docs.openstack.org/user-guide/content/install_clients.html">http://docs.openstack.org/user-guide/content/install_clients.html</ulink> explains how to install the Openstack client.
+</para>
+
+<para>
+The OpenStack tools require a set of shell environment variables in order to 
+run. These variables can be obtained and stored in an 'rc' file much like 
+.profile when logging into a linux server. The environment variables are 
+different per project that you work on. If you log into the dashboard, you 
+will find an <menuchoice><guimenu>Access and Security</guimenu></menuchoice>
+menu on the left hand side. Then choose the 
+<menuchoice><guimenu>API Access</guimenu></menuchoice> Tab to select the 
+options related to using the program interfaces. Select the 
+<menuchoice><guimenu>Download OpenStack RC file</guimenu></menuchoice> option 
+on the top right to download the rc file for your current project. 
+</para>
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/download_rc.png" />
+</imageobject>
+</mediaobject>
+
+<para>
+This file 
+is different for each of the projects you are working on. This file should be 
+saved onto the machine where you want to run the commands from. If you use 
+csh rather than bash/zsh for your shell, you would need to create a new 
+version using 'setenv' rather than export.
+</para>
+
+<para>
+To test it works, run the rc script source file and enter your password to 
+authenticate. The OpenStack command line tools (nova for compute resources, glance for images) can then be used, etc:
+</para>
+<screen>
+$ . ALICE-openrc.sh 
+Please enter your OpenStack Password: 
+$ nova list
++--------------------------------------+---------------------------------------------+--------+------------+-------------+----------------------+
+| ID                                   | Name                                        | Status | Task State | Power State | Networks             |
++--------------------------------------+---------------------------------------------+--------+------------+-------------+----------------------+
+| d85a4221-b2cc-4bcd-8c56-af21afa8ce5c | Monitoring_Server                           | ACTIVE | -          | Running     | alice-lan=10.62.13.5 |
+| 60005bae-93df-454e-9e1f-07c3be27157c | MySQL_Server                                | ACTIVE | -          | Running     | alice-lan=10.62.13.6 |
+| 6cbb5ded-ba65-4850-8078-1e9f1836e7de | Server 6cbb5ded-ba65-4850-8078-1e9f1836e7de | ACTIVE | -          | Running     | alice-lan=10.62.13.2 |
+| 5ce6926a-2796-4dbd-82f2-d84ced6acf38 | Xrootd_Server                               | ACTIVE | -          | Running     | alice-lan=10.62.13.4 |
++--------------------------------------+---------------------------------------------+--------+------------+-------------+----------------------+
+</screen>
+</section>
+
+
+<section id="AccessingtheCloudthroughEC2">
+<title>Accessing the Cloud through the euca2ools EC2 command line tools</title>
+<para>
+The Cloud Area Padovana also exposes a EC2 interface, which is a de-facto 
+standard for computational clouds.
+</para>
+
+<para>
+The euca2ools are command line tools that can be used to interact with an 
+EC2 based cloud.
+The euca2ools require a set of shell environment variables in order to run. 
+These variables can be obtained and stored in an 'rc' file 
+much like .profile when logging into a linux server. The environment 
+variables are different per project that you work on.
+</para>
+<para>
+If you log into the dashboard, you will find an 
+<menuchoice><guimenu>API Access</guimenu></menuchoice>
+menu on the left then an API Access option. On the left hand side, select 
+<menuchoice><guimenu>EC2 credentials</guimenu></menuchoice> and confirm the 
+project you wish to download the zip file for. The zip file will be 
+downloaded to the browser. 
+</para>
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/download_rc.png" />
+</imageobject>
+</mediaobject>
+
+<para>
+This file should be saved onto the machine where 
+you want to run the commands from and unzipped into a private directory, e.g:
+</para>
+
+<screen>
+$ unzip alice-x509.zip 
+Archive:  alice-x509.zip
+extracting: pk.pem                  
+extracting: cert.pem                
+extracting: cacert.pem              
+extracting: ec2rc.sh   
+</screen>
+
+<para>
+ec2rc.sh gives the variables for accessing the Cloud with EC2 APIs. If you 
+use a C shell based shell, you would need to adapt this using setenv. To test 
+it, you can e.g. try the following:
+</para>
+
+<screen>
+$ . ec2rc.sh 
+$ euca-describe-instances
+RESERVATIONr-41vjiwomae4b3654ea08441fabe232390ae908b6
+INSTANCEi-000015b8ami-00000061mysql-serverrunningvenaruzzo-cloudpp0m1.small2014-09-02T08:44:24.000Znovaaki-00000064ari-0000006710.62.13.6instance-store
+RESERVATIONr-bf7v6v6mae4b3654ea08441fabe232390ae908b6
+INSTANCEi-000015b5ami-00000012server-6cbb5ded-ba65-4850-8078-1e9f1836e7derunningvenaruzzo-cloudpp0m1.small2014-09-01T10:41:34.000Znova10.62.13.2instance-store
+BLOCKDEVICE/dev/vdbvol-0000001ffalse
+RESERVATIONr-yanua8rgae4b3654ea08441fabe232390ae908b6
+INSTANCEi-0000153bami-00000061xrootd-serverrunningvenaruzzo-cloudpp0m1.small2014-08-27T14:09:35.000Znovaaki-00000064ari-0000006710.62.13.4instance-store
+BLOCKDEVICE/dev/vdbvol-00000031false
+RESERVATIONr-sll3yfjlae4b3654ea08441fabe232390ae908b6
+INSTANCEi-000015b2ami-0000001emonitoring-serverrunningvenaruzzo-cloudpp0m1.small2014-09-01T09:34:31.000Znova10.62.13.5instance-store
+</screen>
+
+</section>
+
+<section id="GettingHelp">
+<title>Getting help</title>
+<para>
+If you have problems using the Cloud dell'area Padovana private cloud, please contact the admins at <email>cloud-support@lists.pd.infn.it</email>.
+</para>
+
+<para>
+Changes and planned interventions to the service will be posted on the
+<email>cloud-users@lists.pd.infn.it</email>.
+All registered users to the Cloud are member of this mailing list.
+</para>
+</section>
+
+
+
+</chapter>
+

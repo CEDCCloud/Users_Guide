@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Users_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="AdministeringVMs">
+<title>Administering VMs</title>
+
+<section id="CreatingVMs">
+<title>Creating VMs</title>
+<para>
+To create a VM using the dashboard, you need to have already logged into the 
+dashboard and created your private key, as explained before.
+</para>
+
+<para>
+To create a VM, the steps are as follows:
+</para>
+
+<itemizedlist>
+
+<listitem><para>
+On the left hand menu, select the Project that must be used for this VM
+</para></listitem>
+
+
+<listitem><para>
+Go to <menuchoice><guimenu>Instances</guimenu></menuchoice> on the left hand 
+menu. This will display a list of VMs currently running in your project.
+</para></listitem>
+
+
+<listitem><para>
+Select <menuchoice><guimenu>Launch Instance</guimenu></menuchoice> on the 
+top right hand side of the dashboard. A new menu appears where you can enter:
+</para>
+
+
+<itemizedlist>
+
+<listitem><para>
+<menuchoice><guimenu>Instance name</guimenu></menuchoice> is the name of the 
+machine you want to create. Please note that this name will not be registered 
+in the DNS
+</para></listitem>
+
+<listitem><para>
+<menuchoice><guimenu>Flavor</guimenu></menuchoice> is the size of the machine 
+you want to create. These are specified using VPCU (number of virtual CPUs, 
+GB of disk space for the system disk, MB RAM for the memory). Selecting small 
+flavors is more economical and the flavor of a virtual machine can be changed 
+later if required.
+</para></listitem>
+
+<listitem><para>
+As <menuchoice><guimenu>Instance Boot Source</guimenu></menuchoice> 
+select <menuchoice><guimenu>Boot from Image</guimenu></menuchoice> or 
+<menuchoice><guimenu>Boot from Snapshot</guimenu></menuchoice> and then 
+specify its name
+</para></listitem>
+
+</itemizedlist>
+</listitem>
+
+<listitem><para>
+Switch the tab for 
+<menuchoice><guimenu>Access and Security</guimenu></menuchoice> 
+</para>
+
+<itemizedlist>
+
+<listitem><para>
+Select the keypair you created. This will allow you to log in as root using 
+the key
+</para></listitem>
+
+
+<listitem><para>
+You can also specify the admin (usually root) password of the instance. 
+Please note that this is not guaranteed to always work (the image can't 
+support the “injection” of this password). It is therefore suggested to use 
+the ssh-key mechanisms.
+</para></listitem>
+
+<listitem><para>
+Specify the Security group to be used for this VM
+</para></listitem>
+
+
+</itemizedlist>
+</listitem>
+
+<listitem><para>
+Swith the tab for <menuchoice><guimenu>Networking</guimenu></menuchoice>.
+You should see one network called <replaceable>xyz-lan</replaceable>, and in 
+some cases also another network called <replaceable>xyz-wan</replaceable>. 
+Select the former one if your VM doesn't need to be visible on the Internet. 
+Select instead the <replaceable>xyz-wan</replaceable> network if your VM must 
+have a public IP
+</para></listitem>
+
+<listitem><para>
+Select <menuchoice><guimenu>Launch</guimenu></menuchoice> to start the 
+virtual machine being created. When this returns to the overview screen, 
+there will be a line with the instance name, ip adress and status. The status 
+should be active once the install is complete.
+</para></listitem>
+
+</itemizedlist>
+
+<para>
+Once the status of the machine is 'Active', you can watch the console to see 
+it installing and booting. On the right hand side of the table, under 
+<menuchoice><guimenu>More</guimenu></menuchoice>, there is a pull down menu. 
+Options include <menuchoice><guimenu>View Log</guimenu></menuchoice> and 
+<menuchoice><guimenu>Console</guimenu></menuchoice>. For a Linux machine, 
+select <menuchoice><guimenu>Console</guimenu></menuchoice> to access to the 
+console of the VM.
+</para>
+
+
+<warning><para>
+Please note that Virtual Machines instantiated on the Cloud aren't
+registered in the DNS. This means that you'll have to refer to them
+using there IP numbers.
+</para></warning>
+
+<warning><para>
+Please note that this setting the admin password is not guaranteed to always 
+work (the image can't support the “injection” of this password). It is 
+therefore suggested to use the ssh-key mechanisms. 
+</para></warning>
+
+</section>
+
+
+</chapter>
+
