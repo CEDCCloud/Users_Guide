@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Users_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="ManagingStorage">
+<title>Managing Storage</title>
+
+<para>
+There are several ways of handling disk storage in the Cloud Area Padovana:
+</para>
+
+<para>
+
+<itemizedlist>
+
+<listitem><para>
+Ephemeral storage exists only for the life of a virtual machine instance. It 
+will persist across reboots of the guest operating system but when the 
+instance is deleted so is the associated storage. The size of the ephemeral 
+storage is defined in the virtual machine flavor.
+</para></listitem>
+
+<listitem><para>
+Volumes are persistent virtualized block devices independent of any 
+particular instance. Volumes may be attached to a single instance at a time, 
+but may be detached or reattached to a different instance while retaining 
+all data, much like a USB drive. The size of the volume can be selected when 
+it is created within the quota limits for the particular project.
+</para></listitem>
+
+</itemizedlist>
+
+</para>
+
+</chapter>
