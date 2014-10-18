@@ -17,6 +17,14 @@ dashboard and created your private key, as explained before.
 To create a VM, the steps are as follows:
 </para>
 
+<para>
+<itemizedlist>
+<listitem><para>Number of virtual CPU cores (VCPUs)</para></listitem>
+<listitem><para>Amount of memory</para></listitem>
+<listitem><para>Disk space</para></listitem>
+</itemizedlist>
+</para>
+
 <itemizedlist>
 
 <listitem><para>
@@ -125,11 +133,11 @@ registered in the DNS. This means that you'll have to refer to them
 using there IP numbers.
 </para></warning>
 
-<warning><para>
+<note><para>
 Please note that this setting the admin password is not guaranteed to always 
 work (the image can't support the “injection” of this password). It is 
 therefore suggested to use the ssh-key mechanisms. 
-</para></warning>
+</para></note>
 
 </section>
 
@@ -147,34 +155,71 @@ Assuming you stored your <replaceable>my_key</replaceable> keypair in
 $ ssh -o GSSAPIAuthentication=no -i ~/my_key root@10.62.15.3
 </screen>
 
+<para>
 <warning><para>
 Please note that VMs of the Cloud are not registered in the DNS, and therefore you must use the IP address.
 </para></warning>
+</para>
+
 </section>
 
 
 <section id="NetworkCond">
 <title>Network considerations</title>
 <para>
-VMs created using the <replaceable>xyz-lan</replaceable> network are 
-“visible” from both the LAN of Padova and Legnaro. This means that e.g. 
-you can access via ssh a VM of the Cloud directly from your desktop located 
-in Padova or Legnaro. Security groups (discussed below) and firewalls 
-set on the VM (e.g. through iptables) then determine which services/port can 
+VMs created using the <replaceable>xyz-lan</replaceable> network are
+“visible” from both the LAN of Padova and Legnaro. This means that e.g.
+you can access via ssh a VM of the Cloud directly from your desktop located
+in Padova or Legnaro. Security groups (discussed below) and firewalls
+set on the VM (e.g. through iptables) then determine which services/port can
 be accessed.
+</para>
+<para>
+The contrary is instead not possible: from a VM created using the
+<replaceable>xyz-lan</replaceable> network it is generally not possible to
+access a host/service hosted in Padova or Legnaro LANs. It is instead
+possible to access the outside Internet network.
+</para>
+</section>
+
+<section id="Flavors">
+<title>Flavors</title>
+<para>
+Flavors define the virtual machine size such as:
 </para>
 
 <para>
-The contrary is instead not possible: from a VM created using the 
-<replaceable>xyz-lan</replaceable> network it is generally not possible to 
-access a host/service hosted in Padova or Legnaro LANs. It is instead 
-possible to access the outside Internet network.
+<itemizedlist>
+<listitem><para>Number of virtual CPU cores (VCPUs)</para></listitem>
+<listitem><para>Amount of memory</para></listitem>
+<listitem><para>Disk space</para></listitem>
+</itemizedlist>
+</para>
+
+<para>
+When an instance has to be created, the flavor to be used for this VM must
+be chosen. Information about the flavors can be seen in the
+<menuchoice><guimenu>Flavor Details</guimenu></menuchoice> box in the
+Dashboard.
+</para>
+
+<note><para>
+For what concerns VCPUs, please note that the Cloud middleware is configured
+to allow some “overbooking”. The Cloud Area Padovana is configured so that a
+physical core is mapped to 4 VCPUs
+</para></note>
+
+<para>
+A disk size of 0 means that the size of the disk is the same as that in the
+image. For other cases, it may be necessary to resize the partitions.
+</para>
+<para>
+If you find that the specific flavor you require is not available, please
+contact <email>cloud-support@lists.pd.infn.it</email>.
 </para>
 
 
-
 </section>
-
 
 </chapter>
 
