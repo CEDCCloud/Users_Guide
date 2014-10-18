@@ -133,6 +133,48 @@ therefore suggested to use the ssh-key mechanisms.
 
 </section>
 
+<section id="AccessingVMs">
+<title>Accessing to VMs</title>
+<para>
+Assuming you created a Linux virtual machine, using the keypair provided on 
+the start of the VM creation, you can now log in as root.
+
+Assuming you stored your <replaceable>my_key</replaceable> keypair in 
+<replaceable>~/private</replaceable>:
+</para>
+
+<screen>
+$ ssh -o GSSAPIAuthentication=no -i ~/my_key root@10.62.15.3
+</screen>
+
+<warning><para>
+Please note that VMs of the Cloud are not registered in the DNS, and therefore you must use the IP address.
+</para></warning>
+</section>
+
+
+<section id="NetworkCond">
+<title>Network considerations</title>
+<para>
+VMs created using the <replaceable>xyz-lan</replaceable> network are 
+“visible” from both the LAN of Padova and Legnaro. This means that e.g. 
+you can access via ssh a VM of the Cloud directly from your desktop located 
+in Padova or Legnaro. Security groups (discussed below) and firewalls 
+set on the VM (e.g. through iptables) then determine which services/port can 
+be accessed.
+</para>
+
+<para>
+The contrary is instead not possible: from a VM created using the 
+<replaceable>xyz-lan</replaceable> network it is generally not possible to 
+access a host/service hosted in Padova or Legnaro LANs. It is instead 
+possible to access the outside Internet network.
+</para>
+
+
+
+</section>
+
 
 </chapter>
 
