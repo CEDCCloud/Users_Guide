@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Users_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="ManagingImages">
+<title>Managing Images</title>
+<para>
+TBD
+</para>
+
+<section id="PublicImages">
+<title>Public Images</title>
+<para>
+TBD
+</para>
+
+</section>
+
+<section id="UserProvidedImages">
+<title>User Provided Images</title>
+<para>
+TBD
+</para>
+
+</section>
+
+
+
+<section id="SharingImages">
+<title>Sharing Images</title>
+<para>
+TBD
+</para>
+
+</section>
+
+<section id="BuildingImages">
+<title>Building Images</title>
+<para>
+TBD
+</para>
+
+</section>
+
+
+
+<section id="MigratingUsingImages">
+<title>Migrating using images</title>
+<para>
+TBD
+</para>
+
+</section>
+
+</chapter>
