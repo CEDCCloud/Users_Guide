@@ -33,4 +33,152 @@ it is created within the quota limits for the particular project.
 
 </para>
 
+<section id="EphemeralStorage">
+<title>Ephemeral storage</title>
+
+<para>
+Ephemeral storage exists only for the life of a virtual machine instance. 
+It will persist across reboots of the guest operating system but when the 
+instance is deleted so is the associated storage. The size of the ephemeral 
+storage is defined in the virtual machine flavor.
+</para>
+
+<para>
+Among the flavor details (that are listed in the Dashboard when a VM has to 
+be launched or can be seen using the <command>nova flavor-list</command> 
+command), there is an attribute called 'Ephemeral'. When you use a flavor 
+with an ephemeral disk size different from zero, the instance is booted with 
+an extra virtual disk whose size is indicated by the ephemeral value. 
+This ephemeral disk can be useful where you want to partition the second disk 
+or have a specific disk configuration which is not possible within the system 
+disk configuration.
+</para>
+
+</section>
+
+<section id="Volumes">
+<title>Volumes</title>
+
+<para>
+As mentioned above, OpenStack provides two classes of block storage, 
+“ephemeral” storage and persistent “volumes”. Ephemeral storage exists only 
+for the life of an instance: it will persist across reboots of the guest 
+operating system but when the instance is deleted so is the associated storage.
+</para>
+
+<para>
+Volumes are instead persistent virtualized block devices independent of any 
+particular instance. Volumes may be attached to a single instance at a time 
+(i.e. not like a distributed filesystem such as Lustre or Gluster), but they 
+may be detached or reattached to a different instance while retaining all 
+data, much like a USB drive.
+</para>
+
+<para>
+The steps to add a Volume are:
+</para>
+
+<para>
+<itemizedlist>
+<listitem><para>
+Define a disk volume of the size required (12GB in example 
+below) with the volume name defined (<replaceable>testvol</replaceable> in the 
+example below)
+</para></listitem>
+
+<listitem><para>
+Attach that volume to the instance that you would like it to be available on
+</para></listitem>
+
+
+<listitem><para>
+Log in to the instance and format/mount as required
+</para></listitem>
+
+</itemizedlist>
+</para>
+
+<para>
+To define a disk volume using the Dashboard, click on 
+<menuchoice><guimenu>Volumes</guimenu></menuchoice> and then 
+<menuchoice><guimenu>Create Volume</guimenu></menuchoice>. In the 
+“Create Volume” window specify the name of the volume and the desired size. 
+As <menuchoice><guimenu>Volume Source</guimenu></menuchoice> specify 
+“No source, empty volume”.
+</para>
+
+<para>
+The new defined volume will appear in the <menuchoice><guimenu>Volumes</guimenu></menuchoice> 
+tab. To attach this volume to an existing instance, click on 
+<menuchoice><guimenu>Edit attachments</guimenu></menuchoice> and select the 
+relevant Virtual Machine.
+</para>
+
+<para>
+Log into the VM. Check if the disk has been added:
+</para>
+
+<screen>
+grep vdb /proc/partitions
+ 252       48   12582912 vdb
+</screen>
+
+<para>
+If needed, create a file system on it (this will scratch the disk !):
+</para>
+
+<screen>
+mkfs -t ext4 /dev/vdb
+</screen>
+
+<para>
+Mount the volume:
+</para>
+
+<screen>
+mount /dev/sdb /mnt
+</screen>
+
+<para>
+To detach a volume from an instance, first of all log into the virtual 
+machine that has the volume mounted, and unmount it:
+</para>
+
+<screen>
+umount /mnt
+</screen>
+
+<para>
+Then, using the Dashboard, click on 
+<menuchoice><guimenu>Volumes</guimenu></menuchoice>, click on 
+<menuchoice><guimenu>Edit attachments</guimenu></menuchoice> for the relevant 
+volume and select <menuchoice><guimenu>Detach Volume</guimenu></menuchoice>. 
+The detached volume can then be associated to another VM, as described above 
+(you won't have to re-create the file system, otherwise you will lose the 
+content of the volume !)
+</para>
+
+<para>
+If a volume is not needed any longer, to completely remove it (note that 
+this step cannot be reverted!):
+</para>
+
+<itemizedlist>
+
+<listitem><para>
+if needed, detach the volume from the associated instance
+</para></listitem>
+
+
+<listitem><para>
+using the Dashboard, click on 
+<menuchoice><guimenu>Volumes</guimenu></menuchoice>, select the relevant 
+volume and then select 
+<menuchoice><guimenu>Delete Volumes</guimenu></menuchoice>
+</para></listitem>
+
+</itemizedlist>
+
+</section>
+
 </chapter>
