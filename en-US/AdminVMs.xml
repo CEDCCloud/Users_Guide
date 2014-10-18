@@ -221,5 +221,147 @@ contact <email>cloud-support@lists.pd.infn.it</email>.
 
 </section>
 
+
+<section id="SecurityGroups">
+<title>Security Groups</title>
+<para>
+TBD
+</para>
+
+</section>
+
+<section id="StoppingAndStartingVMs">
+<title>Stopping and Starting VMs</title>
+
+<para>
+VMs can be stopped and started in different ways, available in the Dashboad 
+menu (<menuchoice><guimenu>Instances</guimenu><guisubmenu>More</guisubmenu></menuchoice>).
+</para>
+
+<para>
+The cleanest way to shutdown (or reboot) an instance is to log on the VM and 
+issue from the shell the shutdown/reboot command. In fact if the 
+<menuchoice><guimenu>Soft Reboot</guimenu></menuchoice> 
+or <menuchoice><guimenu>Hard Reboot</guimenu></menuchoice> or 
+<menuchoice><guimenu>Shutdown</guimenu></menuchoice> actions are chosen, 
+there could be problems with networking when the VM is later restarted.
+</para>
+
+<para>
+<menuchoice><guimenu>Pause</guimenu></menuchoice>/<menuchoice><guimenu>Unpause</guimenu></menuchoice> 
+allows for temporary suspension of the VM. The VM is kept in 
+memory but it is not allocated any CPU time.
+</para>
+
+<para>
+<menuchoice><guimenu>Suspend</guimenu></menuchoice>/<menuchoice><guimenu>Resume</guimenu></menuchoice> 
+stores the VM onto disk and recovers it later. This is faster 
+than stop/start and the VM returns to the place is was when the suspend was 
+performed rather than a new boot cycle.
+</para>
+
+</section>
+
+<section id="Contextualisation">
+<title>Contextualisation</title>
+<para>
+TBD
+</para>
+
+</section>
+
+<section id="ResizingVMs">
+<title>Resizing VMs</title>
+
+<para>
+If the size of a virtual machine needs to be changed, such as adding more 
+memory or cores, this can be done using the resize operations. Using resize, 
+you can select a new flavor for your virtual machine. The operation will 
+reboot the virtual machine and will take several minutes of downtime, so this 
+operation should be scheduled as it will lead to application downtime.
+</para>
+
+<para>
+To resize a VM using the Horizon graphical Interface:
+</para>
+
+<para>
+<itemizedlist>
+<listitem><para>Select the <menuchoice><guimenu>Instances</guimenu></menuchoice> 
+menu and the <menuchoice><guimenu>Resize Instance</guimenu></menuchoice> 
+option on the actions</para></listitem>
+
+<listitem><para>After the new flavor has been selected, the status will 
+become 'resize' or 'migrating'</para></listitem>
+
+<listitem><para>The status will change after several minutes to 'Confirm' or 
+'Revert Resize/Migrate'. You may need to refresh the web browser page to 
+reflect the new status.</para></listitem>
+
+<listitem><para>Select <menuchoice><guimenu>Confirm Resize/Migrate</guimenu></menuchoice> 
+if you wish to change the instance to the new configuration.
+</para></listitem>
+
+</itemizedlist>
+</para>
+
+<para>
+The status will then change to 'Active' once completed.
+</para>
+
+</section>
+
+
+<section id="SnapshottingVMs">
+<title>Snapshotting VMs</title>
+
+<para>
+It is possible to create a snapshot of a VM, and then the saved snapshot can 
+be used to start new instance(s).
+</para>
+
+<para>
+The new instance can also have a flavor different (but not smaller for what 
+concern the disk size) than the source VM. It is therefore suggested to use 
+the smallest (in terms of disk) possible flavor for the source VM (for SL6.x 
+related images this is 'm1.xsmall').
+</para>
+
+<para>
+Before doing a snapshot, it is needed to clean the network configurations of 
+the “source” VM. For SL6.x related OS this can be done using the following instructions, once logged as root on the “source” VM:
+</para>
+
+<screen>
+/bin/rm /etc/udev/rules.d/70-persistent-net.rules
+/bin/rm /lib/udev/write_net_rules
+</screen>
+
+<para>
+Before doing the snapshot (that can be done using the web-based dashboard, it 
+is recommended to shut down the source VM to make sure that all data is 
+flushed to disk. To perform this shutdown of the VM, please don't do it 
+through Openstack. Instead please do the shutdown within the VM (i.e. log as root to the VM and issue ”shutdown -h now” or ”poweroff”).
+</para>
+
+</section>
+
+
+<section id="DeletingVMs">
+<title>Deleting VMs</title>
+
+<para>
+VMs can be deleted using the <menuchoice><guimenu>Terminate Instance</guimenu></menuchoice> 
+option in the OpenStack dashboard.
+</para>
+
+<warning><para>
+Note: This will immediately terminate the instance, delete all content of the 
+virtual machine and erase the ephemeral disk. This operation is not 
+recoverable.
+</para></warning>
+
+</section>
+
 </chapter>
 
