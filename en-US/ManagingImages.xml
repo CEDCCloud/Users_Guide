@@ -6,14 +6,55 @@
 <chapter id="ManagingImages">
 <title>Managing Images</title>
 <para>
-TBD
+In a cloud environment, Virtual Machines are instantiated from images. These 
+images are registered in an Image Management Service, in our case provided by 
+the Glance OpenStack component. 
 </para>
 
 <section id="PublicImages">
 <title>Public Images</title>
 <para>
-TBD
+Some images in the Cloud Area Padovana are provided by the Cloud 
+administrators. These images are public, and visible to all users.
+They appear in the <menuchoice><guimenu>Public</guimenu></menuchoice> 
+tab of the <menuchoice><guimenu>Images &amp; Snapshots</guimenu></menuchoice> 
+menu.
 </para>
+
+<para>
+The <literal>SL65-x86-64-&lt;date&gt;</literal> is a basic SL6.5 image which
+also includes cloud-init to perform contextualization based on the user data 
+specified when the VM are instantiated. It also configures CVMFS and the
+relevant squid servers.
+</para>
+
+<para>
+The <literal>SL65-x86-64-&lt;date&gt;</literal> image, wrt the
+<literal>SL65-x86-64-&lt;date&gt;</literal> image, also configures the
+Padova LDAP server for user authentication. This means that it is just 
+necessary to “enable” the relevant accounts on the VM adding in the 
+/etc/passwd file:
+
+<screen>
++name1::::::
++name2::::::
+...
+</screen>
+and creating their home directories.
+</para>
+
+<para>
+Changes done in /etc/passwd could not be applied immediately by the system. 
+In this case a:
+
+<screen>
+nscd -i passwd
+</screen>
+
+should help.
+</para>
+ 
+
 
 </section>
 
@@ -40,6 +81,108 @@ TBD
 <para>
 TBD
 </para>
+
+
+<section id="EnablingINFNPadovaLDAP">
+<title>Enabling INFN Padova LDAP based authentication on the Virtual Machine</title>
+
+<para>
+It is possible to refer to the INFN Padova's LDAP section for user 
+authentication on the VMs of the Cloud.
+
+To do that, the following LDAP client configurations, targeted to SL6.x 
+systems, need to be available on the image used to start the VMs. 
+</para>
+
+<para>
+First of all, the following packages must be installed:
+
+<itemizedlist>
+<listitem><para>openssl</para></listitem>
+<listitem><para>openldap</para></listitem>
+<listitem><para>openldap-clients</para></listitem>
+<listitem><para>pam-ldap</para></listitem>
+<listitem><para>nss-pam-ldapd</para></listitem>
+<listitem><para>nss-tools</para></listitem>
+<listitem><para>nscd</para></listitem>
+
+</itemizedlist>
+
+</para>
+
+<para>
+Then the following files (included in this
+<ulink url="https://wiki.infn.it/_media/progetti/cloud-areapd/user_s_guides/ldap.tar">ldap.tar</ulink>
+tar file) must be 
+installed on the Virtual Machine:
+
+<itemizedlist>
+
+<listitem><para>/etc/openldap/cacerts/cacert.pem</para></listitem>
+<listitem><para>/etc/openldap/ldap.conf</para></listitem>
+<listitem><para>/etc/pam_ldap.conf</para></listitem>
+<listitem><para>/etc/nsswitch.conf</para></listitem>
+<listitem><para>/etc/nslcd.conf</para></listitem>
+<listitem><para>/etc/pam.d/system-auth-ac</para></listitem>
+<listitem><para>/etc/pam.d/password-auth-ac</para></listitem>
+</itemizedlist>
+
+</para>
+<para>
+
+To do that, it is enough to log on the VM and:
+
+<screen>
+cd /
+tar xvf / path/ldap.tar
+</screen>
+
+</para>
+
+<para>
+Then it is necessary to start the nslcd and nscd services:
+
+<screen>
+service nslcd start
+service nscd start
+chkconfig nslcd on
+chkconfig nscd on
+</screen>
+</para>
+
+<para>
+Then it is just necessary to “enable” the relevant accounts on the VM adding 
+in the /etc/passwd file:
+
+<screen>
++name1::::::
++name2::::::
+...
+</screen>
+and creating their home directories.
+</para>
+
+<para>
+Changes done in /etc/passwd could not be applied immediately by the system. 
+In this case a:
+
+<screen>
+nscd -i passwd
+should help.
+</screen>
+
+</para>
+
+<note><para>
+Please note that the images <literal>SL65-Padova-x86-64-&lt;date&gt;</literal>
+have already the LDAP client 
+properly configured. Using these images it is just necessary to enable the 
+relevant users in /etc/passwd and create their home directories.
+</para></note>
+
+</section>
+
+
 
 </section>
 
