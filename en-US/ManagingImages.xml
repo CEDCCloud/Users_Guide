@@ -64,13 +64,29 @@ However they are not fully resizable with respect the disk size. This means
 that if you instantiate a VM using a QCOW2 image selecting e.g. the
 m1.medium flavor, that VM will have a small root partition and not the
 expected 40 GB size. This can be fixed logging to the VM as root and 
-performing:
+first of all checking what is the device associated to the root partition:
 </para>
 
 <screen>
-# growpart /dev/vda 1
+# df -h /
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1       3.0G  2.5G  322M  89% /
+</screen>
+
+<para>
+If it is <replaceable>/dev/vda1</replaceable> as in the this example, as
+root perform:
+</para>
+
+<screen>
+growpart /dev/vda 1
 reboot
 </screen>
+
+<para>
+Use <command>growpart /dev/vda 2</command> if the device was instead 
+<replaceable>/dev/vda2</replaceable>, etc.
+</para>
 
 <para>
 When the machine re-starts, it will have the expected (i.e. compliant
