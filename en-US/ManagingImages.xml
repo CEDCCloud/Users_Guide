@@ -22,15 +22,15 @@ menu.
 </para>
 
 <para>
-The <literal>SL65-x86-64-&lt;date&gt;</literal> is a basic SL6.5 image which
+The <literal>SL65-x86-64-&lt;date&gt;-&lt;format&gt;</literal> is a basic SL6.5 image which
 also includes cloud-init to perform contextualization based on the user data 
 specified when the VM are instantiated. It also configures CVMFS and the
 relevant squid servers.
 </para>
 
 <para>
-The <literal>SL65-x86-64-&lt;date&gt;</literal> image, wrt the
-<literal>SL65-x86-64-&lt;date&gt;</literal> image, also configures the
+The <literal>SL65-x86-64-&lt;date&gt;-&lt;format&gt;</literal> image, wrt the
+<literal>SL65-x86-64-&lt;date&gt;-&lt;format&gt;</literal> image, also configures the
 Padova LDAP server for user authentication. This means that it is just 
 necessary to “enable” the relevant accounts on the VM adding in the 
 /etc/passwd file:
@@ -54,7 +54,36 @@ nscd -i passwd
 should help.
 </para>
  
+<para>
+These SL 6.5 images are provided in two formats: QCOW2 and AMI.
+</para>
 
+<para>
+Images in QCOW2 format are smaller (and are therefore better) wrt AMI images. 
+However they are not fully resizable with respect the disk size. This means 
+that if you instantiate a VM using a QCOW2 image selecting e.g. the
+m1.medium flavor, that VM will have a small root partition and not the
+expected 40 GB size. This can be fixed logging to the VM as root and 
+performing:
+</para>
+
+<screen>
+# growpart /dev/vda 1
+reboot
+</screen>
+
+<para>
+When the machine re-starts, it will have the expected (i.e. compliant
+with the selected flavor) disk size.
+</para>
+
+
+<para>
+Images in AMI format are much bigger wrt QCOW2 images.   
+They are fully resizable with respect the disk size (i.e. they don't have
+the problem described above for QCOW2 images). However on a VM 
+using an AMI image it is not possible to update the kernel.
+</para>
 
 </section>
 
