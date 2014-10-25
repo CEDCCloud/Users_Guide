@@ -54,6 +54,12 @@ or have a specific disk configuration which is not possible within the system
 disk configuration.
 </para>
 
+
+<warning><para>
+Please note that backups are not performed on ephemeral storage systems.
+</para></warning>
+
+
 </section>
 
 <section id="Volumes">
@@ -178,6 +184,11 @@ volume and then select
 </para></listitem>
 
 </itemizedlist>
+
+
+<warning><para>
+Please note that backups are not performed on volumes.
+</para></warning>
 
 </section>
 

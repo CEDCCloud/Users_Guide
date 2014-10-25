@@ -239,15 +239,58 @@ You should then have the image visible in the target project.
 <section id="BuildingImages">
 <title>Building Images</title>
 <para>
-TBD
+Users can also build custom images, that can then been uploaded in
+the Cloud Image service as described in the 
+<link linkend="UserProvidedImages">User Defined Images section</link>.
 </para>
+
+<para>
+There are several tools providing support for image creation. Some of them
+are described in the <ulink url="http://docs.openstack.org/image-guide/content/ch_creating_images_automatically.html">Openstack documentation</ulink>.
+</para>
+
+<para>
+<literal>Oz</literal> is one of such tools that automates the process of 
+creating a virtual machine image file.
+Besides the official documentation, 
+<ulink url="https://wiki.infn.it/cn/ccr/cloud/preparazione_immagini_cloud_resizable_con_oz">this page</ulink> provides some useful information for such tool.
+</para>
+
+<para>
+A machine where Oz is installed is available to the users of the Cloud
+Area Padovana. To have access to this machine, please contact the 
+administrators at <email>cloud-support@lists.pd.infn.it</email>.
+Oz requires a configuration file that should be created as follows exchanging 
+USERNAME for the login name of your user:
+
+<screen>
+$ cat ~/.oz/oz.cfg
+
+[paths]
+output_dir = /tmp/USERNAME/oz/images
+data_dir = /tmp/USERNAME/oz/data
+screenshot_dir = /tmp/USERNAME/oz/screenshot
+
+[libvirt]
+uri=qemu:///system
+
+[cache]
+original_media = yes
+modified_media = no
+jeos = no
+</screen>
+</para>
+ 
 
 
 <section id="EnablingINFNPadovaLDAP">
 <title>Enabling INFN Padova LDAP based authentication on the Virtual Machine</title>
 
 <para>
-It is possible to refer to the INFN Padova's LDAP section for user 
+When creating a custom image, it might be needed to enable a LDAP section
+to manage authentication for users.
+
+This section explains how to enable the INFN Padova's LDAP section for user 
 authentication on the VMs of the Cloud.
 
 To do that, the following LDAP client configurations, targeted to SL6.x 
@@ -348,12 +391,5 @@ relevant users in /etc/passwd and create their home directories.
 
 
 
-<section id="MigratingUsingImages">
-<title>Migrating using images</title>
-<para>
-TBD
-</para>
-
-</section>
 
 </chapter>
