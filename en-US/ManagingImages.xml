@@ -106,8 +106,62 @@ using an AMI image it is not possible to update the kernel.
 <section id="UserProvidedImages">
 <title>User Provided Images</title>
 <para>
-TBD
+Along with the standard images, users can provide their own images
+and upload them to the Cloud Image service:
+these images are private, meaning that they are only available to the users 
+of the projects they are uploaded for.
 </para>
+
+<para>
+Many open source projects such as Ubuntu and Fedora now produce pre-build 
+images which can be used for certain clouds. If these are available, it is 
+much easier to use these compared to building your own.
+
+<itemizedlist>
+<listitem><para><ulink url="http://cloud.fedoraproject.org/">Fedora repository</ulink></para></listitem> 
+<listitem><para><ulink url="http://uec-images.ubuntu.com/">Ubuntu repository</ulink></para></listitem> 
+
+</itemizedlist>
+
+</para>
+
+<para>
+Building your own images is also possible, as described in the 
+<link linkend="BuildingImages">relevant section</link>.
+</para>
+
+<para>
+Taking an example of the Ubuntu image, after having downloaded the
+image from the relevant web site, to upload such image 
+(using the command line tools) it is necessary first of all to 
+authenticate to OpenStack using the openrc source, and then the
+following command must be issued:
+
+<screen>
+glance image-create --name=ubuntu-trusty --disk-format=qcow2 \
+--container-format=bare --property hypervisor_type=qemu \
+--file trusty-server-cloudimg-amd64-disk1.img
+</screen>
+
+Once loaded, the image can then be used to create virtual machines. 
+</para>
+
+<para>
+Some system software is delivered in ISO image format. 
+For example, these steps show how to create an image from the Freedos ISO 
+available at http://www.freedos.org/download/and downloaded to fd11src.iso:
+
+<screen>
+glance image-create --name freedos11 --disk-format=iso \
+--container-format=bare --file=fd11src.iso
+</screen>
+</para>
+
+<warning><para>
+No backup is currently done on user provided images and on snapshots.
+Therefore users with private images should keep a copy of the images they 
+have uploaded in their private archives. 
+</para></warning>
 
 </section>
 
@@ -116,7 +170,68 @@ TBD
 <section id="SharingImages">
 <title>Sharing Images</title>
 <para>
-TBD
+Images can be shared between different projects. This is currently only
+possible via the command line tools.
+</para>
+
+<para>
+If an image had been uploaded to your currently active project, such as 
+described in 
+<link linkend="UserProvidedImages">User Defined Images section</link>, 
+you can then use the <command>glance member-create</command> operations to 
+share that image with another project.
+For example, to share an image, first source the project profile for the 
+project containing the image you want to share and find its id with
+the <command>glance image-show</command> command
+(<replaceable>e0d35322-d509-4202-9b40-7d74e7aca0b6</replaceable> in the 
+example):
+
+<screen>
+$ glance image-show ubuntu-trusty
++----------------------------+--------------------------------------+
+| Property                   | Value                                |
++----------------------------+--------------------------------------+
+| Property 'hypervisor_type' | qemu                                 |
+| checksum                   | 2538873a402068e7c48ba5e0b896d222     |
+| container_format           | bare                                 |
+| created_at                 | 2014-10-25T05:06:13                  |
+| deleted                    | False                                |
+| disk_format                | qcow2                                |
+| id                         | e0d35322-d509-4202-9b40-7d74e7aca0b6 |
+| is_public                  | False                                |
+| min_disk                   | 0                                    |
+| min_ram                    | 0                                    |
+| name                       | ubuntu-trusty                        |
+| owner                      | beaeede3841b47efb6b665a1a667e5b1     |
+| protected                  | False                                |
+| size                       | 255853056                            |
+| status                     | active                               |
+| updated_at                 | 2014-10-25T05:07:01                  |
++----------------------------+--------------------------------------+
+</screen>
+
+</para>
+
+<para>
+You now need to find the id of the project you wish to share the image with. 
+This will generally be done by looking at the openrc file of that project and 
+finding the <literal>OS_TENANT_ID</literal> variable (in this example, it is 
+65bf648d-8d07-48af-8c3a-fa162a5b283f).
+</para>
+
+<para>
+Using this tenant ID as an argument on the command line of 
+<command>member-create</command>, the image 
+(<replaceable>e0d35322-d509-4202-9b40-7d74e7aca0b6></replaceable>
+in this example) can then be shared:
+
+<screen>
+glance  member-create e0d35322-d509-4202-9b40-7d74e7aca0b6 65bf648d-8d07-48af-8c3a-fa162a5b283f # share it
+ 
+glance member-list --image-id e0d35322-d509-4202-9b40-7d74e7aca0b6 # check it is shared
+</screen>
+
+You should then have the image visible in the target project.
 </para>
 
 </section>
