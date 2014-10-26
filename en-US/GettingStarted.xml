@@ -75,7 +75,7 @@ home folder.
 The steps are as follows:
 </para>
 <itemizedlist>
-<listitem><para>Go to the <menuchoice><guimenu>Access and Security
+<listitem><para>Go to the <menuchoice><guimenu>Access &amp; Security
 </guimenu></menuchoice> on the left hand side menu</para></listitem>
 <listitem><para>In the <menuchoice><guimenu>keypairs</guimenu></menuchoice> 
 section, select <menuchoice><guimenu>Create a keypair</guimenu></menuchoice>. 
@@ -118,7 +118,7 @@ The OpenStack tools require a set of shell environment variables in order to
 run. These variables can be obtained and stored in an 'rc' file much like 
 .profile when logging into a linux server. The environment variables are 
 different per project that you work on. If you log into the dashboard, you 
-will find an <menuchoice><guimenu>Access and Security</guimenu></menuchoice>
+will find an <menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>
 menu on the left hand side. Then choose the 
 <menuchoice><guimenu>API Access</guimenu></menuchoice> Tab to select the 
 options related to using the program interfaces. Select the 

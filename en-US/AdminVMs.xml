@@ -72,7 +72,7 @@ specify its name
 
 <listitem><para>
 Switch the tab for 
-<menuchoice><guimenu>Access and Security</guimenu></menuchoice> 
+<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice> 
 </para>
 
 <itemizedlist>
@@ -182,6 +182,14 @@ possible to access the outside Internet network.
 </para>
 </section>
 
+
+<section id="AllocatingFloating">
+<title>Allocating a public (floating) IP address to an instance</title>
+<para>
+TBD
+</para>
+</section>
+
 <section id="Flavors">
 <title>Flavors</title>
 <para>
@@ -225,7 +233,102 @@ contact <email>cloud-support@lists.pd.infn.it</email>.
 <section id="SecurityGroups">
 <title>Security Groups</title>
 <para>
-TBD
+Security groups are sets of IP filter rules that define networking access and 
+are applied to all instances within a project using that group. As
+described in xxx, when you create an instance you have to specify
+the security group to be used.
+</para>
+
+<para>
+To set such IP rules, users can either add rules to the default security group 
+or can add a new security group with the desided rules.
+</para>
+
+<para>
+For example the following procedure enables SSH and ICMP (ping) access to 
+instances using the default security group. The rules apply to all instances 
+within a given project using this security group, and should be set 
+(just once) for every 
+project unless there is a reason to prohibit SSH or ICMP access to the 
+instances.
+
+This procedure can be adjusted as necessary to add additional security group 
+rules to a project, if needed.
+</para>
+
+<para>
+<itemizedlist>
+
+<listitem><para>
+Log in to the dashboard, choose a project, and click 
+<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>. The 
+<menuchoice><guimenu>Security Groups</guimenu></menuchoice> tab shows the security 
+groups that are available for this project.
+</para></listitem>
+
+<listitem><para>
+Select the <menuchoice><guimenu>default</guimenu></menuchoice> 
+security group and click <menuchoice><guimenu>Edit Rules</guimenu></menuchoice>.
+</para></listitem>
+
+<listitem><para>
+To allow SSH access, click <menuchoice><guimenu>Add Rule</guimenu></menuchoice>.
+</para></listitem>
+
+<listitem><para> 
+In the Add Rule dialog box, enter the following values:
+
+<informaltable frame="all">
+<tgroup cols="2">
+<tbody>
+    <row><entry>Rule</entry><entry>SSH</entry></row>
+    <row><entry>Remote</entry><entry>CIDR</entry></row>
+    <row><entry>CIDR</entry><entry>0.0.0.0/0</entry></row>
+</tbody>
+</tgroup>
+</informaltable>
+
+
+
+<note><para>
+To accept requests from a particular range of IP addresses, specify the IP address block in the <menuchoice><guimenu>CIDR</guimenu></menuchoice> box.
+</para></note>
+
+</para></listitem>
+
+<listitem><para>
+Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
+</para></listitem>
+
+<listitem><para>
+To add an ICMP rule, click <menuchoice><guimenu>Add Rule</guimenu></menuchoice>.
+</para></listitem>
+
+
+<listitem><para>
+In the Add Rule dialog box, enter the following values:
+
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+    <row><entry>Rule</entry><entry>All ICMP</entry></row>
+    <row><entry>Direction</entry><entry>Ingress</entry></row>
+    <row><entry>Remote</entry><entry>CIDR</entry></row>
+    <row><entry>CIDR</entry><entry>0.0.0.0/0</entry></row>
+</tbody>
+</tgroup>
+</informaltable>
+
+
+</para></listitem> 
+
+<listitem><para>
+Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
+</para></listitem>
+
+</itemizedlist>
+
 </para>
 
 </section>
@@ -265,8 +368,134 @@ performed rather than a new boot cycle.
 <section id="Contextualisation">
 <title>Contextualisation</title>
 <para>
-TBD
+Contextualisation is the process to configure a virtual machine after it has been 
+installed. Typical examples would be to create additional users, install software 
+packages or call a configuration management system. These steps can be used to 
+take a reference image and customise it further. Contextualisation is only run 
+once when the VM is created
 </para>
+
+<para>
+The public images provided in the Cloud Area Padovana include a contextualisation 
+feature using the open source <literal>cloud-init</literal> package.
+</para>
+
+<para>
+With cloud-init, data to be used for contextualisation are called 
+<literal>user data</literal>.
+
+To launch instances with user data using the OpenStack dashboard,
+you can fill in the 
+<menuchoice><guimenu>user data</guimenu></menuchoice> tab.
+
+Using the Openstack command line tool, the <literal>--user_data</literal>
+option of the <command>nova boot</command> command must be used, e.g.:
+
+<screen>
+nova boot my_vm --image "SL65-Padova-x86_64-20141023-QCOW2" --flavor m1.xsmall --user_data my_data.txt --key_name my_key
+</screen>
+</para>
+
+
+<para>
+For example to run a command during contextualisation, the <literal>#cloud-config</literal> directive
+can be used:
+
+<screen>
+cat > cern-config-users.txt &lt;&lt; EOF
+#cloud-config
+runcmd:
+ - [ /usr/bin/yum, "install", -y, "cern-config-users" ]
+ - [ /usr/sbin/cern-config-users, --setup-all ]
+EOF
+</screen>
+
+</para>
+
+<para>
+User data can be provided as a gzip file if needed where the user data is larger than 16384 bytes, 
+e.g.:
+
+<screen>
+cat > userdata4zip.txt &lt;&lt;EOF
+#!/bin/sh
+wget -O /tmp/geolist.txt http://frontier.cern.ch/geolist.txt
+EOF
+gzip -c userdata4zip.txt > userdata4zip.gz
+
+nova boot my_server --image "SL65-Padova-x86_64-20141023-QCOW2" --flavor m1.xsmall \
+--user_data userdata4zip.gz --key_name my_key
+</screen>
+
+</para>
+
+<para>
+With the <literal>#include</literal> or <literal>Content-Type: text/x-include-url</literal>
+directives, it is possible to specify a list of urls, one url per line. The userdata passed by the 
+urls can be plain txt, gzip file or mime-multi-part script. E.g.:
+
+<screen>
+cat userdata.txt &lt;&lt;EOF
+#! /bin/bash
+wget -O /tmp/robots.txt http://www.ubuntu.com/robots.txt
+EOF
+
+cat > userdata4include.txt &lt;&lt;EOF
+#include
+# entries are one url per line. comment lines beginning with '#' are allowed
+# urls are passed to urllib.urlopen, so the format must be supported there
+http://frontier.cern.ch/userdata.txt
+EOF
+</screen>
+
+</para>
+
+<para>
+cloud-init supply also a method called "multiple part" to supply user data in multiple ways, 
+which means you can use userdata script and cloud-config (or other methods recognized by cloud-init) 
+at the same time. cloud-init provides a script write-mime-multipart to generate a final userdata 
+file. Here is an example:
+
+<screen>
+cat > userdata4script &lt;&lt;EOF
+#! /bin/bash
+mkdir -p /tmp/rdu
+echo "Hello World!" > helloworld.txt
+EOF
+ 
+cat userdata4config
+#cloud-config
+runcmd:
+ - [ wget, "http://slashdot.org", -O, /tmp/index.html ]
+ 
+cat userdata4include
+#include
+# entries are one url per line. comment lines beginning with '#' are allowed
+# urls are passed to urllib.urlopen, so the format must be supported there
+http://frontier.cern.ch/userdata.txt
+</screen>
+
+
+Then use <command>write-mime-multipart</command> to generate 
+<replaceable>userdata4multi.txt</replaceable> and use it to launch an instance:
+
+<screen>
+write-mime-multipart -o userdata4multi.txt userdata4script userdata4config userdata4inc
+
+nova boot my_server --image "SL65-Padova-x86_64-20141023-QCOW2" --flavor m1.xsmall \
+--user_data userdata4multi.txt --key_name my_key
+</screen>
+
+
+</para>
+
+
+<para>
+On Internet a lot of documentation (along with examples) is available on
+cloud-init, such is in the <ulink url="https://help.ubuntu.com/community/CloudInit">Ubuntu 
+Documentation</ulink>
+</para>
+
 
 </section>
 

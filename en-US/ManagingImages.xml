@@ -112,6 +112,11 @@ these images are private, meaning that they are only available to the users
 of the projects they are uploaded for.
 </para>
 
+<note><para>
+Users are not allowed to publish public (i.e. available to all projects) images.
+</para></note>
+
+
 <para>
 Many open source projects such as Ubuntu and Fedora now produce pre-build 
 images which can be used for certain clouds. If these are available, it is 
@@ -157,11 +162,17 @@ glance image-create --name freedos11 --disk-format=iso \
 </screen>
 </para>
 
+
+
+
 <warning><para>
 No backup is currently done on user provided images and on snapshots.
 Therefore users with private images should keep a copy of the images they 
 have uploaded in their private archives. 
 </para></warning>
+
+
+
 
 </section>
 
@@ -170,7 +181,8 @@ have uploaded in their private archives.
 <section id="SharingImages">
 <title>Sharing Images</title>
 <para>
-Images can be shared between different projects. This is currently only
+As mentioned before, users are not allowed to publish public images.
+However images can be shared between different projects. This is currently only
 possible via the command line tools.
 </para>
 
