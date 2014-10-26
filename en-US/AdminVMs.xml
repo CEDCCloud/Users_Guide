@@ -492,7 +492,7 @@ nova boot my_server --image "SL65-Padova-x86_64-20141023-QCOW2" --flavor m1.xsma
 
 <para>
 On Internet a lot of documentation (along with examples) is available on
-cloud-init, such is in the <ulink url="https://help.ubuntu.com/community/CloudInit">Ubuntu 
+cloud-init, such as in the <ulink url="https://help.ubuntu.com/community/CloudInit">Ubuntu 
 Documentation</ulink>
 </para>
 
