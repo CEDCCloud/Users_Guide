@@ -91,7 +91,8 @@ the ssh-key mechanisms.
 </para></listitem>
 
 <listitem><para>
-Specify the Security group to be used for this VM
+Specify the Security group to be used for this VM (security groups are 
+discussed in <link linkend="SecurityGroups">another section</link>).
 </para></listitem>
 
 
@@ -235,7 +236,8 @@ contact <email>cloud-support@lists.pd.infn.it</email>.
 <para>
 Security groups are sets of IP filter rules that define networking access and 
 are applied to all instances within a project using that group. As
-described in xxx, when you create an instance you have to specify
+described in <link linkend="CreatingVMs">Creating VMs section</link>, 
+when you create an instance you have to specify
 the security group to be used.
 </para>
 
@@ -291,7 +293,8 @@ In the Add Rule dialog box, enter the following values:
 
 
 <note><para>
-To accept requests from a particular range of IP addresses, specify the IP address block in the <menuchoice><guimenu>CIDR</guimenu></menuchoice> box.
+To accept requests from a particular range of IP addresses, specify the IP address block in 
+the <menuchoice><guimenu>CIDR</guimenu></menuchoice> box.
 </para></note>
 
 </para></listitem>
@@ -330,6 +333,13 @@ Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
 </itemizedlist>
 
 </para>
+
+<note><para>
+If you need to enable some services on a Virtual Machine, besides setting the
+specific IP rules through security groups, be sure that the relevant ports are 
+also enabled (e.g. via iptables) on the Virtual Machine.
+</para></note>
+
 
 </section>
 
@@ -493,7 +503,7 @@ nova boot my_server --image "SL65-Padova-x86_64-20141023-QCOW2" --flavor m1.xsma
 <para>
 On Internet a lot of documentation (along with examples) is available on
 cloud-init, such as in the <ulink url="https://help.ubuntu.com/community/CloudInit">Ubuntu 
-Documentation</ulink>
+Documentation</ulink>.
 </para>
 
 
