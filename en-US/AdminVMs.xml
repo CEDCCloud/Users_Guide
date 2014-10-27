@@ -187,8 +187,90 @@ possible to access the outside Internet network.
 <section id="AllocatingFloating">
 <title>Allocating a public (floating) IP address to an instance</title>
 <para>
-TBD
+When an instance is created in OpenStack, it is automatically assigned a 
+fixed IP address.
+If a VM needs to be visible on the Internet, in addition to the fixed IP 
+address a public (floating) IP address must be attached to the instance.
+Floating IP addresses can have their associations modified at any time, 
+regardless of the state of the instances involved. 
+
 </para>
+
+<para>
+To assign a floating IP to a VM, first of all create the VM
+as described in section xxx, using the xxx network.
+The following procedure then details the reservation of a floating IP address 
+from an existing pool of public addresses and the association of that 
+address with a specific instance.
+
+<itemizedlist>
+
+<listitem><para>
+From the dashboard click 
+<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>.
+</para></listitem>
+
+
+<listitem><para>
+Click the <menuchoice><guimenu>Floating IPs</guimenu></menuchoice> tab, 
+which shows the floating IP addresses allocated to instances.
+</para></listitem>
+
+<listitem><para>
+Click <menuchoice><guimenu>Allocate IP to Project</guimenu></menuchoice>.
+</para></listitem>
+
+<listitem><para> 
+Choose <replaceable>Ext</replaceable> as the pool from which to pick the 
+IP address and click <menuchoice><guimenu>Allocate IP</guimenu></menuchoice>. 
+</para></listitem>
+
+<listitem><para> 
+In the <menuchoice><guimenu>Manage Floating IP 
+Associations</guimenu></menuchoice> dialog box, choose the following options:
+
+<itemizedlist>
+
+<listitem><para> 
+The <menuchoice><guimenu>IP Address</guimenu></menuchoice> field is filled 
+automatically, but you can add a new IP address by clicking the + button
+</para></listitem>
+
+<listitem><para>
+In the <menuchoice><guimenu>Ports to be associated</guimenu></menuchoice> 
+field, select a port from the list (the list shows all the instances with 
+their fixed IP addresses).
+</para></listitem>
+
+</itemizedlist>
+
+</para></listitem>
+
+
+<listitem><para>
+Click  <menuchoice><guimenu>Associate</guimenu></menuchoice>.
+</para></listitem>
+
+
+</itemizedlist>
+
+
+</para>
+
+
+<para>
+To disassociate an IP address from an instance, click the 
+<menuchoice><guimenu>Disassociate</guimenu></menuchoice> button.
+</para>
+
+<para>
+To release the floating IP address back into the pool of addresses, 
+click the <menuchoice><guimenu>More</guimenu></menuchoice> button 
+and select the <menuchoice><guimenu>Release Floating IP</guimenu></menuchoice>
+option.
+</para>
+
+
 </section>
 
 <section id="Flavors">
