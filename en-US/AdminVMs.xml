@@ -28,7 +28,7 @@ To create a VM, the steps are as follows:
 <itemizedlist>
 
 <listitem><para>
-On the left hand menu, select the Project that must be used for this VM
+On the left hand menu, select the Project that must be used for this VM.
 </para></listitem>
 
 
@@ -101,11 +101,13 @@ discussed in <link linkend="SecurityGroups">another section</link>).
 
 <listitem><para>
 Swith the tab for <menuchoice><guimenu>Networking</guimenu></menuchoice>.
-You should see one network called <replaceable>xyz-lan</replaceable>, and in 
-some cases also another network called <replaceable>xyz-wan</replaceable>. 
+You should see one network called <replaceable>&lt;ProjectName&gt;-lan
+</replaceable>, and in 
+some cases also another network called 
+<replaceable>&lt;ProjectName&gt;-wan</replaceable>.
 Select the former one if your VM doesn't need to be visible on the Internet. 
-Select instead the <replaceable>xyz-wan</replaceable> network if your VM must 
-have a public IP
+Select instead the <replaceable>&lt;ProjectName&gt;-wan</replaceable>  
+network if your VM must have a public IP.
 </para></listitem>
 
 <listitem><para>
@@ -198,7 +200,8 @@ regardless of the state of the instances involved.
 
 <para>
 To assign a floating IP to a VM, first of all create the VM
-as described in section xxx, using the xxx network.
+as described in the <link linkend="CreatingVMs">Creating VMs section</link>, 
+using the <replaceable>&lt;ProjectName&gt;-wan</replaceable> network.
 The following procedure then details the reservation of a floating IP address 
 from an existing pool of public addresses and the association of that 
 address with a specific instance.
