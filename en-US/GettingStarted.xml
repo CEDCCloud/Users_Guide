@@ -5,26 +5,96 @@
 ]>
 <chapter id="GettingStarted">
 <title>Getting Started</title>
+
+
+<section id="Overview">
+<title>Overview of the Cloud Area Padovana</title>
+
 <para>
-The “Cloud Area Padovana” offers for the time being a pre-production service 
-based on the Havana version of the OpenStack middleware.
+The <literal>Cloud Area Padovana</literal> is an OpenStack based cloud.
+It implements a IaaS (Infrastructure as a service).
 </para>
+
 <para>
-The following explains how to use it.
-	</para>
+Even if it is a single, logical Cloud service, its resources are spread in two
+different locations: INFN Padova and INFN Laboratori Nazionali di Legnaro (LNL).
+</para>
+
+<section id="PreAndProd">
+<title>The pre-production and the production services</title>
+<para>
+The Cloud Area Padovana offers a 
+<literal>pre-production service</literal> based on the Havana version of the 
+OpenStack middleware.
+</para>
+
+<para>
+A <literal>production service</literal> is now being settled: it is also based
+on Openstack Havana version, but it offers improved functionality and
+more resources with respect to the pre-production service.
+</para>
+
+<para>
+The preproduction service will be dismissed when the production service
+is fully operational and when all the users have migrated to it.
+</para>
+
+</section>
+
+<section id="Projects">
+<title>Projects</title>
+<para>
+<literal>Projects</literal> (also known as tenants) 
+are organizational units in the cloud. A project is used to map or isolate users
+and their resources. </para>
+
+<para>
+Projects are given quotas on resource usage, in terms of virtual machines, cores,
+memory, storage, etc.
+</para>
+
+<para>
+A project can have a single user as member (personal project) but the typical use
+case are shared projects, with multiple users as members, which can map to experiments, 
+organizations, research groups, etc.
+A user can be on multiple projects at the same time and switch between them.
+</para>
+
+<para>
+In the Cloud Area Padovana projects usually map to experiments or other research groups
+who "own" resources in the cloud service.
+</para>
+
+<para>
+A special shared project, called <literal>guest</literal> is used for all other
+users: it has a small quota to allow testing the Cloud infrastructure.
+</para>
+
+<para>
+Personal projects are instead discouraged and are created only for convincing 
+reasons.
+</para>
+</section>
 
 
 
-<section id="RequestAnAccount">
-<title>Request an account</title>
+</section>
+
+
+<section id="Registration">
+<title>Registration</title>
+
 <para>
 To be able to use the Cloud Area Padovana service, first of all you need to 
 apply for an account.
-The registration phase will be in the future managed through a web-based 
-application. 
+The procedure to be followed is described in this section.
 </para>
+
+<section id="RegistrationPreprod">
+<title>Registration in the pre-production service</title>
 <para>
-For the time being please send your request to: <email>cloud-support@lists.pd.infn.it</email>
+To get an account on the pre-production service
+please send your request to: <email>cloud-support@lists.pd.infn.it</email>
 </para>
 <para>
 In your request please specify:
@@ -35,6 +105,18 @@ In your request please specify:
 </para>
 </section>
 	
+
+<section id="RegistrationProd">
+<title>Registration in the Production service</title>
+<para>
+The registration procedure 
+
+TBD
+</para>
+</section>
+
+</section>
+
 <section id="AccessTheCloudThroughTheDashboard">
 <title>Access the Cloud through the Dashboard</title>
 <para>
