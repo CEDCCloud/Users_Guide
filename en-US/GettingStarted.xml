@@ -62,7 +62,9 @@ A user can be on multiple projects at the same time and switch between them.
 
 <para>
 In the Cloud Area Padovana projects usually map to experiments or other research groups
-who "own" resources in the cloud service.
+who "own" resources in the cloud service. 
+Each project has a manager (usually the team leader), who is responsible to manage 
+(accepting or refusing) membership requests for the project.
 </para>
 
 <para>
