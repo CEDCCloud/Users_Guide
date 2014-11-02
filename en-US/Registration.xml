@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Users_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="Registration">
+<title>Registration</title>
+<para>                                                                             
+To be able to use the Cloud Area Padovana service, first of all you need to        
+apply for an account.                                                              
+The procedure to be followed is described in this chapter.                         
+</para>
+
+<section id="RegistrationPreprod">
+<title>Registration in the pre-production service</title>
+<para>                                                                             
+To get an account on the pre-production service                                    
+please send your request to: <email>cloud-support@lists.pd.infn.it</email>
+</para>
+<para>                                                                             
+In your request please specify:                                                    
+<itemizedlist>
+<listitem><para>Your name and family name</para></listitem>
+<listitem><para>The experiment(s)/group(s) you are affiliated
+ with</para></listitem>
+</itemizedlist>
+</para>
+</section>
+
+<section id="RegistrationProd">
+<title>Registration in the Production service</title>
+
+
+<section id="ApplyForAccount">
+<title> Apply for an account</title>
+
+<para>                                                                             
+The registration procedure in the production service is managed through            
+the Horizon Openstack web service interface.                                       
+</para>
+
+<para>                                                                             
+Go to <ulink url="https://cloud-areapd.pd.infn.it/dashboard">https://cloud-areapd.\
+pd.infn.it/dashboard</ulink> in a browser. The following page should appear:       
+                                                                                   
+                                                                                   
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/dashboard_prod.png" />
+</imageobject>
+</mediaobject>
+</para>
+<para>                                                                             
+If you already have an account on the INFN Authenticaton and Authorization         
+Infrastructure (INFN AAI) and therefore you have access to the INFN portal,        
+click on the left icon (INFN AAI).                                                 
+Once logged, click on the <literal>Register</literal> button xxx.                  
+</para>
+
+
+</section>
+
+<section id="ApplyForOtherProjects">
+<title>Apply for membership on other projects</title>
+<para>
+TBD
+</para>
+</section>
+
+<section id="ManageProjectMembershipRequests">
+<title>Manage project membership requests (only for project managers)</title>
+
+<para>
+TBD
+</para>
+
+</section>
+
+
+</section>
+
+</chapter>
