@@ -50,12 +50,78 @@ pd.infn.it/dashboard</ulink> in a browser. The following page should appear:
 </imageobject>
 </mediaobject>
 </para>
+
+
 <para>                                                                             
+
+<itemizedlist>
+
+<listitem><para>
+If you already have an account on the INFN Authenticaton and 
+Authorization         
+Infrastructure (INFN AAI) and therefore you have access to the INFN portal, 
+proceed with <link linkend="ApplyUsingAAI">"Apply for an account using INFN-AAI"
+section</link>.
+</para></listitem>
+
+<listitem><para> 
+If and only if you don't have an account on the INFN Authenticaton and
+Authorization Infrastructure (INFN AAI), proceed with 
+<link linkend="ApplyUsingUserPasswd">" Apply for an account using User and 
+Password" section</link>
+</para></listitem>
+
+
+</itemizedlist>
+
+</para>
+
+<section id="ApplyUsingAAI">                                                      
+<title> Apply for an account using INFN-AAI</title>
+
+<para>
 If you already have an account on the INFN Authenticaton and Authorization         
 Infrastructure (INFN AAI) and therefore you have access to the INFN portal,        
-click on the left icon (INFN AAI).                                                 
-Once logged, click on the <literal>Register</literal> button xxx.                  
+from the OpenStack dashboard click on the icon on the left (INFN AAI).                                                 
+TBC
+
+Once logged, click on the <menuchoice><guimenu>Register</guimenu></menuchoice> 
+button.
 </para>
+
+</section>
+
+
+<section id="ApplyUsingUserPasswd">  
+<title> Apply for an account using User and Password</title>
+
+<para>
+If you already have an account on the INFN Authenticaton and Authorization         
+Infrastructure (INFN AAI) and therefore you have access to the INFN portal,        
+from the OpenStack dashboard click on the icon on the right.
+</para>
+
+<para>
+The following image should appear: 
+
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/LocalAccount.png" />
+</imageobject>
+</mediaobject>
+
+
+Click then on the 
+<menuchoice><guimenu>Register</guimenu></menuchoice> button.
+
+                    
+</para>
+
+
+TBC
+
+</section>
 
 
 </section>
