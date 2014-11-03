@@ -34,21 +34,22 @@ In your request please specify:
 <section id="ApplyForAccount">
 <title> Apply for an account</title>
 
-<para>                                                                             
-The registration procedure in the production service is managed through            
-the Horizon Openstack web service interface.                                       
+<para>                                                                         
+The registration procedure in the production service is managed through     
+the Horizon Openstack web service interface.           
 </para>
 
-<para>                                                                             
-Go to <ulink url="https://cloud-areapd.pd.infn.it/dashboard">https://cloud-areapd.\
-pd.infn.it/dashboard</ulink> in a browser. The following page should appear:       
-                                                                                   
-                                                                                   
+<para>    
+Go to 
+<ulink url="https://cloud-areapd.pd.infn.it/dashboard">https://cloud-areapd.pd.infn.it/dashboard</ulink> in a browser. 
+The following page should appear:       
+    
 <mediaobject>
 <imageobject>
   <imagedata fileref="./images/dashboard_prod.png" />
 </imageobject>
 </mediaobject>
+
 </para>
 
 
@@ -60,8 +61,8 @@ pd.infn.it/dashboard</ulink> in a browser. The following page should appear:
 If you already have an account on the INFN Authenticaton and 
 Authorization         
 Infrastructure (INFN AAI) and therefore you have access to the INFN portal, 
-proceed with <link linkend="ApplyUsingAAI">"Apply for an account using INFN-AAI"
-section</link>.
+proceed with <link linkend="ApplyUsingAAI">"Apply for an account using 
+INFN-AAI" section</link>.
 </para></listitem>
 
 <listitem><para> 
@@ -76,13 +77,15 @@ Password" section</link>
 
 </para>
 
-<section id="ApplyUsingAAI">                                                      
+
+<section id="ApplyUsingAAI">                                                   
 <title> Apply for an account using INFN-AAI</title>
 
 <para>
-If you already have an account on the INFN Authenticaton and Authorization         
-Infrastructure (INFN AAI) and therefore you have access to the INFN portal,        
-from the OpenStack dashboard click on the icon on the left (INFN AAI).                                                 
+If you already have an account on the INFN Authenticaton and Authorization     
+Infrastructure (INFN AAI) and therefore you have access to the INFN portal,
+from the OpenStack dashboard click on the icon on the left (INFN AAI).
+
 TBC
 
 Once logged, click on the <menuchoice><guimenu>Register</guimenu></menuchoice> 
@@ -96,12 +99,8 @@ button.
 <title> Apply for an account using User and Password</title>
 
 <para>
-If you already have an account on the INFN Authenticaton and Authorization         
-Infrastructure (INFN AAI) and therefore you have access to the INFN portal,        
-from the OpenStack dashboard click on the icon on the right.
-</para>
-
-<para>
+If and only if you don't have an account on the INFN Authenticaton and
+Authorization Infrastructure (INFN AAI), click on the icon on the right.
 The following image should appear: 
 
 
@@ -110,16 +109,28 @@ The following image should appear:
   <imagedata fileref="./images/LocalAccount.png" />
 </imageobject>
 </mediaobject>
+</para>
 
-
+<para>
 Click then on the 
 <menuchoice><guimenu>Register</guimenu></menuchoice> button.
+A form such as the one of the following image will appear.
 
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/RegisterFormUserPasswd.png" />
+</imageobject>
+</mediaobject>
+
+</para>
+
+<para>
+TBC
                     
 </para>
 
 
-TBC
 
 </section>
 
