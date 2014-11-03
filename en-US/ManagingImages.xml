@@ -113,7 +113,18 @@ of the projects they are uploaded for.
 </para>
 
 <note><para>
-Users are not allowed to publish public (i.e. available to all projects) images.
+Users are not allowed to publish public (i.e. available to all projects) 
+images.
+This means that you don't want to use the <literal>--public</literal> flag
+with the <literal> glance image-create</literal> command, otherwise you will 
+get a quite cryptic error message such as:
+
+<screen>
+Request returned failure status.
+403 Forbidden
+Access was denied to this resource.
+    (HTTP 403)
+</screen>
 </para></note>
 
 
