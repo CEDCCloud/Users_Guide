@@ -7,8 +7,15 @@
 <title>Overview of the Cloud Area Padovana</title>
 <para>                                                                          
 The <literal>Cloud Area Padovana</literal> is an OpenStack based cloud.         
-It implements a IaaS (Infrastructure as a service).                             
 </para>
+
+<para>
+It implements a IaaS (Infrastructure as a service):
+it allows the instantiations of Virtual Machines (VMs) of the desired
+environments (in terms of operating system, installed software, etc.)
+and of the desired flavors (in terms of processors, memory size, etc.).
+</para>
+
 
 <para>                                                                          
 Even if it is a single, logical Cloud service, its resources are spread in two  

@@ -88,11 +88,112 @@ Password" section</link>
 If you already have an account on the INFN Authenticaton and Authorization     
 Infrastructure (INFN AAI) and therefore you have access to the INFN portal,
 from the OpenStack dashboard click on the icon on the left (INFN AAI).
+</para>
 
-TBC
-
+<para>
 Once logged, click on the <menuchoice><guimenu>Register</guimenu></menuchoice> 
-button.
+button. A form such as the one in the following picture show appear.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/RegisterFormAAI.png" />
+</imageobject>
+</mediaobject>
+
+</para>
+
+<para>
+Fill the form with the name of your organization (e.g. 'INFN Padova'),
+your phone number, the name of a contact person in Padova/Legnaro
+(e.g. your team leader), and if needed some notes.
+</para>
+
+
+<para>
+For what concerns the <menuchoice><guimenu>Project Action</guimenu></menuchoice>
+you have three options:
+
+<itemizedlist>
+<listitem><para>Select Existing Projects</para></listitem>
+<listitem><para>Create new project</para></listitem>
+<listitem><para>Use guest project</para></listitem>
+</itemizedlist>
+
+</para>
+
+<para>
+Choose <literal>Select Existing Projects</literal> if you want to apply
+membership for one or more existing projects (choose them in the relevant
+box).
+</para>
+
+<para>
+Select <literal>Create new project</literal> if instead you want to ask
+the creation of a new project. In this case you will have to specify also
+a Project name and a Project Description. You will also have to specify
+if this project must be private (a personal project where you will
+be the only member) or not.
+
+
+<warning><para>
+Personal private projects are discouraged and are created only for convincing
+reasons. 
+</para></warning>
+
+
+<note><para>
+The person who asks for the creation of a new project is automatically
+defined as the manager of this project, i.e. he/she will have to
+manage the membership requests for this project. So the request to create a new
+project should be done by the relevant experiment/group leader.
+</para></note>
+
+</para>
+<para>
+Select <literal>Use guest project</literal> if you want to apply membership
+for the guest project, i.e. the project with 
+a small quota used to test the Cloud infrastructure.
+</para>
+
+
+<para>
+When you have filled the form, click on the 
+<menuchoice><guimenu>Read the AUP</guimenu></menuchoice> button. The following
+window will appear.
+
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/ReadAUP.jpg" />
+</imageobject>
+</mediaobject>
+
+</para>
+
+<para>
+Read the AUP that you need to accept (by clicking the 
+<menuchoice><guimenu>Accept</guimenu></menuchoice> button) to be allowed
+to have an account.
+</para>
+
+<para>
+Finally click on the <menuchoice><guimenu>Register</guimenu></menuchoice> 
+button and you are done.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/RegistrationDone.jpg" />
+</imageobject>
+</mediaobject>
+
+</para>
+
+<para>
+Your request will be managed by the Cloud adminstrator and by
+the manager(s) of the project(s) for which you applied membership.
+You will get an e-mail when your request is approved (and therefore you
+can start using the Cloud Area Padovana) or if for some reason
+your request is refused.
 </para>
 
 </section>
@@ -129,8 +230,99 @@ A form such as the one of the following image will appear.
 </para>
 
 <para>
-TBC
-                    
+Fill the form with your personal data (First Name, Last Name, Email Address,
+Organization (e.g. 'INFN Padova'), Phone number.
+Choose a User name (please note that it could be changed by the Cloud
+admins during the registration process) and a Password.
+Specify the name of a contact person in Padova/Legnaro
+(e.g. your team leader), and if needed provide some other info in the
+'Notes' field. 
+</para>
+
+<para>
+For what concerns the <menuchoice><guimenu>Project Action</guimenu></menuchoice>
+you have three options:
+
+<itemizedlist>
+<listitem><para>Select Existing Projects</para></listitem>
+<listitem><para>Create new project</para></listitem>
+<listitem><para>Use guest project</para></listitem>
+</itemizedlist>
+
+</para>
+
+<para>
+Choose <literal>Select Existing Projects</literal> if you want to apply
+membership for one or more existing projects (choose them in the relevant
+box).
+</para>
+
+<para>
+Select <literal>Create new project</literal> if instead you want to ask
+the creation of a new project. In this case you will have to specify also
+a Project name and a Project Description. You will also have to specify
+if this project must be private (a personal project where you will
+be the only member) or not.
+
+
+<warning><para>
+Personal private projects are discouraged and are created only for convincing
+reasons. 
+</para></warning>
+
+
+<note><para>
+The person who asks for the creation of a new project is automatically
+defined as the manager of this project, i.e. he/she will have to
+manage the membership requests for this project. So the request to create a new
+project should be done by the relevant experiment/group leader.
+</para></note>
+</para>
+
+<para>
+Select <literal>Use guest project</literal> if you want to apply membership
+for the guest project, i.e. the project with 
+a small quota used to test the Cloud infrastructure.
+</para>
+
+
+<para>
+When you have filled the form, click on the 
+<menuchoice><guimenu>Read the AUP</guimenu></menuchoice> button. The following
+window will appear.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/ReadAUP.jpg" />
+</imageobject>
+</mediaobject>
+
+</para>
+
+<para>
+Read the AUP that you need to accept (by clicking the 
+<menuchoice><guimenu>Accept</guimenu></menuchoice> button) to be allowed
+to have an account.
+</para>
+
+<para>
+Finally click on the <menuchoice><guimenu>Register</guimenu></menuchoice> 
+button and you are done.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/RegistrationDone.jpg" />
+</imageobject>
+</mediaobject>
+
+</para>
+
+<para>
+Your request will be managed by the Cloud adminstrator and by
+the manager(s) of the project(s) for which you applied membership.
+You will get an e-mail when your request is approved (and therefore you
+can start using the Cloud Area Padovana) or if for some reason
+your request is refused.
 </para>
 
 
@@ -141,17 +333,89 @@ TBC
 </section>
 
 <section id="ApplyForOtherProjects">
-<title>Apply for membership on other projects</title>
+<title>Apply for other projects</title>
 <para>
-TBD
+After you have been given an account on the Cloud Area Padovana, at any
+time you can ask the creation of a new project or the membership to
+an already existing project.
 </para>
+
+<para>
+This can be done using the OpenStack dashboard clicking on 
+<menuchoice><guimenu>Request for projects</guimenu></menuchoice> (on the 
+bottom-left).
+
+A window such as this one will appear:
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/ProjectRequest.png" />
+</imageobject>
+</mediaobject>
+</para>
+
+<para>
+Using this window you can then ask the creation of a new project or the
+affiliation to already existing projects.
+</para>
+
 </section>
 
 <section id="ManageProjectMembershipRequests">
 <title>Manage project membership requests (only for project managers)</title>
 
 <para>
-TBD
+If you are the manager of a project, you will receive membership requests
+for this project that you will have to manage (approving or refusing them).
+</para>
+
+<para>
+When a user applies to be member of a project that you manage, you will receive
+an e-mail such as this one:
+
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/email_subreq.png" />
+</imageobject>
+</mediaobject>
+</para>
+
+
+<para>
+To manage such requests, open the OpenStack web dashboard, log in, and then 
+click on
+<menuchoice><guimenu>Subscriptions</guimenu></menuchoice> (on the bottom-left).
+An image such as the following one, with the list of the pending requests,
+will appear.
+
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/Subscriptions.png" />
+</imageobject>
+</mediaobject>
+</para>
+
+
+<para>
+To manage a membership request click on the corresponding                      
+<menuchoice><guimenu>Process</guimenu></menuchoice> button.
+A window such as the following one will appear:
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/ProcessSubscription.png" />
+</imageobject>
+</mediaobject>
+</para>
+
+<para>
+Click on the 
+<menuchoice><guimenu>Approve</guimenu></menuchoice> button to approve
+the request.
+Otherwise, to reject the request, click on the 
+<menuchoice><guimenu>Reject</guimenu></menuchoice> button.
 </para>
 
 </section>

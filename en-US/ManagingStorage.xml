@@ -190,6 +190,26 @@ volume and then select
 Please note that backups are not performed on volumes.
 </para></warning>
 
+<section id="SharingVolume">
+<title>Sharing a volume between multiple (virtual) machines </title>
+<para>
+TBD
+</para>
+
+
+</section>
+
+
+</section>
+
+
+<section id="AccessingExternalStorage">
+<title>Accessing storage external to the Cloud</title>
+
+<para>
+TBD
+</para>
+
 </section>
 
 </chapter>
