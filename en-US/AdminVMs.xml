@@ -665,8 +665,15 @@ the “source” VM. For SL6.x related OS this can be done using the following i
 Before doing the snapshot (that can be done using the web-based dashboard, it 
 is recommended to shut down the source VM to make sure that all data is 
 flushed to disk. To perform this shutdown of the VM, please don't do it 
-through Openstack. Instead please do the shutdown within the VM (i.e. log as root to the VM and issue ”shutdown -h now” or ”poweroff”).
+through Openstack. Instead please do the shutdown within the VM (i.e. log as root to the VM and issue <command>shutdown -h now</command> or 
+<command>poweroff</command>).
 </para>
+
+<warning><para>
+In the production Cloud it is possible to save in the Image service
+only snapshots with a maximum size of 25 GB. 
+</para></warning>
+
 
 </section>
 
