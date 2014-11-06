@@ -142,8 +142,8 @@ much easier to use these compared to building your own.
 </para>
 
 <para>
-Building your own images is also possible, as described in the 
-<link linkend="BuildingImages">relevant section</link>.
+Building your own images is also possible, as described in 
+<xref linkend="BuildingImages"/>.
 </para>
 
 <para>
@@ -200,7 +200,7 @@ possible via the command line tools.
 <para>
 If an image had been uploaded to your currently active project, such as 
 described in 
-<link linkend="UserProvidedImages">User Defined Images section</link>, 
+<xref linkend="UserProvidedImages"/>, 
 you can then use the <command>glance member-create</command> operations to 
 share that image with another project.
 For example, to share an image, first source the project profile for the 
@@ -263,8 +263,8 @@ You should then have the image visible in the target project.
 <title>Building Images</title>
 <para>
 Users can also build custom images, that can then been uploaded in
-the Cloud Image service as described in the 
-<link linkend="UserProvidedImages">User Defined Images section</link>.
+the Cloud Image service as described in 
+<xref linkend="UserProvidedImages"/>.
 </para>
 
 <para>

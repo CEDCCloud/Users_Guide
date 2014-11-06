@@ -64,15 +64,13 @@ The following page should appear:
 If you already have an account on the INFN Authenticaton and 
 Authorization         
 Infrastructure (INFN AAI) and therefore you have access to the INFN portal, 
-proceed with <link linkend="ApplyUsingAAI">"Apply for an account using 
-INFN-AAI" section</link>.
+proceed with <xref linkend="ApplyUsingAAI"/>. 
 </para></listitem>
 
 <listitem><para> 
 If and only if you don't have an account on the INFN Authenticaton and
 Authorization Infrastructure (INFN AAI), proceed with 
-<link linkend="ApplyUsingUserPasswd">" Apply for an account using User and 
-Password" section</link>
+<xref linkend="ApplyUsingUserPasswd"/>.
 </para></listitem>
 
 

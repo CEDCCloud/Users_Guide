@@ -92,7 +92,7 @@ the ssh-key mechanisms.
 
 <listitem><para>
 Specify the Security group to be used for this VM (security groups are 
-discussed in <link linkend="SecurityGroups">another section</link>).
+discussed in <xref linkend="SecurityGroups"/>).
 </para></listitem>
 
 
@@ -200,7 +200,7 @@ regardless of the state of the instances involved.
 
 <para>
 To assign a floating IP to a VM, first of all create the VM
-as described in the <link linkend="CreatingVMs">Creating VMs section</link>, 
+as described in <xref linkend="CreatingVMs"/>, 
 using the <replaceable>&lt;ProjectName&gt;-wan</replaceable> network.
 The following procedure then details the reservation of a floating IP address 
 from an existing pool of public addresses and the association of that 
@@ -321,7 +321,7 @@ contact <email>cloud-support@lists.pd.infn.it</email>.
 <para>
 Security groups are sets of IP filter rules that define networking access and 
 are applied to all instances within a project using that group. As
-described in <link linkend="CreatingVMs">Creating VMs section</link>, 
+described in <xref linkend="CreatingVMs"/>, 
 when you create an instance you have to specify
 the security group to be used.
 </para>
