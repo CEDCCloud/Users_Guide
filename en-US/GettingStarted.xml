@@ -18,8 +18,14 @@ provided by the Cloud.
 There are several ways of interacting with the Cloud. The simplest one is the 
 dashboard, a web based GUI.
 </para>
+
+
+<section id="AccessThePreprodThroughTheDashboard">
+<title>Access the pre-production service through the Dashboard</title>
+
 <para>
-To access the Cloud dell'area Padovana via the dashboard, you must simply go 
+To access the pre-production service of the Cloud Area Padovana via the 
+dashboard, you must simply go 
 to  <ulink url="https://cloudpp-areapd.pd.infn.it:8443/dashboard">https://cloudpp-areapd.pd.infn.it:8443/dashboard</ulink> in a browser.
 </para>
 
@@ -29,21 +35,50 @@ to  <ulink url="https://cloudpp-areapd.pd.infn.it:8443/dashboard">https://cloudp
 </imageobject>
 </mediaobject>
 
+<para>
+You can now log in using the username and password provided by the Cloud 
+administrators.
+</para>
+
+</section>
+
+<section id="AccessTheProdThroughTheDashboard">
+<title>Access the production service through the Dashboard</title>
+
+
+<para>
+To access the production service of the Cloud Area Padovana via the 
+dashboard, you must simply go 
+to  <ulink url="https://cloud-areapd.pd.infn.it/dashboard">https://cloud-areapd.pd.infn.it/dashboard</ulink> in a browser.
+</para>
+
+
+
 <mediaobject>
 <imageobject>
   <imagedata fileref="./images/dashboard_prod.png" />
 </imageobject>
 </mediaobject>
 
-
-
-
 <para>
-You can now log in using the username and password provided by the Cloud 
-administrators.
+You can now log either using the INFN-AAI credentials, or 
+using the username and password.
 </para>
+
+
 </section>
 
+</section>
+
+
+<section id="SwitchingBetweenProjects">
+<title>Switching between projects</title>
+
+<para>
+TBD
+</para>
+
+</section>
 
 <section id="CreatingAKeypair">
 <title>Creating a keypair</title>
@@ -76,6 +111,8 @@ You will need to give the keypair a name, such as
 
 
 <para>
+TBD: figura
+
 On completion of the operation, a file <replaceable>my_key.pem</replaceable> will be downloaded to your browser. This should be stored in a safe location. 
 To keep it private, run:
 <command>
