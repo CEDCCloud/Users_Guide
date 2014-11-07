@@ -54,12 +54,9 @@ or have a specific disk configuration which is not possible within the system
 disk configuration.
 </para>
 
-
 <warning><para>
 Please note that backups are not performed on ephemeral storage systems.
 </para></warning>
-
-
 </section>
 
 <section id="Volumes">
@@ -89,28 +86,43 @@ The steps to add a Volume are:
 <listitem><para>
 Define a disk volume of the size required (12GB in example 
 below) with the volume name defined (<replaceable>testvol</replaceable> in the 
-example below)
+example below). Using the Dashboard, click on 
+<menuchoice><guimenu>Volumes</guimenu></menuchoice> and then 
+<menuchoice><guimenu>Create Volume</guimenu></menuchoice>. 
+In the “Create Volume” window specify the name of the volume and the desired size.
+As <menuchoice><guimenu>Volume Source</guimenu></menuchoice> specify “No source, empty volume”. Like images below:
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/CreateVolumeCinder.jpg" />
+</imageobject>
+</mediaobject>
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/testvolCreation.jpg" />
+</imageobject>
+</mediaobject>
 </para></listitem>
 
 <listitem><para>
 Attach that volume to the instance that you would like it to be available on
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/AttachVolumeToInstance.jpg" />
+</imageobject>
+</mediaobject>
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/AttachVolumeToInstance1.jpg" />
+</imageobject>
+</mediaobject>
 </para></listitem>
-
 
 <listitem><para>
 Log in to the instance and format/mount as required
 </para></listitem>
 
 </itemizedlist>
-</para>
-
-<para>
-To define a disk volume using the Dashboard, click on 
-<menuchoice><guimenu>Volumes</guimenu></menuchoice> and then 
-<menuchoice><guimenu>Create Volume</guimenu></menuchoice>. In the 
-“Create Volume” window specify the name of the volume and the desired size. 
-As <menuchoice><guimenu>Volume Source</guimenu></menuchoice> specify 
-“No source, empty volume”.
 </para>
 
 <para>
@@ -193,13 +205,82 @@ Please note that backups are not performed on volumes.
 <section id="SharingVolume">
 <title>Sharing a volume between multiple (virtual) machines </title>
 <para>
-TBD
+Follow the creation and the format of cinder persistent volume above.
+</para>
+<para>
+Create the mount point and mount the volume:
+<screen>
+mkdir /dataNfs
+mount /dev/sdb /dataNfs
+</screen>
+</para>
+<para>
+Ensure in your virtual machine designed for nfs server are present the follow rpms and their dependencies:
+<screen>
+nfs-utils
+nfs-utils-lib
+rpcbind
+</screen>
+</para>
+<para>
+Insert the corret export in /etc/exports file. For example for all the virtual machine in the same subnet 10.62.15.* (check the subnet with ifconfig command) the contents of the /etc/exports file shoud be:
+<screen>
+/dataNfs 10.62.15.*(async,rw,no_root_squash)
+</screen>
+</para>
+
+<para>
+Check the iptables on the virtual machine. In the file /etc/sysconfig/iptables ensure other virtaula machines could access to porst 111, 2049, 875 UPD and TPC. So your file /etc/sysconfig/iptables should be like this:
+<screen>
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 111 -j ACCEPT
+-A INPUT -m state --state NEW -m udp -p udp --dport 111 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 875 -j ACCEPT
+-A INPUT -m state --state NEW -m udp -p udp --dport 875 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 2049 -j ACCEPT
+-A INPUT -m state --state NEW -m udp -p udp --dport 2049 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+</screen>
+Remember to restart iptables after any change on that file:
+<screen>
+/etc/init.d/iptables restart
+</screen>
+</para>
+
+<para>
+Check the Access &amp; Security of your tenat and remember to add th rule Ingress IPv4 TCP and UDP for the ports 111 875 and 2049. Like the image below:
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/AccessAndSecurity.jpg"/>
+</imageobject>
+</mediaobject>
+</para>
+
+<para>
+Restart nfs server:
+<screen>
+/etc/init.d/nfs restart
+</screen>
+</para>
+
+<para>
+Enter in another instance of the same tentant and mount via nfs filesystem like example below (if some errors occurs check you have installed rpcbind):
+<screen>
+mount -t nfs 10.62.15.4:/dataNfs /mnt
+</screen>
 </para>
 
 
 </section>
-
-
 </section>
 
 
