@@ -112,6 +112,197 @@ chmod 600 <replaceable>my_key.pem</replaceable>
 </section>
 
 
+<section id="SecurityGroups">
+<title>Setting security group(s)</title>
+
+<para>
+Security groups are sets of IP filter rules that define networking access and 
+are applied to all instances within a project using that group. As
+described in <xref linkend="CreatingVMs"/>, 
+when you create an instance you have to specify
+the security group to be used.
+</para>
+<para>
+To set such IP rules, users can either add rules to the default security group 
+or can add a new security group with the desided rules.
+</para>
+
+<para>
+For example the following procedure enables SSH and ICMP (ping) access to 
+instances using the default security group. The rules apply to all instances 
+within a given project using this security group, and should be set 
+(just once) for every 
+project unless there is a reason to prohibit SSH or ICMP access to the 
+instances.
+
+This procedure can be adjusted as necessary to add additional security group 
+rules to a project, if needed.
+</para>
+<para>
+<itemizedlist>
+
+<listitem><para>
+Log in to the dashboard, choose a project, and click 
+<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>. The 
+<menuchoice><guimenu>Security Groups</guimenu></menuchoice> tab shows the security 
+groups that are available for this project.
+</para></listitem>
+
+<listitem><para>
+Select the <menuchoice><guimenu>default</guimenu></menuchoice> 
+security group and click <menuchoice><guimenu>Edit Rules</guimenu></menuchoice>.
+</para></listitem>
+
+<listitem><para>
+To allow SSH access, click <menuchoice><guimenu>Add Rule</guimenu></menuchoice>.
+</para></listitem>
+<listitem><para> 
+In the Add Rule dialog box, enter the following values:
+
+<informaltable frame="all">
+<tgroup cols="2">
+<tbody>
+    <row><entry>Rule</entry><entry>SSH</entry></row>
+    <row><entry>Remote</entry><entry>CIDR</entry></row>
+    <row><entry>CIDR</entry><entry>0.0.0.0/0</entry></row>
+</tbody>
+</tgroup>
+</informaltable>
+
+
+
+<note><para>
+To accept requests from a particular range of IP addresses, specify the IP address block in 
+the <menuchoice><guimenu>CIDR</guimenu></menuchoice> box.
+</para></note>
+
+</para></listitem>
+<listitem><para>
+Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
+</para></listitem>
+
+<listitem><para>
+To add an ICMP rule, click <menuchoice><guimenu>Add Rule</guimenu></menuchoice>.
+</para></listitem>
+
+
+<listitem><para>
+In the Add Rule dialog box, enter the following values:
+
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+    <row><entry>Rule</entry><entry>All ICMP</entry></row>
+    <row><entry>Direction</entry><entry>Ingress</entry></row>
+    <row><entry>Remote</entry><entry>CIDR</entry></row>
+    <row><entry>CIDR</entry><entry>0.0.0.0/0</entry></row>
+</tbody>
+</tgroup>
+</informaltable>
+
+
+</para></listitem> 
+
+<listitem><para>
+Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
+</para></listitem>
+
+</itemizedlist>
+
+</para>
+
+<note><para>
+If you need to enable some services on a Virtual Machine, besides setting the
+specific IP rules through security groups, be sure that the relevant ports are 
+also enabled (e.g. via iptables) on the Virtual Machine.
+</para></note>
+
+
+</section>
+
+<section id="SettingPassword">
+<title>Setting/changing password</title>
+
+<section id="SettingPasswordPreprod">
+<title>Changing password in the pre-production cloud</title>
+
+<para>
+In the pre-production cloud, to change the password from the OpenStack
+dashboard select 
+<menuchoice><guimenu>Settings</guimenu></menuchoice> (on the top)
+then <menuchoice><guimenu>Change Password</guimenu></menuchoice>.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/changepasswd_preprod.png" />
+</imageobject>
+</mediaobject>
+
+
+</para>
+
+<important><para>
+This is the password to authenticate with the Cloud service. It has
+nothing to do with the password of the Cloud virtual machines.
+</para></important>
+
+
+</section>
+
+<section id="SettingPasswordProd">
+<title>Setting/changing password in the production cloud</title>
+
+
+<note><para>
+If you log on the production cloud through INFN-AAI and if you don't need 
+to access the cloud service using the OpenStack command line tools discussed
+in <xref linkend="AccessingtheCloudthroughCLI"/> you can safely ignore
+this section.
+</para></note>
+
+<para>
+If you access the production cloud through username and password, and
+you want to change such password, 
+from the OpenStack dashboard select 
+<menuchoice><guimenu>Settings</guimenu></menuchoice> (on the top) and
+then <menuchoice><guimenu>Activate Password</guimenu></menuchoice>.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/changepasswd_prod.png" />
+</imageobject>
+</mediaobject>
+
+</para>
+
+<para>
+If instead you log through INFN-AAI, you don't need
+to know this OpenStack password. You need to know it only if you need
+to access the service using the OpenStack command line tools discussed
+in <xref linkend="AccessingtheCloudthroughCLI"/>.
+</para>
+
+<para>
+To set such password (or to change it) use the same procedure:
+from the OpenStack dashboard select 
+<menuchoice><guimenu>Settings</guimenu></menuchoice> (on the top) and
+then <menuchoice><guimenu>Activate Password</guimenu></menuchoice>.
+
+</para>
+
+<important><para>
+This is the password to authenticate with the Cloud service. It has
+nothing to do with the password of the Cloud virtual machines nor
+with the INFN-AAI password.
+</para></important>
+
+</section>
+
+</section>
+
+
+
 <section id="SwitchingBetweenProjects">
 <title>Switching between projects</title>
 
@@ -134,6 +325,8 @@ figure.
 </para>
 
 </section>
+
+
 
 
 <section id="AccessingtheCloudthroughCLI">

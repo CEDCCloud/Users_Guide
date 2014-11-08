@@ -317,7 +317,7 @@ contact <email>cloud-support@lists.pd.infn.it</email>.
 </section>
 
 
-<section id="SecurityGroups">
+<section id="SecurityGroups1">
 <title>Security Groups</title>
 <para>
 Security groups are sets of IP filter rules that define networking access and 
