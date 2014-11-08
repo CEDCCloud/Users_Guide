@@ -368,8 +368,28 @@ version using 'setenv' rather than export.
 </para>
 
 <para>
+In the production cloud, since services are secured using SSL, you need to
+edit the RC file adding the line:
+
+<screen>
+export OS_CACERT=/etc/grid-security/certificates/INFN-CA-2006.pem
+</screen>
+
+and you need to make sure that this file exists on the relevant client
+machine. 
+Its content must be the
+certificate of the INFN-CA in PEM format. This file is provided by
+the <literal>ca_INFN-CA-2006</literal> package (that can be downloaded
+e.g. from the <ulink url="http://www.eugridpma.org/">EUGridPMA web 
+site</ulink>. The certificate can also be downloaded from the
+<ulink url="https://security.fi.infn.it/CA/mgt/INFNCA.pem">INFN CA web 
+site</ulink>.
+</para>
+
+<para>
 To test it works, run the rc script source file and enter your password to 
-authenticate. The OpenStack command line tools (nova for compute resources, glance for images) can then be used, etc:
+authenticate. The OpenStack command line tools (nova for compute resources, 
+glance for images) can then be used, etc:
 </para>
 <screen>
 $ . ALICE-openrc.sh 
@@ -395,20 +415,22 @@ standard for computational clouds.
 </para>
 
 <para>
-The euca2ools are command line tools that can be used to interact with an 
+The <literal>euca2ools</literal> are command line tools that can be used to 
+interact with an 
 EC2 based cloud.
 The euca2ools require a set of shell environment variables in order to run. 
-These variables can be obtained and stored in an 'rc' file 
-much like .profile when logging into a linux server. The environment 
+These environment 
 variables are different per project that you work on.
 </para>
 <para>
-If you log into the dashboard, you will find an 
-<menuchoice><guimenu>API Access</guimenu></menuchoice>
-menu on the left then an API Access option. On the left hand side, select 
-<menuchoice><guimenu>EC2 credentials</guimenu></menuchoice> and confirm the 
-project you wish to download the zip file for. The zip file will be 
-downloaded to the browser. 
+If you log into the dashboard, you 
+will find an <menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>
+menu on the left hand side. Then choose the 
+<menuchoice><guimenu>API Access</guimenu></menuchoice> Tab to select the 
+options related to using the program interfaces. Select the 
+<menuchoice><guimenu>Download EC2 Credentials</guimenu></menuchoice> option 
+on the top right to download the zip file for your current project.
+This zip file will be downloaded to the browser. 
 </para>
 
 <mediaobject>
@@ -433,7 +455,12 @@ extracting: ec2rc.sh
 
 <para>
 ec2rc.sh gives the variables for accessing the Cloud with EC2 APIs. If you 
-use a C shell based shell, you would need to adapt this using setenv. To test 
+use a C shell based shell, you would need to adapt this using setenv. 
+
+</para>
+
+<para>
+To test 
 it, you can e.g. try the following:
 </para>
 
