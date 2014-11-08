@@ -75,7 +75,21 @@ using the username and password.
 <title>Switching between projects</title>
 
 <para>
-TBD
+As introduced in <xref linkend="Projects"/>,
+a user can be on multiple projects at the same time. It is possible 
+to switch between them using the Dashboard, clicking on 
+<menuchoice><guimenu>CURRENT PROJECT</guimenu></menuchoice> 
+as shown in the following
+figure.
+
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/ProjectSwitch.png" />
+</imageobject>
+</mediaobject>
+
+
 </para>
 
 </section>
