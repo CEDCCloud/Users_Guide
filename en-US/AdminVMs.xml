@@ -4,12 +4,13 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="AdministeringVMs">
-<title>Administering VMs</title>
+<title>Managing Virtual Machines</title>
 
 <section id="CreatingVMs">
-<title>Creating VMs</title>
+<title>Creating Virtual Machines</title>
 <para>
-To create a VM using the dashboard, you need to have already logged into the 
+To create a Virtual Machine (VM) using the dashboard, you need to have 
+already logged into the 
 dashboard and created your private key, as explained before.
 </para>
 
@@ -133,7 +134,7 @@ console of the VM.
 <warning><para>
 Please note that Virtual Machines instantiated on the Cloud aren't
 registered in the DNS. This means that you'll have to refer to them
-using there IP numbers.
+using their IP numbers.
 </para></warning>
 
 <note><para>

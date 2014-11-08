@@ -71,28 +71,6 @@ using the username and password.
 </section>
 
 
-<section id="SwitchingBetweenProjects">
-<title>Switching between projects</title>
-
-<para>
-As introduced in <xref linkend="Projects"/>,
-a user can be on multiple projects at the same time. It is possible 
-to switch between them using the Dashboard, clicking on 
-<menuchoice><guimenu>CURRENT PROJECT</guimenu></menuchoice> 
-as shown in the following
-figure.
-
-
-<mediaobject>
-<imageobject>
-  <imagedata fileref="./images/ProjectSwitch.png" />
-</imageobject>
-</mediaobject>
-
-
-</para>
-
-</section>
 
 <section id="CreatingAKeypair">
 <title>Creating a keypair</title>
@@ -125,14 +103,36 @@ You will need to give the keypair a name, such as
 
 
 <para>
-TBD: figura
-
 On completion of the operation, a file <replaceable>my_key.pem</replaceable> will be downloaded to your browser. This should be stored in a safe location. 
 To keep it private, run:
 <command>
 chmod 600 <replaceable>my_key.pem</replaceable>
 </command>
 </para>
+</section>
+
+
+<section id="SwitchingBetweenProjects">
+<title>Switching between projects</title>
+
+<para>
+As introduced in <xref linkend="Projects"/>,
+a user can be on multiple projects at the same time. It is possible 
+to switch between them using the Dashboard, clicking on 
+<menuchoice><guimenu>CURRENT PROJECT</guimenu></menuchoice> 
+as shown in the following
+figure.
+
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/ProjectSwitch.png" />
+</imageobject>
+</mediaobject>
+
+
+</para>
+
 </section>
 
 
