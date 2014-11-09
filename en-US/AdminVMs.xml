@@ -143,14 +143,23 @@ Swith the tab for <menuchoice><guimenu>Networking</guimenu></menuchoice>.
 
 
 You should see one network called <replaceable>&lt;ProjectName&gt;-lan
-</replaceable>, and in 
-some cases also another network called 
+</replaceable> and, if the possibility to use public IP numbers
+was requested for your project,
+also another network called 
 <replaceable>&lt;ProjectName&gt;-wan</replaceable>.
 Select the former one if your VM doesn't need to be visible on the Internet. 
 Select instead the <replaceable>&lt;ProjectName&gt;-wan</replaceable>  
 network if your VM must have a public IP. You will then need to allocate a 
 public (floating) IP address to this instance, as explained in 
 <xref linkend="AllocatingFloating"/>. 
+
+<note><para>
+By default the possibility to use public IP numbers is disabled and
+therefore by default the <replaceable>&lt;ProjectName&gt;-wan</replaceable>
+network doesn't exist. If public IPs are needed for your
+project, please contact <email>cloud-support@lists.pd.infn.it</email>. 
+</para></note>
+
 </para></listitem>
 
 <listitem><para>
@@ -192,49 +201,108 @@ using their IP numbers.
 </section>
 
 <section id="AccessingVMs">
-<title>Accessing to VMs</title>
+<title>Accessing to Virtual Machines</title>
 <para>
-Assuming you created a Linux virtual machine, using the keypair provided on 
-the start of the VM creation, you can now log in as root.
+Assuming you created a Linux virtual machine using the 
+<replaceable>&lt;ProjectName&gt;-lan</replaceable> network, you can 
+now log to this VM from the Local Area Networks (LANs) of both Padova 
+and LNL.
+</para>
 
+<para>
 Assuming you stored your <replaceable>my_key</replaceable> keypair in 
-<replaceable>~/private</replaceable>:
+<replaceable>~/private</replaceable> and the IP number of this VM is
+<replaceable>10.64.15.3</replaceable>:
 </para>
 
 <screen>
-$ ssh -o GSSAPIAuthentication=no -i ~/my_key root@10.62.15.3
+$ ssh -i ~/private/my_key root@10.64.15.3
 </screen>
 
 <para>
 <warning><para>
-Please note that VMs of the Cloud are not registered in the DNS, and therefore you must use the IP address.
+Please note that VMs of the Cloud are not registered in the DNS, and therefore 
+you must use the IP address.
 </para></warning>
 </para>
+
+<para>
+If it is necessary to log on this VM from the Internet, it is 
+necessary to go through a gate machine. For this purpose you can rely
+on the existing gate hosts in Padova and Legnaro. 
+If you don't have an account on one of such gate hosts, you can use 
+a Cloud specific gate host (<literal>cld-gate.pd.infn.it</literal>): contact 
+<email>cloud-support@lists.pd.infn.it</email> if you need an account on such 
+machine.
+</para>
+
+
+<para>
+If needed, e.g. if a VM should host a service accessible from the 
+Internet, such VM on the Cloud can be given a public IP. For this purpose
+it is needed:
+
+<itemizedlist>
+
+<listitem><para>
+to instantiate the VM on the <replaceable>&lt;ProjectName&gt;-wan</replaceable> 
+network;
+</para></listitem>
+
+<listitem><para>
+to allocate a floating (public) IP to the VM, as discussed in 
+<xref linkend="AllocatingFloating"/>.
+</para></listitem>
+
+</itemizedlist>
+
+</para>
+
+
+<note><para>
+Please note that by default the possibility to use public IP numbers is disabled.
+If public IPs are needed for your project, please contact 
+<email>cloud-support@lists.pd.infn.it</email>.                
+</para></note>
+
+<para>
+To control which services/ports of your virtual machine can be accessed,
+please use the security groups (discussed in <xref linkend="SecurityGroups"/>) 
+and firewalls (e.g. iptables) on the relevant VM.
+</para>
+
 
 </section>
 
 
-<section id="NetworkCond">
-<title>Network considerations</title>
+<section id="AccessingFromVMs">
+<title>Accessing to other hosts/services from Virtual Machines</title>
+
 <para>
-VMs created using the <replaceable>xyz-lan</replaceable> network are
-“visible” from both the LAN of Padova and Legnaro. This means that e.g.
-you can access via ssh a VM of the Cloud directly from your desktop located
-in Padova or Legnaro. Security groups (discussed below) and firewalls
-set on the VM (e.g. through iptables) then determine which services/port can
-be accessed.
-</para>
-<para>
-The contrary is instead not possible: from a VM created using the
-<replaceable>xyz-lan</replaceable> network it is generally not possible to
-access a host/service hosted in Padova or Legnaro LANs. It is instead
-possible to access the outside Internet network.
+From a VM of the Cloud, it is possible to access the outside 
+Internet network, but by default it is not possible to      
+access a host/service hosted in Padova or Legnaro. 
+If, for some reasons, you need to access some
+services hosted in Padova or Legnaro from the Cloud, please contact
+<email>cloud-support@lists.pd.infn.it</email>.
 </para>
 </section>
 
 
 <section id="AllocatingFloating">
 <title>Allocating a public (floating) IP address to an instance</title>
+
+
+
+<note><para>                                                                         xxx 
+By default the possibility to use public IP numbers is disabled and                   
+therefore by default the <replaceable>&lt;ProjectName&gt;-wan</replaceable>           
+network doesn't exist. If public IPs are needed for your                              
+project, please contact <email>cloud-support@lists.pd.infn.it</email>.                
+</para></note>
+
+
+
 <para>
 When an instance is created in OpenStack, it is automatically assigned a 
 fixed IP address.
