@@ -290,17 +290,7 @@ services hosted in Padova or Legnaro from the Cloud, please contact
 
 
 <section id="AllocatingFloating">
-<title>Allocating a public (floating) IP address to an instance</title>
-
-
-
-<note><para>                                                                         xxx 
-By default the possibility to use public IP numbers is disabled and                   
-therefore by default the <replaceable>&lt;ProjectName&gt;-wan</replaceable>           
-network doesn't exist. If public IPs are needed for your                              
-project, please contact <email>cloud-support@lists.pd.infn.it</email>.                
-</para></note>
-
+<title>Allocating a public (floating) IP address to a Virtual Machine</title>
 
 
 <para>
@@ -321,6 +311,7 @@ The following procedure then details the reservation of a floating IP address
 from an existing pool of public addresses and the association of that 
 address with a specific instance.
 
+
 <itemizedlist>
 
 <listitem><para>
@@ -332,15 +323,36 @@ From the dashboard click
 <listitem><para>
 Click the <menuchoice><guimenu>Floating IPs</guimenu></menuchoice> tab, 
 which shows the floating IP addresses allocated to instances.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/floatingips.png" />
+</imageobject>
+</mediaobject>
+
 </para></listitem>
 
 <listitem><para>
 Click <menuchoice><guimenu>Allocate IP to Project</guimenu></menuchoice>.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/allocatefloatingip.png" />
+</imageobject>
+</mediaobject>
+
+
 </para></listitem>
 
 <listitem><para> 
 Choose <replaceable>Ext</replaceable> as the pool from which to pick the 
 IP address and click <menuchoice><guimenu>Allocate IP</guimenu></menuchoice>. 
+</para></listitem>
+
+
+<listitem><para> 
+Click on the <menuchoice><guimenu>Associate</guimenu></menuchoice> for the
+just allocated floating IP.
 </para></listitem>
 
 <listitem><para> 
@@ -362,6 +374,14 @@ their fixed IP addresses).
 
 </itemizedlist>
 
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/associatefloatingip.png" />
+</imageobject>
+</mediaobject>
+
+
+
 </para></listitem>
 
 
@@ -379,6 +399,14 @@ Click  <menuchoice><guimenu>Associate</guimenu></menuchoice>.
 <para>
 To disassociate an IP address from an instance, click the 
 <menuchoice><guimenu>Disassociate</guimenu></menuchoice> button.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/disassociatefloatingip.png" />
+</imageobject>
+</mediaobject>
+
+
 </para>
 
 <para>
@@ -386,7 +414,23 @@ To release the floating IP address back into the pool of addresses,
 click the <menuchoice><guimenu>More</guimenu></menuchoice> button 
 and select the <menuchoice><guimenu>Release Floating IP</guimenu></menuchoice>
 option.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/releasefloatingip.png" />
+</imageobject>
+</mediaobject>
+
 </para>
+
+
+<note><para>
+By default the possibility to use public IP numbers is disabled and  
+therefore by default it is not possible to allocate a floating
+IP to an instance.
+If public IPs are needed for your                              
+project, please contact <email>cloud-support@lists.pd.infn.it</email>.
+</para></note>
 
 
 </section>
