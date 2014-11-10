@@ -4,26 +4,23 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="AdministeringVMs">
-<title>Administering VMs</title>
+<title>Managing Virtual Machines</title>
 
 <section id="CreatingVMs">
-<title>Creating VMs</title>
+<title>Creating Virtual Machines</title>
 <para>
-To create a VM using the dashboard, you need to have already logged into the 
-dashboard and created your private key, as explained before.
+To create a Virtual Machine (VM) using the dashboard, you need to have 
+already logged into the 
+dashboard, created your private key (as explained in 
+<xref linkend="CreatingAKeypair"/>) and set
+the security group (as discussed in <xref linkend="SecurityGroups"/>) to be
+used for this VM.
 </para>
 
 <para>
 To create a VM, the steps are as follows:
 </para>
 
-<para>
-<itemizedlist>
-<listitem><para>Number of virtual CPU cores (VCPUs)</para></listitem>
-<listitem><para>Amount of memory</para></listitem>
-<listitem><para>Disk space</para></listitem>
-</itemizedlist>
-</para>
 
 <itemizedlist>
 
@@ -35,12 +32,30 @@ On the left hand menu, select the Project that must be used for this VM.
 <listitem><para>
 Go to <menuchoice><guimenu>Instances</guimenu></menuchoice> on the left hand 
 menu. This will display a list of VMs currently running in your project.
+
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/instances.png" />
+</imageobject>
+</mediaobject>
+
 </para></listitem>
 
 
+
+
 <listitem><para>
-Select <menuchoice><guimenu>Launch Instance</guimenu></menuchoice> on the 
-top right hand side of the dashboard. A new menu appears where you can enter:
+Select the <menuchoice><guimenu>+ Launch Instance</guimenu></menuchoice> 
+button. A new menu appears. 
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/launchinstance.png" />
+</imageobject>
+</mediaobject>
+
+Here you can enter:
 </para>
 
 
@@ -48,23 +63,27 @@ top right hand side of the dashboard. A new menu appears where you can enter:
 
 <listitem><para>
 <menuchoice><guimenu>Instance name</guimenu></menuchoice> is the name of the 
-machine you want to create. Please note that this name will not be registered 
-in the DNS
+machine you want to create. 
 </para></listitem>
 
 <listitem><para>
 <menuchoice><guimenu>Flavor</guimenu></menuchoice> is the size of the machine 
-you want to create. These are specified using VPCU (number of virtual CPUs, 
-GB of disk space for the system disk, MB RAM for the memory). Selecting small 
+you want to create. These are specified using VCPUs (number of virtual CPUs, 
+disk space for the system disk, size for the RAM memory). Selecting small 
 flavors is more economical and the flavor of a virtual machine can be changed 
-later if required.
+later if required. Flavors are discussed in <xref linkend="Flavors"/>.
 </para></listitem>
+
+<listitem><para>
+<menuchoice><guimenu>Instance Count</guimenu></menuchoice> is the number
+of virtual machines to be started.
+</para></listitem> 
 
 <listitem><para>
 As <menuchoice><guimenu>Instance Boot Source</guimenu></menuchoice> 
 select <menuchoice><guimenu>Boot from Image</guimenu></menuchoice> or 
 <menuchoice><guimenu>Boot from Snapshot</guimenu></menuchoice> and then 
-specify its name
+specify its name.
 </para></listitem>
 
 </itemizedlist>
@@ -72,22 +91,36 @@ specify its name
 
 <listitem><para>
 Switch the tab for 
-<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice> 
+<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/launch-accesssec.png" />
+</imageobject>
+</mediaobject>
+
+ 
 </para>
 
 <itemizedlist>
 
 <listitem><para>
-Select the keypair you created. This will allow you to log in as root using 
-the key
+As <menuchoice><guimenu>Keypair</guimenu></menuchoice> 
+select the keypair you created. This will allow you to log in as root using 
+this SSH key.
 </para></listitem>
 
 
 <listitem><para>
 You can also specify the admin (usually root) password of the instance. 
-Please note that this is not guaranteed to always work (the image can't 
+
+<warning><para>
+Please note that this setting of the admin password is not guaranteed to 
+always work (the image can't 
 support the “injection” of this password). It is therefore suggested to use 
 the ssh-key mechanisms.
+</para></warning>
+
 </para></listitem>
 
 <listitem><para>
@@ -101,20 +134,39 @@ discussed in <xref linkend="SecurityGroups"/>).
 
 <listitem><para>
 Swith the tab for <menuchoice><guimenu>Networking</guimenu></menuchoice>.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/launch-net.png" />
+</imageobject>
+</mediaobject>
+
+
 You should see one network called <replaceable>&lt;ProjectName&gt;-lan
-</replaceable>, and in 
-some cases also another network called 
+</replaceable> and, if the possibility to use public IP numbers
+was requested for your project,
+also another network called 
 <replaceable>&lt;ProjectName&gt;-wan</replaceable>.
 Select the former one if your VM doesn't need to be visible on the Internet. 
 Select instead the <replaceable>&lt;ProjectName&gt;-wan</replaceable>  
-network if your VM must have a public IP.
+network if your VM must have a public IP. You will then need to allocate a 
+public (floating) IP address to this instance, as explained in 
+<xref linkend="AllocatingFloating"/>. 
+
+<note><para>
+By default the possibility to use public IP numbers is disabled and
+therefore by default the <replaceable>&lt;ProjectName&gt;-wan</replaceable>
+network doesn't exist. If public IPs are needed for your
+project, please contact <email>cloud-support@lists.pd.infn.it</email>. 
+</para></note>
+
 </para></listitem>
 
 <listitem><para>
 Select <menuchoice><guimenu>Launch</guimenu></menuchoice> to start the 
 virtual machine being created. When this returns to the overview screen, 
 there will be a line with the instance name, ip adress and status. The status 
-should be active once the install is complete.
+should be 'Active' once the install is complete.
 </para></listitem>
 
 </itemizedlist>
@@ -124,7 +176,16 @@ Once the status of the machine is 'Active', you can watch the console to see
 it installing and booting. On the right hand side of the table, under 
 <menuchoice><guimenu>More</guimenu></menuchoice>, there is a pull down menu. 
 Options include <menuchoice><guimenu>View Log</guimenu></menuchoice> and 
-<menuchoice><guimenu>Console</guimenu></menuchoice>. For a Linux machine, 
+<menuchoice><guimenu>Console</guimenu></menuchoice>. 
+
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/instance-more.png" />
+</imageobject>
+</mediaobject>
+
+For a Linux machine, 
 select <menuchoice><guimenu>Console</guimenu></menuchoice> to access to the 
 console of the VM.
 </para>
@@ -133,61 +194,105 @@ console of the VM.
 <warning><para>
 Please note that Virtual Machines instantiated on the Cloud aren't
 registered in the DNS. This means that you'll have to refer to them
-using there IP numbers.
+using their IP numbers.
 </para></warning>
 
-<note><para>
-Please note that this setting the admin password is not guaranteed to always 
-work (the image can't support the “injection” of this password). It is 
-therefore suggested to use the ssh-key mechanisms. 
-</para></note>
 
 </section>
 
 <section id="AccessingVMs">
-<title>Accessing to VMs</title>
+<title>Accessing to Virtual Machines</title>
 <para>
-Assuming you created a Linux virtual machine, using the keypair provided on 
-the start of the VM creation, you can now log in as root.
+Assuming you created a Linux virtual machine using the 
+<replaceable>&lt;ProjectName&gt;-lan</replaceable> network, you can 
+now log to this VM from the Local Area Networks (LANs) of both Padova 
+and LNL.
+</para>
 
+<para>
 Assuming you stored your <replaceable>my_key</replaceable> keypair in 
-<replaceable>~/private</replaceable>:
+<replaceable>~/private</replaceable> and the IP number of this VM is
+<replaceable>10.64.15.3</replaceable>:
 </para>
 
 <screen>
-$ ssh -o GSSAPIAuthentication=no -i ~/my_key root@10.62.15.3
+$ ssh -i ~/private/my_key root@10.64.15.3
 </screen>
 
 <para>
 <warning><para>
-Please note that VMs of the Cloud are not registered in the DNS, and therefore you must use the IP address.
+Please note that VMs of the Cloud are not registered in the DNS, and therefore 
+you must use the IP address.
 </para></warning>
 </para>
+
+<para>
+If it is necessary to log on this VM from the Internet, it is 
+necessary to go through a gate machine. For this purpose you can rely
+on the existing gate hosts in Padova and Legnaro. 
+If you don't have an account on one of such gate hosts, you can use 
+a Cloud specific gate host (<literal>cld-gate.pd.infn.it</literal>): contact 
+<email>cloud-support@lists.pd.infn.it</email> if you need an account on such 
+machine.
+</para>
+
+
+<para>
+If needed, e.g. if a VM should host a service accessible from the 
+Internet, such VM on the Cloud can be given a public IP. For this purpose
+it is needed:
+
+<itemizedlist>
+
+<listitem><para>
+to instantiate the VM on the <replaceable>&lt;ProjectName&gt;-wan</replaceable> 
+network;
+</para></listitem>
+
+<listitem><para>
+to allocate a floating (public) IP to the VM, as discussed in 
+<xref linkend="AllocatingFloating"/>.
+</para></listitem>
+
+</itemizedlist>
+
+</para>
+
+
+<note><para>
+Please note that by default the possibility to use public IP numbers is disabled.
+If public IPs are needed for your project, please contact 
+<email>cloud-support@lists.pd.infn.it</email>.                
+</para></note>
+
+<para>
+To control which services/ports of your virtual machine can be accessed,
+please use the security groups (discussed in <xref linkend="SecurityGroups"/>) 
+and firewalls (e.g. iptables) on the relevant VM.
+</para>
+
 
 </section>
 
 
-<section id="NetworkCond">
-<title>Network considerations</title>
+<section id="AccessingFromVMs">
+<title>Accessing to other hosts/services from Virtual Machines</title>
+
 <para>
-VMs created using the <replaceable>xyz-lan</replaceable> network are
-“visible” from both the LAN of Padova and Legnaro. This means that e.g.
-you can access via ssh a VM of the Cloud directly from your desktop located
-in Padova or Legnaro. Security groups (discussed below) and firewalls
-set on the VM (e.g. through iptables) then determine which services/port can
-be accessed.
-</para>
-<para>
-The contrary is instead not possible: from a VM created using the
-<replaceable>xyz-lan</replaceable> network it is generally not possible to
-access a host/service hosted in Padova or Legnaro LANs. It is instead
-possible to access the outside Internet network.
+From a VM of the Cloud, it is possible to access the outside 
+Internet network, but by default it is not possible to      
+access a host/service hosted in Padova or Legnaro. 
+If, for some reasons, you need to access some
+services hosted in Padova or Legnaro from the Cloud, please contact
+<email>cloud-support@lists.pd.infn.it</email>.
 </para>
 </section>
 
 
 <section id="AllocatingFloating">
-<title>Allocating a public (floating) IP address to an instance</title>
+<title>Allocating a public (floating) IP address to a Virtual Machine</title>
+
+
 <para>
 When an instance is created in OpenStack, it is automatically assigned a 
 fixed IP address.
@@ -206,6 +311,7 @@ The following procedure then details the reservation of a floating IP address
 from an existing pool of public addresses and the association of that 
 address with a specific instance.
 
+
 <itemizedlist>
 
 <listitem><para>
@@ -217,15 +323,36 @@ From the dashboard click
 <listitem><para>
 Click the <menuchoice><guimenu>Floating IPs</guimenu></menuchoice> tab, 
 which shows the floating IP addresses allocated to instances.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/floatingips.png" />
+</imageobject>
+</mediaobject>
+
 </para></listitem>
 
 <listitem><para>
 Click <menuchoice><guimenu>Allocate IP to Project</guimenu></menuchoice>.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/allocatefloatingip.png" />
+</imageobject>
+</mediaobject>
+
+
 </para></listitem>
 
 <listitem><para> 
 Choose <replaceable>Ext</replaceable> as the pool from which to pick the 
 IP address and click <menuchoice><guimenu>Allocate IP</guimenu></menuchoice>. 
+</para></listitem>
+
+
+<listitem><para> 
+Click on the <menuchoice><guimenu>Associate</guimenu></menuchoice> for the
+just allocated floating IP.
 </para></listitem>
 
 <listitem><para> 
@@ -247,6 +374,14 @@ their fixed IP addresses).
 
 </itemizedlist>
 
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/associatefloatingip.png" />
+</imageobject>
+</mediaobject>
+
+
+
 </para></listitem>
 
 
@@ -264,6 +399,14 @@ Click  <menuchoice><guimenu>Associate</guimenu></menuchoice>.
 <para>
 To disassociate an IP address from an instance, click the 
 <menuchoice><guimenu>Disassociate</guimenu></menuchoice> button.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/disassociatefloatingip.png" />
+</imageobject>
+</mediaobject>
+
+
 </para>
 
 <para>
@@ -271,7 +414,23 @@ To release the floating IP address back into the pool of addresses,
 click the <menuchoice><guimenu>More</guimenu></menuchoice> button 
 and select the <menuchoice><guimenu>Release Floating IP</guimenu></menuchoice>
 option.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/releasefloatingip.png" />
+</imageobject>
+</mediaobject>
+
 </para>
+
+
+<note><para>
+By default the possibility to use public IP numbers is disabled and  
+therefore by default it is not possible to allocate a floating
+IP to an instance.
+If public IPs are needed for your                              
+project, please contact <email>cloud-support@lists.pd.infn.it</email>.
+</para></note>
 
 
 </section>
@@ -316,117 +475,6 @@ contact <email>cloud-support@lists.pd.infn.it</email>.
 </section>
 
 
-<section id="SecurityGroups">
-<title>Security Groups</title>
-<para>
-Security groups are sets of IP filter rules that define networking access and 
-are applied to all instances within a project using that group. As
-described in <xref linkend="CreatingVMs"/>, 
-when you create an instance you have to specify
-the security group to be used.
-</para>
-
-<para>
-To set such IP rules, users can either add rules to the default security group 
-or can add a new security group with the desided rules.
-</para>
-
-<para>
-For example the following procedure enables SSH and ICMP (ping) access to 
-instances using the default security group. The rules apply to all instances 
-within a given project using this security group, and should be set 
-(just once) for every 
-project unless there is a reason to prohibit SSH or ICMP access to the 
-instances.
-
-This procedure can be adjusted as necessary to add additional security group 
-rules to a project, if needed.
-</para>
-
-<para>
-<itemizedlist>
-
-<listitem><para>
-Log in to the dashboard, choose a project, and click 
-<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>. The 
-<menuchoice><guimenu>Security Groups</guimenu></menuchoice> tab shows the security 
-groups that are available for this project.
-</para></listitem>
-
-<listitem><para>
-Select the <menuchoice><guimenu>default</guimenu></menuchoice> 
-security group and click <menuchoice><guimenu>Edit Rules</guimenu></menuchoice>.
-</para></listitem>
-
-<listitem><para>
-To allow SSH access, click <menuchoice><guimenu>Add Rule</guimenu></menuchoice>.
-</para></listitem>
-
-<listitem><para> 
-In the Add Rule dialog box, enter the following values:
-
-<informaltable frame="all">
-<tgroup cols="2">
-<tbody>
-    <row><entry>Rule</entry><entry>SSH</entry></row>
-    <row><entry>Remote</entry><entry>CIDR</entry></row>
-    <row><entry>CIDR</entry><entry>0.0.0.0/0</entry></row>
-</tbody>
-</tgroup>
-</informaltable>
-
-
-
-<note><para>
-To accept requests from a particular range of IP addresses, specify the IP address block in 
-the <menuchoice><guimenu>CIDR</guimenu></menuchoice> box.
-</para></note>
-
-</para></listitem>
-
-<listitem><para>
-Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
-</para></listitem>
-
-<listitem><para>
-To add an ICMP rule, click <menuchoice><guimenu>Add Rule</guimenu></menuchoice>.
-</para></listitem>
-
-
-<listitem><para>
-In the Add Rule dialog box, enter the following values:
-
-
-<informaltable>
-<tgroup cols="2">
-<tbody>
-    <row><entry>Rule</entry><entry>All ICMP</entry></row>
-    <row><entry>Direction</entry><entry>Ingress</entry></row>
-    <row><entry>Remote</entry><entry>CIDR</entry></row>
-    <row><entry>CIDR</entry><entry>0.0.0.0/0</entry></row>
-</tbody>
-</tgroup>
-</informaltable>
-
-
-</para></listitem> 
-
-<listitem><para>
-Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
-</para></listitem>
-
-</itemizedlist>
-
-</para>
-
-<note><para>
-If you need to enable some services on a Virtual Machine, besides setting the
-specific IP rules through security groups, be sure that the relevant ports are 
-also enabled (e.g. via iptables) on the Virtual Machine.
-</para></note>
-
-
-</section>
 
 <section id="StoppingAndStartingVMs">
 <title>Stopping and Starting VMs</title>
@@ -665,8 +713,15 @@ the “source” VM. For SL6.x related OS this can be done using the following i
 Before doing the snapshot (that can be done using the web-based dashboard, it 
 is recommended to shut down the source VM to make sure that all data is 
 flushed to disk. To perform this shutdown of the VM, please don't do it 
-through Openstack. Instead please do the shutdown within the VM (i.e. log as root to the VM and issue ”shutdown -h now” or ”poweroff”).
+through Openstack. Instead please do the shutdown within the VM (i.e. log as root to the VM and issue <command>shutdown -h now</command> or 
+<command>poweroff</command>).
 </para>
+
+<warning><para>
+In the production Cloud it is possible to save in the Image service
+only snapshots with a maximum size of 25 GB. 
+</para></warning>
+
 
 </section>
 

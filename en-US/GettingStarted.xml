@@ -18,8 +18,14 @@ provided by the Cloud.
 There are several ways of interacting with the Cloud. The simplest one is the 
 dashboard, a web based GUI.
 </para>
+
+
+<section id="AccessThePreprodThroughTheDashboard">
+<title>Access the pre-production service through the Dashboard</title>
+
 <para>
-To access the Cloud dell'area Padovana via the dashboard, you must simply go 
+To access the pre-production service of the Cloud Area Padovana via the 
+dashboard, you must simply go 
 to  <ulink url="https://cloudpp-areapd.pd.infn.it:8443/dashboard">https://cloudpp-areapd.pd.infn.it:8443/dashboard</ulink> in a browser.
 </para>
 
@@ -29,20 +35,41 @@ to  <ulink url="https://cloudpp-areapd.pd.infn.it:8443/dashboard">https://cloudp
 </imageobject>
 </mediaobject>
 
+<para>
+You can now log in using the username and password provided by the Cloud 
+administrators.
+</para>
+
+</section>
+
+<section id="AccessTheProdThroughTheDashboard">
+<title>Access the production service through the Dashboard</title>
+
+
+<para>
+To access the production service of the Cloud Area Padovana via the 
+dashboard, you must simply go 
+to  <ulink url="https://cloud-areapd.pd.infn.it/dashboard">https://cloud-areapd.pd.infn.it/dashboard</ulink> in a browser.
+</para>
+
+
+
 <mediaobject>
 <imageobject>
   <imagedata fileref="./images/dashboard_prod.png" />
 </imageobject>
 </mediaobject>
 
-
-
-
 <para>
-You can now log in using the username and password provided by the Cloud 
-administrators.
+You can now log either using the INFN-AAI credentials, or 
+using the username and password.
 </para>
+
+
 </section>
+
+</section>
+
 
 
 <section id="CreatingAKeypair">
@@ -85,6 +112,223 @@ chmod 600 <replaceable>my_key.pem</replaceable>
 </section>
 
 
+<section id="SecurityGroups">
+<title>Setting security group(s)</title>
+
+<para>
+Security groups are sets of IP filter rules that define networking access and 
+are applied to all instances within a project using that group. As
+described in <xref linkend="CreatingVMs"/>, 
+when you create an instance you have to specify
+the security group to be used.
+</para>
+<para>
+To set such IP rules, users can either add rules to the default security group 
+or can add a new security group with the desided rules.
+</para>
+
+<para>
+For example the following procedure enables SSH and ICMP (ping) access to 
+instances using the default security group. The rules apply to all instances 
+within a given project using this security group, and should be set 
+(just once) for every 
+project unless there is a reason to prohibit SSH or ICMP access to the 
+instances.
+
+This procedure can be adjusted as necessary to add additional security group 
+rules to a project, if needed.
+</para>
+<para>
+<itemizedlist>
+
+<listitem><para>
+Log in to the dashboard, choose a project, and click 
+<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>. The 
+<menuchoice><guimenu>Security Groups</guimenu></menuchoice> tab shows the security 
+groups that are available for this project.
+</para></listitem>
+
+<listitem><para>
+Select the <menuchoice><guimenu>default</guimenu></menuchoice> 
+security group and click <menuchoice><guimenu>Edit Rules</guimenu></menuchoice>.
+</para></listitem>
+
+<listitem><para>
+To allow SSH access, click <menuchoice><guimenu>Add Rule</guimenu></menuchoice>.
+</para></listitem>
+<listitem><para> 
+In the Add Rule dialog box, enter the following values:
+
+<informaltable frame="all">
+<tgroup cols="2">
+<tbody>
+    <row><entry>Rule</entry><entry>SSH</entry></row>
+    <row><entry>Remote</entry><entry>CIDR</entry></row>
+    <row><entry>CIDR</entry><entry>0.0.0.0/0</entry></row>
+</tbody>
+</tgroup>
+</informaltable>
+
+
+
+<note><para>
+To accept requests from a particular range of IP addresses, specify the IP address block in 
+the <menuchoice><guimenu>CIDR</guimenu></menuchoice> box.
+</para></note>
+
+</para></listitem>
+<listitem><para>
+Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
+</para></listitem>
+
+<listitem><para>
+To add an ICMP rule, click <menuchoice><guimenu>Add Rule</guimenu></menuchoice>.
+</para></listitem>
+
+
+<listitem><para>
+In the Add Rule dialog box, enter the following values:
+
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+    <row><entry>Rule</entry><entry>All ICMP</entry></row>
+    <row><entry>Direction</entry><entry>Ingress</entry></row>
+    <row><entry>Remote</entry><entry>CIDR</entry></row>
+    <row><entry>CIDR</entry><entry>0.0.0.0/0</entry></row>
+</tbody>
+</tgroup>
+</informaltable>
+
+
+</para></listitem> 
+
+<listitem><para>
+Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
+</para></listitem>
+
+</itemizedlist>
+
+</para>
+
+<note><para>
+If you need to enable some services on a Virtual Machine, besides setting the
+specific IP rules through security groups, be sure that the relevant ports are 
+also enabled (e.g. via iptables) on the Virtual Machine.
+</para></note>
+
+
+</section>
+
+<section id="SettingPassword">
+<title>Setting/changing password</title>
+
+<section id="SettingPasswordPreprod">
+<title>Changing password in the pre-production cloud</title>
+
+<para>
+In the pre-production cloud, to change the password from the OpenStack
+dashboard select 
+<menuchoice><guimenu>Settings</guimenu></menuchoice> (on the top)
+then <menuchoice><guimenu>Change Password</guimenu></menuchoice>.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/changepasswd_preprod.png" />
+</imageobject>
+</mediaobject>
+
+
+</para>
+
+<important><para>
+This is the password to authenticate with the Cloud service. It has
+nothing to do with the password of the Cloud virtual machines.
+</para></important>
+
+
+</section>
+
+<section id="SettingPasswordProd">
+<title>Setting/changing password in the production cloud</title>
+
+
+<note><para>
+If you log on the production cloud through INFN-AAI and if you don't need 
+to access the cloud service using the OpenStack command line tools discussed
+in <xref linkend="AccessingtheCloudthroughCLI"/> you can safely ignore
+this section.
+</para></note>
+
+<para>
+If you access the production cloud through username and password, and
+you want to change such password, 
+from the OpenStack dashboard select 
+<menuchoice><guimenu>Settings</guimenu></menuchoice> (on the top) and
+then <menuchoice><guimenu>Activate Password</guimenu></menuchoice>.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/changepasswd_prod.png" />
+</imageobject>
+</mediaobject>
+
+</para>
+
+<para>
+If instead you log through INFN-AAI, you don't need
+to know this OpenStack password. You need to know it only if you need
+to access the service using the OpenStack command line tools discussed
+in <xref linkend="AccessingtheCloudthroughCLI"/>.
+</para>
+
+<para>
+To set such password (or to change it) use the same procedure:
+from the OpenStack dashboard select 
+<menuchoice><guimenu>Settings</guimenu></menuchoice> (on the top) and
+then <menuchoice><guimenu>Activate Password</guimenu></menuchoice>.
+
+</para>
+
+<important><para>
+This is the password to authenticate with the Cloud service. It has
+nothing to do with the password of the Cloud virtual machines nor
+with the INFN-AAI password.
+</para></important>
+
+</section>
+
+</section>
+
+
+
+<section id="SwitchingBetweenProjects">
+<title>Switching between projects</title>
+
+<para>
+As introduced in <xref linkend="Projects"/>,
+a user can be on multiple projects at the same time. It is possible 
+to switch between them using the Dashboard, clicking on 
+<menuchoice><guimenu>CURRENT PROJECT</guimenu></menuchoice> 
+as shown in the following
+figure.
+
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/ProjectSwitch.png" />
+</imageobject>
+</mediaobject>
+
+
+</para>
+
+</section>
+
+
+
+
 <section id="AccessingtheCloudthroughCLI">
 <title>Accessing the Cloud through the Openstack command line tools</title>
 <para>
@@ -124,8 +368,28 @@ version using 'setenv' rather than export.
 </para>
 
 <para>
+In the production cloud, since services are secured using SSL, you need to
+edit the RC file adding the line:
+
+<screen>
+export OS_CACERT=/etc/grid-security/certificates/INFN-CA-2006.pem
+</screen>
+
+and you need to make sure that this file exists on the relevant client
+machine. 
+Its content must be the
+certificate of the INFN-CA in PEM format. This file is provided by
+the <literal>ca_INFN-CA-2006</literal> package (that can be downloaded
+e.g. from the <ulink url="http://www.eugridpma.org/">EUGridPMA web 
+site</ulink>. The certificate can also be downloaded from the
+<ulink url="https://security.fi.infn.it/CA/mgt/INFNCA.pem">INFN CA web 
+site</ulink>.
+</para>
+
+<para>
 To test it works, run the rc script source file and enter your password to 
-authenticate. The OpenStack command line tools (nova for compute resources, glance for images) can then be used, etc:
+authenticate. The OpenStack command line tools (nova for compute resources, 
+glance for images) can then be used, etc:
 </para>
 <screen>
 $ . ALICE-openrc.sh 
@@ -151,20 +415,22 @@ standard for computational clouds.
 </para>
 
 <para>
-The euca2ools are command line tools that can be used to interact with an 
+The <literal>euca2ools</literal> are command line tools that can be used to 
+interact with an 
 EC2 based cloud.
 The euca2ools require a set of shell environment variables in order to run. 
-These variables can be obtained and stored in an 'rc' file 
-much like .profile when logging into a linux server. The environment 
+These environment 
 variables are different per project that you work on.
 </para>
 <para>
-If you log into the dashboard, you will find an 
-<menuchoice><guimenu>API Access</guimenu></menuchoice>
-menu on the left then an API Access option. On the left hand side, select 
-<menuchoice><guimenu>EC2 credentials</guimenu></menuchoice> and confirm the 
-project you wish to download the zip file for. The zip file will be 
-downloaded to the browser. 
+If you log into the dashboard, you 
+will find an <menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>
+menu on the left hand side. Then choose the 
+<menuchoice><guimenu>API Access</guimenu></menuchoice> Tab to select the 
+options related to using the program interfaces. Select the 
+<menuchoice><guimenu>Download EC2 Credentials</guimenu></menuchoice> option 
+on the top right to download the zip file for your current project.
+This zip file will be downloaded to the browser. 
 </para>
 
 <mediaobject>
@@ -189,7 +455,12 @@ extracting: ec2rc.sh
 
 <para>
 ec2rc.sh gives the variables for accessing the Cloud with EC2 APIs. If you 
-use a C shell based shell, you would need to adapt this using setenv. To test 
+use a C shell based shell, you would need to adapt this using setenv. 
+
+</para>
+
+<para>
+To test 
 it, you can e.g. try the following:
 </para>
 
