@@ -437,11 +437,15 @@ project, please contact <email>cloud-support@lists.pd.infn.it</email>.
 
 <section id="Flavors">
 <title>Flavors</title>
+
 <para>
-Flavors define the virtual machine size such as:
+As shown in <xref linkend="CreatingVMs"/>, when an instance has to be created
+it is necessary to specify the flavor to be used for this VM.
 </para>
 
 <para>
+Flavors define the virtual machine size such as:
+
 <itemizedlist>
 <listitem><para>Number of virtual CPU cores (VCPUs)</para></listitem>
 <listitem><para>Amount of memory</para></listitem>
@@ -450,26 +454,28 @@ Flavors define the virtual machine size such as:
 </para>
 
 <para>
-When an instance has to be created, the flavor to be used for this VM must
-be chosen. Information about the flavors can be seen in the
+Information about the flavors can be seen in the
 <menuchoice><guimenu>Flavor Details</guimenu></menuchoice> box in the
 Dashboard.
+
+TBD fig
 </para>
 
-<note><para>
-For what concerns VCPUs, please note that the Cloud middleware is configured
-to allow some “overbooking”. The Cloud Area Padovana is configured so that a
-physical core is mapped to 4 VCPUs
-</para></note>
+<warning><para>
+For what concerns VCPUs, please note that the Cloud Area Padovana is 
+configured to allow some “overbooking” so that a
+physical core is mapped to 4 VCPUs.
+</para></warning>
 
 <para>
 A disk size of 0 means that the size of the disk is the same as that in the
 image. For other cases, it may be necessary to resize the partitions.
 </para>
-<para>
-If you find that the specific flavor you require is not available, please
+
+<note><para>
+If you find that a specific flavor you require is not available, please
 contact <email>cloud-support@lists.pd.infn.it</email>.
-</para>
+</para></note>
 
 
 </section>
@@ -482,16 +488,25 @@ contact <email>cloud-support@lists.pd.infn.it</email>.
 <para>
 VMs can be stopped and started in different ways, available in the Dashboad 
 menu (<menuchoice><guimenu>Instances</guimenu><guisubmenu>More</guisubmenu></menuchoice>).
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/instance-more.png" />
+</imageobject>
+</mediaobject>
+
 </para>
 
-<para>
-The cleanest way to shutdown (or reboot) an instance is to log on the VM and 
-issue from the shell the shutdown/reboot command. In fact if the 
+<warning><para>
+The cleanest way to shutdown (or reboot) an instance is 
+however to log on the VM and 
+issue from the shell the 
+<command>shutdown</command>/<command>reboot</command> command. In fact if the 
 <menuchoice><guimenu>Soft Reboot</guimenu></menuchoice> 
 or <menuchoice><guimenu>Hard Reboot</guimenu></menuchoice> or 
 <menuchoice><guimenu>Shutdown</guimenu></menuchoice> actions are chosen, 
 there could be problems with networking when the VM is later restarted.
-</para>
+</para></warning>
 
 <para>
 <menuchoice><guimenu>Pause</guimenu></menuchoice>/<menuchoice><guimenu>Unpause</guimenu></menuchoice> 
@@ -515,7 +530,7 @@ Contextualisation is the process to configure a virtual machine after it has bee
 installed. Typical examples would be to create additional users, install software 
 packages or call a configuration management system. These steps can be used to 
 take a reference image and customise it further. Contextualisation is only run 
-once when the VM is created
+once when the VM is created.
 </para>
 
 <para>
@@ -531,11 +546,16 @@ To launch instances with user data using the OpenStack dashboard,
 you can fill in the 
 <menuchoice><guimenu>user data</guimenu></menuchoice> tab.
 
+TBD FIG
+</para>
+
+<para>
 Using the Openstack command line tool, the <literal>--user_data</literal>
 option of the <command>nova boot</command> command must be used, e.g.:
 
 <screen>
-nova boot my_vm --image "SL65-Padova-x86_64-20141023-QCOW2" --flavor m1.xsmall --user_data my_data.txt --key_name my_key
+nova boot my_vm --image "SL65-Padova-x86_64-20141023-QCOW2" \
+  --flavor m1.xsmall --user_data my_data.txt --key_name my_key
 </screen>
 </para>
 
@@ -566,15 +586,15 @@ wget -O /tmp/geolist.txt http://frontier.cern.ch/geolist.txt
 EOF
 gzip -c userdata4zip.txt > userdata4zip.gz
 
-nova boot my_server --image "SL65-Padova-x86_64-20141023-QCOW2" --flavor m1.xsmall \
---user_data userdata4zip.gz --key_name my_key
+nova boot my_server --image "SL65-Padova-x86_64-20141023-QCOW2" \
+  --flavor m1.xsmall --user_data userdata4zip.gz --key_name my_key
 </screen>
 
 </para>
 
 <para>
 With the <literal>#include</literal> or <literal>Content-Type: text/x-include-url</literal>
-directives, it is possible to specify a list of urls, one url per line. The userdata passed by the 
+directives, it is possible to specify a list of URLs, one url per line. The userdata passed by the 
 urls can be plain txt, gzip file or mime-multi-part script. E.g.:
 
 <screen>
@@ -596,7 +616,8 @@ EOF
 <para>
 cloud-init supply also a method called "multiple part" to supply user data in multiple ways, 
 which means you can use userdata script and cloud-config (or other methods recognized by cloud-init) 
-at the same time. cloud-init provides a script write-mime-multipart to generate a final userdata 
+at the same time. cloud-init provides a script 
+(<literal>write-mime-multipart</literal>) to generate a final userdata 
 file. Here is an example:
 
 <screen>
@@ -625,8 +646,8 @@ Then use <command>write-mime-multipart</command> to generate
 <screen>
 write-mime-multipart -o userdata4multi.txt userdata4script userdata4config userdata4inc
 
-nova boot my_server --image "SL65-Padova-x86_64-20141023-QCOW2" --flavor m1.xsmall \
---user_data userdata4multi.txt --key_name my_key
+nova boot my_server --image "SL65-Padova-x86_64-20141023-QCOW2" \
+  --flavor m1.xsmall --user_data userdata4multi.txt --key_name my_key
 </screen>
 
 
@@ -643,7 +664,7 @@ Documentation</ulink>.
 </section>
 
 <section id="ResizingVMs">
-<title>Resizing VMs</title>
+<title>Resizing Virtual Machines</title>
 
 <para>
 If the size of a virtual machine needs to be changed, such as adding more 
