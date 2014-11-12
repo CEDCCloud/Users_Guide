@@ -429,7 +429,9 @@ By default the possibility to use public IP numbers is disabled and
 therefore by default it is not possible to allocate a floating
 IP to an instance.
 If public IPs are needed for your                              
-project, please contact <email>cloud-support@lists.pd.infn.it</email>.
+project, please contact <email>cloud-support@lists.pd.infn.it</email>
+specifying what is/are the relevant service(s) and the port(s) that need
+to be open.
 </para></note>
 
 
