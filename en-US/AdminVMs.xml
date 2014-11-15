@@ -457,10 +457,15 @@ Flavors define the virtual machine size such as:
 
 <para>
 Information about the flavors can be seen in the
-<menuchoice><guimenu>Flavor Details</guimenu></menuchoice> box in the
-Dashboard.
+<menuchoice><guimenu>Flavor Details</guimenu></menuchoice> box that
+appears in the Dashboard when you launch a new instance.
 
-TBD fig
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/flavor.png" />
+</imageobject>
+</mediaobject>
+
 </para>
 
 <warning><para>
@@ -544,11 +549,6 @@ feature using the open source <literal>cloud-init</literal> package.
 With cloud-init, data to be used for contextualisation are called 
 <literal>user data</literal>.
 
-To launch instances with user data using the OpenStack dashboard,
-you can fill in the 
-<menuchoice><guimenu>user data</guimenu></menuchoice> tab.
-
-TBD FIG
 </para>
 
 <para>
