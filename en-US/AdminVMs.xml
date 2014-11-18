@@ -684,16 +684,39 @@ To resize a VM using the Horizon graphical Interface:
 <itemizedlist>
 <listitem><para>Select the <menuchoice><guimenu>Instances</guimenu></menuchoice> 
 menu and the <menuchoice><guimenu>Resize Instance</guimenu></menuchoice> 
-option on the actions</para></listitem>
+option on the actions.
+</para></listitem>
+
+<listitem><para>
+In the <menuchoice><guimenu>Resize Instance</guimenu></menuchoice> box select
+the desired flavor.
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/resize.png" />
+</imageobject>
+</mediaobject>
+
+</para></listitem>
+
 
 <listitem><para>After the new flavor has been selected, the status will 
-become 'resize' or 'migrating'</para></listitem>
+become 'resize' or 'migrating'.</para></listitem>
 
 <listitem><para>The status will change after several minutes to 'Confirm' or 
 'Revert Resize/Migrate'. You may need to refresh the web browser page to 
-reflect the new status.</para></listitem>
+reflect the new status.
 
-<listitem><para>Select <menuchoice><guimenu>Confirm Resize/Migrate</guimenu></menuchoice> 
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/confirm_resize.png" />
+</imageobject>
+</mediaobject>
+
+</para></listitem>
+
+<listitem><para>Select 
+<menuchoice><guimenu>Confirm Resize/Migrate</guimenu></menuchoice> 
 if you wish to change the instance to the new configuration.
 </para></listitem>
 
@@ -708,7 +731,7 @@ The status will then change to 'Active' once completed.
 
 
 <section id="SnapshottingVMs">
-<title>Snapshotting VMs</title>
+<title>Snapshotting Virtual Machines</title>
 
 <para>
 It is possible to create a snapshot of a VM, and then the saved snapshot can 
@@ -719,7 +742,7 @@ be used to start new instance(s).
 The new instance can also have a flavor different (but not smaller for what 
 concern the disk size) than the source VM. It is therefore suggested to use 
 the smallest (in terms of disk) possible flavor for the source VM (for SL6.x 
-related images this is 'm1.xsmall').
+related images this is <literal>cloudareapd.xsmall</literal>).
 </para>
 
 <para>
@@ -733,8 +756,11 @@ the “source” VM. For SL6.x related OS this can be done using the following i
 </screen>
 
 <para>
-Before doing the snapshot (that can be done using the web-based dashboard, it 
-is recommended to shut down the source VM to make sure that all data is 
+Before doing the snapshot (that can be done using the web-based dashboard
+selecting the <menuchoice><guimenu>Instances</guimenu></menuchoice> 
+menu and the <menuchoice><guimenu>Create Snapshot</guimenu></menuchoice> 
+option on the actions), it 
+is recommended to shut down the VM to make sure that all data is 
 flushed to disk. To perform this shutdown of the VM, please don't do it 
 through Openstack. Instead please do the shutdown within the VM (i.e. log as root to the VM and issue <command>shutdown -h now</command> or 
 <command>poweroff</command>).
@@ -750,18 +776,18 @@ only snapshots with a maximum size of 25 GB.
 
 
 <section id="DeletingVMs">
-<title>Deleting VMs</title>
+<title>Deleting Virtual Machines</title>
 
 <para>
 VMs can be deleted using the <menuchoice><guimenu>Terminate Instance</guimenu></menuchoice> 
 option in the OpenStack dashboard.
 </para>
 
-<warning><para>
+<important><para>
 Note: This will immediately terminate the instance, delete all content of the 
 virtual machine and erase the ephemeral disk. This operation is not 
 recoverable.
-</para></warning>
+</para></important>
 
 </section>
 
