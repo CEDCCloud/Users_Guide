@@ -15,14 +15,15 @@ There are several ways of handling disk storage in the Cloud Area Padovana:
 <itemizedlist>
 
 <listitem><para>
-Ephemeral storage exists only for the life of a virtual machine instance. It 
+<literal>Ephemeral storage</literal> exists only for the life of a virtual machine 
+instance. It 
 will persist across reboots of the guest operating system but when the 
 instance is deleted so is the associated storage. The size of the ephemeral 
 storage is defined in the virtual machine flavor.
 </para></listitem>
 
 <listitem><para>
-Volumes are persistent virtualized block devices independent of any 
+<literal>Volumes</literal> are persistent virtualized block devices independent of any 
 particular instance. Volumes may be attached to a single instance at a time, 
 but may be detached or reattached to a different instance while retaining 
 all data, much like a USB drive. The size of the volume can be selected when 
@@ -63,14 +64,7 @@ Please note that backups are not performed on ephemeral storage systems.
 <title>Volumes</title>
 
 <para>
-As mentioned above, OpenStack provides two classes of block storage, 
-“ephemeral” storage and persistent “volumes”. Ephemeral storage exists only 
-for the life of an instance: it will persist across reboots of the guest 
-operating system but when the instance is deleted so is the associated storage.
-</para>
-
-<para>
-Volumes are instead persistent virtualized block devices independent of any 
+Volumes are persistent virtualized block devices independent of any 
 particular instance. Volumes may be attached to a single instance at a time 
 (i.e. not like a distributed filesystem such as Lustre or Gluster), but they 
 may be detached or reattached to a different instance while retaining all 
@@ -82,6 +76,7 @@ The steps to add a Volume are:
 </para>
 
 <para>
+
 <itemizedlist>
 <listitem><para>
 Define a disk volume of the size required (12GB in example 
@@ -90,50 +85,48 @@ example below). Using the Dashboard, click on
 <menuchoice><guimenu>Volumes</guimenu></menuchoice> and then 
 <menuchoice><guimenu>Create Volume</guimenu></menuchoice>. 
 In the “Create Volume” window specify the name of the volume and the desired size.
-As <menuchoice><guimenu>Volume Source</guimenu></menuchoice> specify “No source, empty volume”. Like images below:
+As <menuchoice><guimenu>Volume Source</guimenu></menuchoice> specify “No source, empty volume”. 
 
 <mediaobject>
 <imageobject>
   <imagedata fileref="./images/CreateVolumeCinder.jpg" />
 </imageobject>
 </mediaobject>
+
 <mediaobject>
 <imageobject>
   <imagedata fileref="./images/testvolCreation.jpg" />
 </imageobject>
 </mediaobject>
+
 </para></listitem>
 
 <listitem><para>
-Attach that volume to the instance that you would like it to be available on
+The new defined volume will appear in the 
+<menuchoice><guimenu>Volumes</guimenu></menuchoice> tab. To attach this volume to an 
+existing instance, click on 
+<menuchoice><guimenu>Edit attachments</guimenu></menuchoice> and select the 
+relevant Virtual Machine.
+
 <mediaobject>
 <imageobject>
   <imagedata fileref="./images/AttachVolumeToInstance.jpg" />
 </imageobject>
 </mediaobject>
+
 <mediaobject>
 <imageobject>
   <imagedata fileref="./images/AttachVolumeToInstance1.jpg" />
 </imageobject>
 </mediaobject>
-</para></listitem>
 
-<listitem><para>
-Log in to the instance and format/mount as required
 </para></listitem>
 
 </itemizedlist>
 </para>
 
 <para>
-The new defined volume will appear in the <menuchoice><guimenu>Volumes</guimenu></menuchoice> 
-tab. To attach this volume to an existing instance, click on 
-<menuchoice><guimenu>Edit attachments</guimenu></menuchoice> and select the 
-relevant Virtual Machine.
-</para>
-
-<para>
-Log into the VM. Check if the disk has been added:
+Log in to the instance and check if the disk has been added:
 </para>
 
 <screen>
@@ -156,6 +149,7 @@ Mount the volume:
 <screen>
 mount /dev/sdb /mnt
 </screen>
+
 
 <para>
 To detach a volume from an instance, first of all log into the virtual 
