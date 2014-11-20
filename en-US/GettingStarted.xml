@@ -66,6 +66,13 @@ using the username and password.
 </para>
 
 
+<warning><para>
+Authentication through <literal>IDEM</literal> (the Italian identity
+federation of universities and research institutes for authentication and
+authorization) is being setup and therefore the relevant icon might appear
+in the Dashboard. However this is not yet operational.                          </para></warning>
+
+
 </section>
 
 </section>
