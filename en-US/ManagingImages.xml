@@ -22,15 +22,16 @@ menu.
 </para>
 
 <para>
-The <literal>SL65-x86-64-&lt;date&gt;-&lt;format&gt;</literal> is a basic SL6.5 image which
+The <literal>SL6x-x86-64-&lt;date&gt;</literal> is a basic 
+SL6.x image which
 also includes cloud-init to perform contextualization based on the user data 
 specified when the VM are instantiated. It also configures CVMFS and the
 relevant squid servers.
 </para>
 
 <para>
-The <literal>SL65-x86-64-&lt;date&gt;-&lt;format&gt;</literal> image, wrt the
-<literal>SL65-x86-64-&lt;date&gt;-&lt;format&gt;</literal> image, also configures the
+The <literal>SL6x-x86-64-&lt;date&gt;</literal> image, wrt the
+<literal>SL6x-x86-64-&lt;date&gt;</literal> image, also configures the
 Padova LDAP server for user authentication. This means that it is just 
 necessary to “enable” the relevant accounts on the VM adding in the 
 /etc/passwd file:
@@ -54,8 +55,12 @@ nscd -i passwd
 should help.
 </para>
  
+
 <para>
-These SL 6.5 images are provided in two formats: QCOW2 and AMI.
+In the production cloud SL 6.x images are provided in QCOW2 format.
+They are fully resizable also with respect to the disk size.
+In the pre-production cloud SL 6.x images are instead provided in two 
+formats: QCOW2 and AMI.
 </para>
 
 <para>
@@ -115,7 +120,7 @@ of the projects they are uploaded for.
 <note><para>
 Users are not allowed to publish public (i.e. available to all projects) 
 images.
-This means that you don't want to use the <literal>--public</literal> flag
+This means that you don't have to use the <literal>--public</literal> flag
 with the <literal> glance image-create</literal> command, otherwise you will 
 get a quite cryptic error message such as:
 
@@ -279,9 +284,22 @@ are described in the <ulink url="http://docs.openstack.org/image-guide/content/c
 <para>
 <literal>Oz</literal> is one of such tools that automates the process of 
 creating a virtual machine image file.
-Besides the official documentation, 
-<ulink url="https://wiki.infn.it/cn/ccr/cloud/preparazione_immagini_cloud_resizable_con_oz">this page</ulink> provides some useful information for such tool.
 </para>
+
+<para>
+Besides the <ulink url="https://github.com/clalancette/oz/wiki">official 
+OZ documentation</ulink>, some notes (and examples) to build Scientific
+Linux 6.x and CentOS 6.x
+resizable images in QCOW2 format are available 
+<ulink url="https://github.com/CloudPadovana/qcow2-resizable-images">here</ulink>.
+</para>
+
+<para>
+The public SL6.x images of the Cloud Area Padovana are built using OZ.
+The relevant source files are available 
+<ulink url="https://github.com/CloudPadovana/OZImages">here</ulink>
+</para>
+
 
 <para>
 A machine where Oz is installed is available to the users of the Cloud
@@ -404,7 +422,7 @@ should help.
 </para>
 
 <note><para>
-Please note that the images <literal>SL65-Padova-x86-64-&lt;date&gt;</literal>
+Please note that the images <literal>SL6x-Padova-x86-64-&lt;date&gt;</literal>
 have already the LDAP client 
 properly configured. Using these images it is just necessary to enable the 
 relevant users in /etc/passwd and create their home directories.
