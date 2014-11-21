@@ -19,6 +19,15 @@ administrators. These images are public, and visible to all users.
 They appear in the <menuchoice><guimenu>Public</guimenu></menuchoice> 
 tab of the <menuchoice><guimenu>Images &amp; Snapshots</guimenu></menuchoice> 
 menu.
+
+
+<mediaobject>
+<imageobject>
+  <imagedata fileref="./images/public_images.png"/>
+</imageobject>
+</mediaobject>
+
+
 </para>
 
 <para>
@@ -59,13 +68,13 @@ should help.
 <para>
 In the production cloud SL 6.x images are provided in QCOW2 format.
 They are fully resizable also with respect to the disk size.
-In the pre-production cloud SL 6.x images are instead provided in two 
-formats: QCOW2 and AMI.
 </para>
 
 <para>
+In the pre-production cloud SL 6.x images are instead provided in two 
+formats: QCOW2 and AMI.
 Images in QCOW2 format are smaller (and are therefore better) wrt AMI images. 
-However they are not fully resizable with respect the disk size. This means 
+However they are not fully resizable with respect to the disk size. This means 
 that if you instantiate a VM using a QCOW2 image selecting e.g. the
 m1.medium flavor, that VM will have a small root partition and not the
 expected 40 GB size. This can be fixed logging to the VM as root and 
@@ -114,7 +123,7 @@ using an AMI image it is not possible to update the kernel.
 Along with the standard images, users can provide their own images
 and upload them to the Cloud Image service:
 these images are private, meaning that they are only available to the users 
-of the projects they are uploaded for.
+of the project they are uploaded for.
 </para>
 
 <note><para>
@@ -207,15 +216,18 @@ possible via the command line tools.
 </para>
 
 <para>
-If an image had been uploaded to your currently active project, such as 
-described in 
+If an image has been uploaded to your currently active project, using the
+procedure described in 
 <xref linkend="UserProvidedImages"/>, 
 you can then use the <command>glance member-create</command> operations to 
 share that image with another project.
-For example, to share an image, first source the project profile for the 
+</para>
+
+<para>
+To share an image, first source the project profile for the 
 project containing the image you want to share and find its id with
 the <command>glance image-show</command> command
-(<replaceable>e0d35322-d509-4202-9b40-7d74e7aca0b6</replaceable> in the 
+(e0d35322-d509-4202-9b40-7d74e7aca0b6 in the 
 example):
 
 <screen>
@@ -252,9 +264,9 @@ finding the <literal>OS_TENANT_ID</literal> variable (in this example, it is
 </para>
 
 <para>
-Using this tenant ID as an argument on the command line of 
+Using this tenant ID as an argument of the command line of 
 <command>member-create</command>, the image 
-(<replaceable>e0d35322-d509-4202-9b40-7d74e7aca0b6></replaceable>
+(e0d35322-d509-4202-9b40-7d74e7aca0b6
 in this example) can then be shared:
 
 <screen>
@@ -263,7 +275,6 @@ glance  member-create e0d35322-d509-4202-9b40-7d74e7aca0b6 65bf648d-8d07-48af-8c
 glance member-list --image-id e0d35322-d509-4202-9b40-7d74e7aca0b6 # check it is shared
 </screen>
 
-You should then have the image visible in the target project.
 </para>
 
 </section>
@@ -284,9 +295,6 @@ are described in the <ulink url="http://docs.openstack.org/image-guide/content/c
 <para>
 <literal>Oz</literal> is one of such tools that automates the process of 
 creating a virtual machine image file.
-</para>
-
-<para>
 Besides the <ulink url="https://github.com/clalancette/oz/wiki">official 
 OZ documentation</ulink>, some notes (and examples) to build Scientific
 Linux 6.x and CentOS 6.x
@@ -297,7 +305,7 @@ resizable images in QCOW2 format are available
 <para>
 The public SL6.x images of the Cloud Area Padovana are built using OZ.
 The relevant source files are available 
-<ulink url="https://github.com/CloudPadovana/OZImages">here</ulink>
+<ulink url="https://github.com/CloudPadovana/OZImages">here</ulink>.
 </para>
 
 
@@ -332,10 +340,10 @@ jeos = no
 <title>Enabling INFN Padova LDAP based authentication on the Virtual Machine</title>
 
 <para>
-When creating a custom image, it might be needed to enable a LDAP section
+When creating a custom image, it might be needed to enable a LDAP server
 to manage authentication for users.
 
-This section explains how to enable the INFN Padova's LDAP section for user 
+This section explains how to enable the INFN Padova's LDAP server for user 
 authentication on the VMs of the Cloud.
 
 To do that, the following LDAP client configurations, targeted to SL6.x 
@@ -424,7 +432,8 @@ should help.
 <note><para>
 Please note that the images <literal>SL6x-Padova-x86-64-&lt;date&gt;</literal>
 have already the LDAP client 
-properly configured. Using these images it is just necessary to enable the 
+properly configured to use the Padova LDAP server. 
+Using these images it is just necessary to enable the 
 relevant users in /etc/passwd and create their home directories.
 </para></note>
 
