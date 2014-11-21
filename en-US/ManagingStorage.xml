@@ -25,7 +25,7 @@ storage is defined in the virtual machine flavor.
 <listitem><para>
 <literal>Volumes</literal> are persistent virtualized block devices independent of any 
 particular instance. Volumes may be attached to a single instance at a time, 
-but may be detached or reattached to a different instance while retaining 
+but may be detached or re-attached to a different instance while retaining 
 all data, much like a USB drive. The size of the volume can be selected when 
 it is created within the quota limits for the particular project.
 </para></listitem>
@@ -67,7 +67,7 @@ Please note that backups are not performed on ephemeral storage systems.
 Volumes are persistent virtualized block devices independent of any 
 particular instance. Volumes may be attached to a single instance at a time 
 (i.e. not like a distributed filesystem such as Lustre or Gluster), but they 
-may be detached or reattached to a different instance while retaining all 
+may be detached or re-attached to a different instance while retaining all 
 data, much like a USB drive.
 </para>
 
@@ -79,12 +79,12 @@ The steps to add a Volume are:
 
 <itemizedlist>
 <listitem><para>
-Define a disk volume of the size required (12GB in example 
-below) with the volume name defined (<replaceable>testvol</replaceable> in the 
-example below). Using the Dashboard, click on 
+Using the Dashboard, click on 
 <menuchoice><guimenu>Volumes</guimenu></menuchoice> and then 
 <menuchoice><guimenu>Create Volume</guimenu></menuchoice>. 
-In the “Create Volume” window specify the name of the volume and the desired size.
+In the "Create Volume” window specify the name of the volume 
+(<replaceable>testvol</replaceable> in the example below) and the desired 
+size (<replaceable>12 GB</replaceable> in the example).
 As <menuchoice><guimenu>Volume Source</guimenu></menuchoice> specify “No source, empty volume”. 
 
 <mediaobject>
@@ -103,7 +103,11 @@ As <menuchoice><guimenu>Volume Source</guimenu></menuchoice> specify “No sourc
 
 <listitem><para>
 The new defined volume will appear in the 
-<menuchoice><guimenu>Volumes</guimenu></menuchoice> tab. To attach this volume to an 
+<menuchoice><guimenu>Volumes</guimenu></menuchoice> tab. 
+</para></listitem>
+
+<listitem><para>
+To attach this volume to an 
 existing instance, click on 
 <menuchoice><guimenu>Edit attachments</guimenu></menuchoice> and select the 
 relevant Virtual Machine.
@@ -198,33 +202,49 @@ Please note that backups are not performed on volumes.
 
 <section id="SharingVolume">
 <title>Sharing a volume between multiple (virtual) machines </title>
+
 <para>
-Follow the creation and the format of cinder persistent volume above.
+As discussed in <xref linkend="Volumes"/>, a volume may be attached to a 
+single instance. However it can be shared with other virtual machines of the 
+Cloud (and/or with other hosts) using NFS.
 </para>
+
 <para>
-Create the mount point and mount the volume:
+Once a volume has been created, attached to an instance (acting as
+a NFS server) and formatted (the procedure has been
+explained in <xref linkend="Volumes"/>, create the mount point and mount the 
+volume on this virtual machine:
 <screen>
 mkdir /dataNfs
 mount /dev/sdb /dataNfs
 </screen>
 </para>
+
 <para>
-Ensure in your virtual machine designed for nfs server are present the follow rpms and their dependencies:
+Ensure that on this virtual machine the follow packages are installed:
 <screen>
 nfs-utils
 nfs-utils-lib
 rpcbind
 </screen>
 </para>
+
 <para>
-Insert the corret export in /etc/exports file. For example for all the virtual machine in the same subnet 10.62.15.* (check the subnet with ifconfig command) the contents of the /etc/exports file shoud be:
+Insert the correct export directive in the /etc/exports file. For example 
+if the volume must be visible to 
+all the virtual machines of the same subnet 10.64.15.* (check the subnet with 
+the <command>ifconfig</command> command) the content of the /etc/exports file 
+should be:
 <screen>
 /dataNfs 10.62.15.*(async,rw,no_root_squash)
 </screen>
 </para>
 
 <para>
-Check the iptables on the virtual machine. In the file /etc/sysconfig/iptables ensure other virtaula machines could access to porst 111, 2049, 875 UPD and TPC. So your file /etc/sysconfig/iptables should be like this:
+Check the firewall on the virtual machine. Ensure that the other instances
+can access to ports 111, 2049, 875 UPD and TCP.
+So considering iptables, the /etc/sysconfig/iptables file should be 
+something like this:
 <screen>
 *filter
 :INPUT ACCEPT [0:0]
@@ -244,35 +264,48 @@ Check the iptables on the virtual machine. In the file /etc/sysconfig/iptables e
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
 </screen>
-Remember to restart iptables after any change on that file:
+</para>
+
+<para>
+Please remember to restart iptables after any change on that file:
 <screen>
-/etc/init.d/iptables restart
+service iptables restart
 </screen>
 </para>
 
 <para>
-Check the Access &amp; Security of your tenat and remember to add th rule Ingress IPv4 TCP and UDP for the ports 111 875 and 2049. Like the image below:
+Check the security group (see <xref linkend="SecurityGroups"/>): 
+access to ports 111, 875 and 2049
+(IPv4 Ingress TCP and UDP) should be guaranteed: 
 <mediaobject>
 <imageobject>
   <imagedata fileref="./images/AccessAndSecurity.jpg"/>
 </imageobject>
 </mediaobject>
+
 </para>
 
 <para>
 Restart nfs server:
 <screen>
-/etc/init.d/nfs restart
+service nfs restart
 </screen>
 </para>
 
 <para>
-Enter in another instance of the same tentant and mount via nfs filesystem like example below (if some errors occurs check you have installed rpcbind):
+To mount the volume on the other VMs, check that the 
+<literal>rpcbind</literal> package is installed, and then issue a mount
+command such as this one:
 <screen>
 mount -t nfs 10.62.15.4:/dataNfs /mnt
 </screen>
 </para>
 
+
+<note><para>
+Please note that this procedure can be used to mount a volume also on hosts
+outside the Cloud.
+</para></note>
 
 </section>
 </section>
@@ -282,59 +315,20 @@ mount -t nfs 10.62.15.4:/dataNfs /mnt
 <title>Accessing storage external to the Cloud</title>
 
 <para>
-We assume the Storage has been configured with theirs tunnel gre (configured by L3 agent and openvswitch) and it has a LAN IP address in the same subnet of the cloud virtual machines. Ask to cloud administrators the correct procedure to do that.
+As explained in <xref linkend="NetworkAccess"/> from an instance of the Cloud
+by default it is not possible to access a host/service hosted in Padova or 
+Legnaro. This also means that by default on a virtual machine of
+the Cloud Area Padovana it is not possible to mount a file system 
+exported from a storage server hosted in Padova or Legnaro.
 </para>
 
 <para>
-Inside virtual machine remember to add the line corresponding the name and ip address to /etc/hosts file like this:
+Accessing a storage system external to the Cloud from a virtual machine
+in an efficient way require some non negligible effort with respect 
+to network configuration. 
+If however there is such need,
+please contact <email>cloud-support@lists.pd.infn.i</email>.
 </para>
-<screen>
-10.62.15.200    storage1.cloud.pd.infn.it     storage-01
-</screen>
-<para>
-Where 10.62.15.200 is the ip of the storage node configured with the tunnel gre and storage1 is the name of your storage node with his FQAN storage1.cloud.pd.infn.it
-</para>
-
-<para>
-Now you have many possibilities. We describe just two methods:
-</para>
-<itemizedlist>
-
-<listitem><para>
-If the external storage export disks via nfs. In your virtual machine you have to install the rpm:
-</para>
-<screen>
-rpcbind or portmap
-nfs-utils 
-</screen>
-<para>
-and then you can mount the volume like:
-</para>
-<screen>
-mount -t nfs 10.62.15.200:/dataNfs /mnt
-</screen>
-</listitem> 
-
-<listitem><para>
-If the external storage export disks via glusterfs. In your virtual machine you have to download the glusterfs repo file if you are using SL or CentOS (if you are using debian or ubuntu please follow the gluster documentation to install the same package glusterfs-client):
-</para>
-<screen>
-wget http://download.gluster.org/pub/gluster/glusterfs/3.5/LATEST/CentOS/glusterfs-epel.repo -O /etc/yum.repos.d/glusterfs-epel.repo
-</screen>
-<para>
-and then install the rpm:
-</para>
-<screen>
-yum install glusterfs-client 
-</screen>
-<para>
-now you can mount the volume like:
-</para>
-<screen>
-mount -t glusterfs 10.62.15.200:/data /mnt
-</screen>
-</listitem>
-</itemizedlist>
 
 </section>
 
