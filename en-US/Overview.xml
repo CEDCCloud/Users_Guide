@@ -76,10 +76,10 @@ A special shared project, called <literal>guest</literal> is used for all other
 users: it has a small quota to allow testing the Cloud infrastructure.             
 </para>
 
-<para>                                                                             
-Personal projects are instead discouraged and are created only for convincing      
-reasons.                                                                           
-</para>
+<warning><para>                                                                
+<literal>Personal private</literal> projects are instead discouraged and are created only for 
+convincing  reasons.     
+</para></warning>
 </section>
 
 

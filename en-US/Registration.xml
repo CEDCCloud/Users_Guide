@@ -98,7 +98,7 @@ from the OpenStack dashboard click on the icon on the left (INFN AAI).
 
 <para>
 Once logged, click on the <menuchoice><guimenu>Register</guimenu></menuchoice> 
-button. A form such as the one in the following picture show appear.
+button. A form such as the one in the following picture should appear.
 
 <mediaobject>
 <imageobject>
@@ -117,7 +117,8 @@ your phone number, the name of a contact person in Padova/Legnaro
 
 <para>
 For what concerns the <menuchoice><guimenu>Project Action</guimenu></menuchoice>
-you have three options:
+(projects have been discussed in <xref linkend="Projects"/>) you 
+have three options:
 
 <itemizedlist>
 <listitem><para>Select Existing Projects</para></listitem>
@@ -139,11 +140,17 @@ the creation of a new project. In this case you will have to specify also
 a Project name and a Project Description. You will also have to specify
 if this project must be private (a personal project where you will
 be the only member) or not.
+</para>
 
+<note><para>
+Public (i.e. not private) projects are projects where other users can apply
+for membership. They are supposed to be used for experiments or other research
+groups.
+</para></note>
 
 <warning><para>
-Personal private projects are discouraged and are created only for convincing
-reasons. 
+<literal>Personal private</literal> projects are discouraged and are created 
+only for convincing reasons. 
 </para></warning>
 
 
@@ -154,7 +161,6 @@ manage the membership requests for this project. So the request to create a new
 project should be done by the relevant experiment/group leader.
 </para></note>
 
-</para>
 <para>
 Select <literal>Use guest project</literal> if you want to apply membership
 for the guest project, i.e. the project with 
