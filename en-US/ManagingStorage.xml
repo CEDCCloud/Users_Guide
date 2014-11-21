@@ -282,8 +282,59 @@ mount -t nfs 10.62.15.4:/dataNfs /mnt
 <title>Accessing storage external to the Cloud</title>
 
 <para>
-TBD
+We assume the Storage has been configured with theirs tunnel gre (configured by L3 agent and openvswitch) and it has a LAN IP address in the same subnet of the cloud virtual machines. Ask to cloud administrators the correct procedure to do that.
 </para>
+
+<para>
+Inside virtual machine remember to add the line corresponding the name and ip address to /etc/hosts file like this:
+</para>
+<screen>
+10.62.15.200    storage1.cloud.pd.infn.it     storage-01
+</screen>
+<para>
+Where 10.62.15.200 is the ip of the storage node configured with the tunnel gre and storage1 is the name of your storage node with his FQAN storage1.cloud.pd.infn.it
+</para>
+
+<para>
+Now you have many possibilities. We describe just two methods:
+</para>
+<itemizedlist>
+
+<listitem><para>
+If the external storage export disks via nfs. In your virtual machine you have to install the rpm:
+</para>
+<screen>
+rpcbind or portmap
+nfs-utils 
+</screen>
+<para>
+and then you can mount the volume like:
+</para>
+<screen>
+mount -t nfs 10.62.15.200:/dataNfs /mnt
+</screen>
+</listitem> 
+
+<listitem><para>
+If the external storage export disks via glusterfs. In your virtual machine you have to download the glusterfs repo file if you are using SL or CentOS (if you are using debian or ubuntu please follow the gluster documentation to install the same package glusterfs-client):
+</para>
+<screen>
+wget http://download.gluster.org/pub/gluster/glusterfs/3.5/LATEST/CentOS/glusterfs-epel.repo -O /etc/yum.repos.d/glusterfs-epel.repo
+</screen>
+<para>
+and then install the rpm:
+</para>
+<screen>
+yum install glusterfs-client 
+</screen>
+<para>
+now you can mount the volume like:
+</para>
+<screen>
+mount -t glusterfs 10.62.15.200:/data /mnt
+</screen>
+</listitem>
+</itemizedlist>
 
 </section>
 
