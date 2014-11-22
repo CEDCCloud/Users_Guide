@@ -304,7 +304,8 @@ mount -t nfs 10.62.15.4:/dataNfs /mnt
 
 <note><para>
 Please note that this procedure can be used to mount a volume also on hosts
-outside the Cloud.
+outside the Cloud: it is just necessary to specify the IP address of these
+hosts in the /etc/exports file on the instance acting as NFS server.
 </para></note>
 
 </section>
@@ -327,7 +328,7 @@ Accessing a storage system external to the Cloud from a virtual machine
 in an efficient way require some non negligible effort with respect 
 to network configuration. 
 If however there is such need,
-please contact <email>cloud-support@lists.pd.infn.i</email>.
+please contact <email>cloud-support@lists.pd.infn.it</email>.
 </para>
 
 </section>
