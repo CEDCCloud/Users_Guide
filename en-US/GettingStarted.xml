@@ -384,8 +384,8 @@ export OS_CACERT=/etc/grid-security/certificates/INFN-CA-2006.pem
 
 and you need to make sure that this file exists on the relevant client
 machine. 
-Its content must be the
-certificate of the INFN-CA in PEM format. This file is provided by
+The content of this '/etc/grid-security/certificates/INFN-CA-2006.pem' file
+must be the certificate of the INFN-CA in PEM format. This file is provided by
 the <literal>ca_INFN-CA-2006</literal> package (that can be downloaded
 e.g. from the <ulink url="http://www.eugridpma.org/">EUGridPMA web 
 site</ulink>. The certificate can also be downloaded from the
@@ -411,6 +411,13 @@ $ nova list
 | 5ce6926a-2796-4dbd-82f2-d84ced6acf38 | Xrootd_Server                               | ACTIVE | -          | Running     | alice-lan=10.62.13.4 |
 +--------------------------------------+---------------------------------------------+--------+------------+-------------+----------------------+
 </screen>
+
+<note><para>
+When you source the rc script you are asked for a password. If the 
+password is wrong, you will be told (with an authentication error) only
+when you issue some OpenStack command.
+</para></note>
+
 </section>
 
 
