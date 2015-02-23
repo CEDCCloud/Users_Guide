@@ -348,6 +348,10 @@ Documentation at <ulink url="http://docs.openstack.org/user-guide/content/instal
 </para>
 
 <para>
+The OpenStack client is also installed on lx.pd.infn.it.
+</para>
+
+<para>
 The OpenStack tools require a set of shell environment variables in order to 
 run. These variables can be obtained and stored in an 'rc' file much like 
 .profile when logging into a linux server. The environment variables are 
