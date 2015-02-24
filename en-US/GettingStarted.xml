@@ -348,7 +348,7 @@ Documentation at <ulink url="http://docs.openstack.org/user-guide/content/instal
 </para>
 
 <para>
-The OpenStack client is also installed on lx.pd.infn.it.
+The OpenStack client is also installed on <literal>lx.pd.infn.it</literal>.
 </para>
 
 <para>
