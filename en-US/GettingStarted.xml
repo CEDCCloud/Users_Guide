@@ -20,31 +20,6 @@ dashboard, a web based GUI.
 </para>
 
 
-<section id="AccessThePreprodThroughTheDashboard">
-<title>Access the pre-production service through the Dashboard</title>
-
-<para>
-To access the pre-production service of the Cloud Area Padovana via the 
-dashboard, you must simply go 
-to  <ulink url="https://cloudpp-areapd.pd.infn.it:8443/dashboard">https://cloudpp-areapd.pd.infn.it:8443/dashboard</ulink> in a browser.
-</para>
-
-<mediaobject>
-<imageobject>
-  <imagedata fileref="./images/dashboard.png" />
-</imageobject>
-</mediaobject>
-
-<para>
-You can now log in using the username and password provided by the Cloud 
-administrators.
-</para>
-
-</section>
-
-<section id="AccessTheProdThroughTheDashboard">
-<title>Access the production service through the Dashboard</title>
-
 
 <para>
 To access the production service of the Cloud Area Padovana via the 
@@ -75,7 +50,6 @@ in the Dashboard. However this is not yet operational.                          
 
 </section>
 
-</section>
 
 
 
@@ -231,35 +205,6 @@ also enabled (e.g. via iptables) on the Virtual Machine.
 <section id="SettingPassword">
 <title>Setting/changing password</title>
 
-<section id="SettingPasswordPreprod">
-<title>Changing password in the pre-production cloud</title>
-
-<para>
-In the pre-production cloud, to change the password from the OpenStack
-dashboard select 
-<menuchoice><guimenu>Settings</guimenu></menuchoice> (on the top)
-then <menuchoice><guimenu>Change Password</guimenu></menuchoice>.
-
-<mediaobject>
-<imageobject>
-  <imagedata fileref="./images/changepasswd_preprod.png" />
-</imageobject>
-</mediaobject>
-
-
-</para>
-
-<important><para>
-This is the password to authenticate with the Cloud service. It has
-nothing to do with the password of the Cloud virtual machines.
-</para></important>
-
-
-</section>
-
-<section id="SettingPasswordProd">
-<title>Setting/changing password in the production cloud</title>
-
 
 <note><para>
 If you log on the production cloud through INFN-AAI and if you don't need 
@@ -306,7 +251,6 @@ with the INFN-AAI password.
 
 </section>
 
-</section>
 
 
 

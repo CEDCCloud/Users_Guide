@@ -19,29 +19,15 @@ and of the desired flavors (in terms of processors, memory size, etc.).
 
 <para>                                                                          
 Even if it is a single, logical Cloud service, its resources are spread in two  
-different locations: INFN Padova and INFN Laboratori Nazionali di Legnaro (LNL).                                                                               
-</para>
+different locations: INFN Padova and INFN Laboratori Nazionali di Legnaro (LNL). 
 
-<section id="PreAndProd">
-<title>The pre-production and the production services</title>
-<para>                                                                          
-The Cloud Area Padovana offers a                                                
-<literal>pre-production service</literal> based on the Havana version of the    
-OpenStack middleware.                                                           
 </para>
 
 <para>                                                                          
-A <literal>production service</literal> is now being settled: it is also based  
-on Openstack Havana version, but it offers improved functionality and           
-more resources with respect to the pre-production service.                      
+The Cloud Area Padovana is currently based on the Havana version of the    
+OpenStack middleware.                     
 </para>
 
-<para>                                                                          
-The preproduction service will be dismissed when the production service         
-is fully operational and when all the users have migrated to it.                
-</para>
-
-</section>
 
 <section id="Projects">
 <title>Projects</title>
@@ -102,7 +88,7 @@ If it is necessary to log on a VM of the Cloud from the Internet, it is
 necessary to go through a gate machine. For this purpose users can rely
 on the existing gate hosts in Padova and Legnaro. 
 Users who don't have an account on such gate hosts can rely on 
-a Cloud specific gate host (<literal>cld-gate.pd.infn.it</literal>): contact 
+a Cloud specific gate host (<literal>cld-gate.pd.infn.it</literal>): please contact 
 <email>cloud-support@lists.pd.infn.it</email> if you need an account on such 
 machine.
 </para>
@@ -137,7 +123,7 @@ contact the admins at <email>cloud-support@lists.pd.infn.it</email>.
 
 <para>                                                                             
 Changes and planned interventions to the service will be posted on the             
-<email>cloud-users@lists.pd.infn.it</email>.                                       
+<email>cloud-users@pd.infn.it</email>.                                       
 All registered users to the Cloud are member of this mailing list.    
 </para>
 </section>

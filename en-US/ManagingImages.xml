@@ -70,50 +70,6 @@ In the production cloud SL 6.x images are provided in QCOW2 format.
 They are fully resizable also with respect to the disk size.
 </para>
 
-<para>
-In the pre-production cloud SL 6.x images are instead provided in two 
-formats: QCOW2 and AMI.
-Images in QCOW2 format are smaller (and are therefore better) wrt AMI images. 
-However they are not fully resizable with respect to the disk size. This means 
-that if you instantiate a VM using a QCOW2 image selecting e.g. the
-m1.medium flavor, that VM will have a small root partition and not the
-expected 40 GB size. This can be fixed logging to the VM as root and 
-first of all checking what is the device associated to the root partition:
-</para>
-
-<screen>
-# df -h /
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/vda1       3.0G  2.5G  322M  89% /
-</screen>
-
-<para>
-If it is <replaceable>/dev/vda1</replaceable> as in the this example, as
-root perform:
-</para>
-
-<screen>
-growpart /dev/vda 1
-reboot
-</screen>
-
-<para>
-Use <command>growpart /dev/vda 2</command> if the device was instead 
-<replaceable>/dev/vda2</replaceable>, etc.
-</para>
-
-<para>
-When the machine re-starts, it will have the expected (i.e. compliant
-with the selected flavor) disk size.
-</para>
-
-
-<para>
-Images in AMI format are much bigger wrt QCOW2 images.   
-They are fully resizable with respect the disk size (i.e. they don't have
-the problem described above for QCOW2 images). However on a VM 
-using an AMI image it is not possible to update the kernel.
-</para>
 
 </section>
 
