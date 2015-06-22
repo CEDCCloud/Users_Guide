@@ -11,7 +11,7 @@ The <literal>Cloud Area Padovana</literal> is an OpenStack based cloud.
 
 <para>
 It implements a IaaS (Infrastructure as a service):
-it allows the instantiations of Virtual Machines (VMs) of the desired
+it allows the instantiation of Virtual Machines (VMs) of the desired
 environments (in terms of operating system, installed software, etc.)
 and of the desired flavors (in terms of processors, memory size, etc.).
 </para>
@@ -24,7 +24,7 @@ different locations: INFN Padova and INFN Laboratori Nazionali di Legnaro (LNL).
 </para>
 
 <para>                                                                          
-The Cloud Area Padovana is currently based on the Havana version of the    
+The Cloud Area Padovana is currently based on the Icehouse version of the    
 OpenStack middleware.                     
 </para>
 

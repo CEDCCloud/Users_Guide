@@ -290,6 +290,9 @@ jeos = no
 </screen>
 </para>
  
+<para>
+The directories specified in this configuration file must be manually created.
+</para>
 
 
 <section id="EnablingINFNPadovaLDAP">
