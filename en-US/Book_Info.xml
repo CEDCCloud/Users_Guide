@@ -6,16 +6,19 @@
 <bookinfo id="book-Documentation-Users_Guide-Users_Guide">
 	<title>Users Guide</title>
 	<subtitle></subtitle>
-	<productname>Cloud Area Padovana</productname>
+	<productname>CEDC Cloud</productname>
 	<productnumber></productnumber>
-	<edition>1.8</edition>
+	<edition>1.0</edition>
 	<pubsnumber>0</pubsnumber>
 	<abstract>
 		<para>
-This document explains how to use the services of the Cloud Area Padovana.
+This document explains how to use the services of the CEDC Cloud.
 		</para>
 <para>
-It was heavily inspired from 
+This document is an adaptation of INFN "Cloud Area Padovana" users guide
+<ulink url="http://wiki.infn.it/progetti/cloud-areapd/user_s_guides/cloud_area_padovana_user_guide">Cloud Area Padovana User Guide</ulink>
+
+that in turn was heavily inspired from 
 <ulink url="https://information-technology.web.cern.ch/book/cern-private-cloud-user-guide">the CERN Cloud User Guide</ulink>
 
 </para>
