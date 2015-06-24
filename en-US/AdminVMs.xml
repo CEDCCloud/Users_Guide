@@ -469,7 +469,7 @@ appears in the Dashboard when you launch a new instance.
 </para>
 
 <warning><para>
-For what concerns VCPUs, please note that the Cloud Area Padovana is 
+For what concerns VCPUs, please note that the CEDC Cloud is 
 configured to allow some “overbooking” so that a
 physical core is mapped to 4 VCPUs.
 </para></warning>
@@ -541,7 +541,7 @@ once when the VM is created.
 </para>
 
 <para>
-The public images provided in the Cloud Area Padovana include a contextualisation 
+The public images provided in the CEDC Cloud include a contextualisation 
 feature using the open source <literal>cloud-init</literal> package.
 </para>
 

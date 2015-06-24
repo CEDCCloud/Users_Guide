@@ -7,7 +7,7 @@
 <title>Managing Storage</title>
 
 <para>
-There are several ways of handling disk storage in the Cloud Area Padovana:
+There are several ways of handling disk storage in the CEDC Cloud:
 </para>
 
 <para>
@@ -319,7 +319,7 @@ hosts in the /etc/exports file on the instance acting as NFS server.
 As explained in <xref linkend="NetworkAccess"/> from an instance of the Cloud
 by default it is not possible to access a host/service hosted in Padova or 
 Legnaro. This also means that by default on a virtual machine of
-the Cloud Area Padovana it is not possible to mount a file system 
+the CEDC Cloud it is not possible to mount a file system 
 exported from a storage server hosted in Padova or Legnaro.
 </para>
 

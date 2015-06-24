@@ -22,7 +22,7 @@ dashboard, a web based GUI.
 
 
 <para>
-To access the production service of the Cloud Area Padovana via the 
+To access the production service of the CEDC Cloud via the 
 dashboard, you must simply go 
 to  <ulink url="https://cloud-areapd.pd.infn.it/dashboard">https://cloud-areapd.pd.infn.it/dashboard</ulink> in a browser.
 </para>
@@ -372,7 +372,7 @@ when you issue some OpenStack command.
 <section id="AccessingtheCloudthroughEC2">
 <title>Accessing the Cloud through the euca2ools EC2 command line tools</title>
 <para>
-The Cloud Area Padovana also exposes a EC2 interface, which is a de-facto 
+The CEDC Cloud also exposes a EC2 interface, which is a de-facto 
 standard for computational clouds.
 </para>
 
