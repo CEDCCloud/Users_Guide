@@ -1,4 +1,4 @@
 Users_Guide
 ===========
 
-Users' guide for the Cloud Area Padovana
+Users' guide for the CEDC Cloud
