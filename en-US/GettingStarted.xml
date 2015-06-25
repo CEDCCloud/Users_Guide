@@ -196,7 +196,7 @@ Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
 <note><para>
 If you need to enable some services on a Virtual Machine, besides setting the
 specific IP rules through security groups, be sure that the relevant ports are 
-also enabled (e.g. via iptables) on the Virtual Machine.
+also enabled (e.g. via firewalld) on the Virtual Machine.
 </para></note>
 
 
