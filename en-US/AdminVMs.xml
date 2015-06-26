@@ -157,7 +157,7 @@ public (floating) IP address to this instance, as explained in
 By default the possibility to use public IP numbers is disabled and
 therefore by default the <replaceable>&lt;ProjectName&gt;-wan</replaceable>
 network doesn't exist. If public IPs are needed for your
-project, please contact <email>cloud-support@lists.pd.infn.it</email>. 
+project, please contact <email>cedc-support@lists.pd.infn.it</email>. 
 </para></note>
 
 </para></listitem>
@@ -232,7 +232,7 @@ necessary to go through a gate machine. For this purpose you can rely
 on the existing gate hosts in Padova and Legnaro. 
 If you don't have an account on one of such gate hosts, you can use 
 a Cloud specific gate host (<literal>cld-gate.pd.infn.it</literal>): contact 
-<email>cloud-support@lists.pd.infn.it</email> if you need an account on such 
+<email>cedc-support@lists.pd.infn.it</email> if you need an account on such 
 machine.
 </para>
 
@@ -262,7 +262,7 @@ to allocate a floating (public) IP to the VM, as discussed in
 <note><para>
 Please note that by default the possibility to use public IP numbers is disabled.
 If public IPs are needed for your project, please contact 
-<email>cloud-support@lists.pd.infn.it</email>.                
+<email>cedc-support@lists.pd.infn.it</email>.                
 </para></note>
 
 <para>
@@ -284,7 +284,7 @@ Internet network, but by default it is not possible to
 access a host/service hosted in Padova or Legnaro. 
 If, for some reasons, you need to access some
 services hosted in Padova or Legnaro from the Cloud, please contact
-<email>cloud-support@lists.pd.infn.it</email>.
+<email>cedc-support@lists.pd.infn.it</email>.
 </para>
 </section>
 
@@ -429,7 +429,7 @@ By default the possibility to use public IP numbers is disabled and
 therefore by default it is not possible to allocate a floating
 IP to an instance.
 If public IPs are needed for your                              
-project, please contact <email>cloud-support@lists.pd.infn.it</email>
+project, please contact <email>cedc-support@lists.pd.infn.it</email>
 specifying what is/are the relevant service(s) and the port(s) that need
 to be open.
 </para></note>
@@ -481,7 +481,7 @@ image. For other cases, it may be necessary to resize the partitions.
 
 <note><para>
 If you find that a specific flavor you require is not available, please
-contact <email>cloud-support@lists.pd.infn.it</email>.
+contact <email>cedc-support@lists.pd.infn.it</email>.
 </para></note>
 
 

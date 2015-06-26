@@ -18,8 +18,8 @@ and of the desired flavors (in terms of processors, memory size, etc.).
 
 
 <para>                                                                          
-Even if it is a single, logical Cloud service, its resources are spread in two  
-different locations: INFN Padova and INFN Laboratori Nazionali di Legnaro (LNL). 
+Even if it is a single, logical Cloud service, its resources are spread in various  
+different locations: CSIA Padova, INFN Padova and INFN Laboratori Nazionali di Legnaro (LNL). 
 
 </para>
 
@@ -73,8 +73,14 @@ convincing  reasons.
 
 <title>Network access</title>
 <para>                                                                         
-Virtual Machines created in the CEDC Cloud are by
-default “visible” from the Local Area Networks (LANs) of both Padova and 
+Access to Virtual Machines created in the CEDC Cloud depends on your affiliation.
+
+<itemizedlist>
+
+<listitem>
+If you are a INFN user:
+<para>
+VM are by default “visible” from the Local Area Networks (LANs) of both Padova and 
 LNL. This means that e.g. users can access via ssh VMs of the Cloud directly 
 from their desktops located in Padova or Legnaro. 
 
@@ -89,7 +95,7 @@ necessary to go through a gate machine. For this purpose users can rely
 on the existing gate hosts in Padova and Legnaro. 
 Users who don't have an account on such gate hosts can rely on 
 a Cloud specific gate host (<literal>cld-gate.pd.infn.it</literal>): please contact 
-<email>cloud-support@lists.pd.infn.it</email> if you need an account on such 
+<email>cedc-support@lists.pd.infn.it</email> if you need an account on such 
 machine.
 </para>
 
@@ -97,9 +103,12 @@ machine.
 If needed, e.g. if a VM should host a service accessible from the 
 Internet, such VM on the Cloud can be given a public IP.
 If this is the case please contact 
-<email>cloud-support@lists.pd.infn.it</email>. 
+<email>cedc-support@lists.pd.infn.it</email>. 
 </para>
+</listitem>
 
+</itemizedlist>
+</para>
 
 <para>
 From a VM of the Cloud, it is possible to access the outside 
@@ -108,7 +117,7 @@ it is not possible to
 access a host/service hosted in Padova or Legnaro. 
 If, for some reasons, you need to access some
 services hosted in Padova or Legnaro from the Cloud, please contact
-<email>cloud-support@lists.pd.infn.it</email>.
+<email>cedc-support@lists.pd.infn.it</email>.
 </para>
 
 </section>
@@ -118,7 +127,7 @@ services hosted in Padova or Legnaro from the Cloud, please contact
 <title>Getting help</title>
 <para>                                                                             
 If you have problems using the Cloud dell'area Padovana private cloud, please 
-contact the admins at <email>cloud-support@lists.pd.infn.it</email>.
+contact the admins at <email>cedc-support@lists.pd.infn.it</email>.
 </para>
 
 <para>                                                                             

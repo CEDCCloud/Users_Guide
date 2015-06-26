@@ -268,7 +268,7 @@ The relevant source files are available
 <para>
 A machine where Oz is installed is available to the users of the CEDC Cloud.
 To have access to this machine, please contact the 
-administrators at <email>cloud-support@lists.pd.infn.it</email>.
+administrators at <email>cedc-support@lists.pd.infn.it</email>.
 Oz requires a configuration file that should be created as follows exchanging 
 USERNAME for the login name of your user:
 
