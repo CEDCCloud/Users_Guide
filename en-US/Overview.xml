@@ -77,8 +77,7 @@ Access to Virtual Machines created in the CEDC Cloud depends on your affiliation
 
 <itemizedlist>
 
-<listitem>
-If you are a INFN user:
+<listitem>If you are a INFN user:
 <para>
 VM are by default “visible” from the Local Area Networks (LANs) of both Padova and 
 LNL. This means that e.g. users can access via ssh VMs of the Cloud directly 
@@ -104,6 +103,19 @@ If needed, e.g. if a VM should host a service accessible from the
 Internet, such VM on the Cloud can be given a public IP.
 If this is the case please contact 
 <email>cedc-support@lists.pd.infn.it</email>. 
+</para>
+</listitem>
+
+<listitem>If you are a UNIPD user:
+<para>
+VM may be accessed from a gate (<literal>cld-blu-gate.pd.infn.it</literal>): please contact
+<email>cedc-support@lists.pd.infn.it</email> if you need an account on such
+machine.
+</para>
+</listitem>
+
+<listitem>If you are an "external" user:
+<para>Please contact <email>cedc-support@lists.pd.infn.it</email>
 </para>
 </listitem>
 
