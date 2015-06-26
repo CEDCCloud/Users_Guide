@@ -66,13 +66,19 @@ home folder.
 The steps are as follows:
 </para>
 <itemizedlist>
-<listitem><para>Go to the <menuchoice><guimenu>Access &amp; Security
-</guimenu></menuchoice> on the left hand side menu</para></listitem>
-<listitem><para>In the <menuchoice><guimenu>keypairs</guimenu></menuchoice> 
+<listitem><para>Open the <menuchoice><guimenu>Compute
+</guimenu></menuchoice> tab on the left side</para></listitem>
+
+<listitem><para>Select <menuchoice><guimenu>Access &amp; Security
+</guimenu></menuchoice></para></listitem>
+
+<listitem><para>In the <menuchoice><guimenu>Key Pairs</guimenu></menuchoice> 
 section, select <menuchoice><guimenu>Create a keypair</guimenu></menuchoice>. 
-You will need to give the keypair a name, such as 
-<replaceable>my_key</replaceable>.</para></listitem>
+</para></listitem>
 </itemizedlist>
+<para>
+You will need to give the keypair a name, such as 
+<replaceable>my_key</replaceable>.</para>
 
 
 <mediaobject>
@@ -84,7 +90,8 @@ You will need to give the keypair a name, such as
 
 
 <para>
-On completion of the operation, a file <replaceable>my_key.pem</replaceable> will be downloaded to your browser. This should be stored in a safe location. 
+On completion of the operation, a file <replaceable>my_key.pem</replaceable> will be downloaded to your computer.
+ This should be stored in a safe location. 
 To keep it private, run:
 <command>
 chmod 600 <replaceable>my_key.pem</replaceable>
@@ -97,25 +104,26 @@ chmod 600 <replaceable>my_key.pem</replaceable>
 <title>Setting security group(s)</title>
 
 <para>
-Security groups are sets of IP filter rules that define networking access and 
+Security groups are sets of IP rules (firewall) that define networking access and 
 are applied to all instances within a project using that group. As
 described in <xref linkend="CreatingVMs"/>, 
 when you create an instance you have to specify
 the security group to be used.
 </para>
 <para>
-To set such IP rules, users can either add rules to the default security group 
-or can add a new security group with the desided rules.
+To set such IP rules, users can either add them to the <replaceable>default</replaceable> security group 
+or can create a new security group with the desided rules.
 </para>
 
 <para>
 For example the following procedure enables SSH and ICMP (ping) access to 
-instances using the default security group. The rules apply to all instances 
+the <replaceable>default</replaceable> security group. The rules apply to all instances 
 within a given project using this security group, and should be set 
 (just once) for every 
-project unless there is a reason to prohibit SSH or ICMP access to the 
-instances.
+project, unless there is a reason to inhibit SSH or ICMP access to the 
+instances.</para>
 
+<para>
 This procedure can be adjusted as necessary to add additional security group 
 rules to a project, if needed.
 </para>
@@ -124,6 +132,7 @@ rules to a project, if needed.
 
 <listitem><para>
 Log in to the dashboard, choose a project, and click 
+<menuchoice><guimenu>Compute</guimenu></menuchoice> -> 
 <menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>. The 
 <menuchoice><guimenu>Security Groups</guimenu></menuchoice> tab shows the security 
 groups that are available for this project.
@@ -131,7 +140,7 @@ groups that are available for this project.
 
 <listitem><para>
 Select the <menuchoice><guimenu>default</guimenu></menuchoice> 
-security group and click <menuchoice><guimenu>Edit Rules</guimenu></menuchoice>.
+security group and click <menuchoice><guimenu>Manage Rules</guimenu></menuchoice>.
 </para></listitem>
 
 <listitem><para>
@@ -161,7 +170,11 @@ the <menuchoice><guimenu>CIDR</guimenu></menuchoice> box.
 <listitem><para>
 Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
 </para></listitem>
+</itemizedlist>
+</para>
 
+<para>
+<itemizedlist>
 <listitem><para>
 To add an ICMP rule, click <menuchoice><guimenu>Add Rule</guimenu></menuchoice>.
 </para></listitem>
