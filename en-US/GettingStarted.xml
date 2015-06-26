@@ -206,11 +206,11 @@ Click <menuchoice><guimenu>Add.</guimenu></menuchoice>
 
 </para>
 
-<note><para>
+<warning><para>
 If you need to enable some services on a Virtual Machine, besides setting the
 specific IP rules through security groups, be sure that the relevant ports are 
 also enabled (e.g. via firewalld) on the Virtual Machine.
-</para></note>
+</para></warning>
 
 
 </section>
