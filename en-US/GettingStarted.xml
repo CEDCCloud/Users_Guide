@@ -227,11 +227,12 @@ this section.
 </para></note>
 
 <para>
-If you access the production cloud through username and password, and
+If you access the cloud through username and password, and
 you want to change such password, 
-from the OpenStack dashboard select 
-<menuchoice><guimenu>Settings</guimenu></menuchoice> (on the top) and
-then <menuchoice><guimenu>Activate Password</guimenu></menuchoice>.
+from the OpenStack dashboard click on your user's name (on the top), select 
+<menuchoice><guimenu>Settings</guimenu></menuchoice> and
+then <menuchoice><guimenu>Change Password</guimenu></menuchoice>
+from the menu on the left.
 
 <mediaobject>
 <imageobject>
@@ -250,8 +251,8 @@ in <xref linkend="AccessingtheCloudthroughCLI"/>.
 
 <para>
 To set such password (or to change it) use the same procedure:
-from the OpenStack dashboard select 
-<menuchoice><guimenu>Settings</guimenu></menuchoice> (on the top) and
+from the OpenStack dashboard select <menuchoice><guimenu>your_user</guimenu></menuchoice>
+-> <menuchoice><guimenu>Settings</guimenu></menuchoice> and
 then <menuchoice><guimenu>Activate Password</guimenu></menuchoice>.
 
 </para>
