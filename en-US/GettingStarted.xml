@@ -297,8 +297,8 @@ To switch between projects just open the dropdown menu
 <section id="AccessingtheCloudthroughCLI">
 <title>Accessing the Cloud through the Openstack command line tools</title>
 <para>
-It is possible to access the functionality of the Cloud also using the 
-Openstack command line tools, even if most of the functionality provided by 
+It is possible to manage the Cloud using command line tools, 
+even if most of the functionality provided by 
 the Cloud can be accessed through the dashboard web interface.
 The <ulink url="http://docs.openstack.org">Openstack End User Guide</ulink>
 contains extended information on the command line tools in OpenStack.
@@ -311,15 +311,18 @@ The OpenStack client is also installed on <literal>lx.pd.infn.it</literal>.
 
 <para>
 The OpenStack tools require a set of shell environment variables in order to 
-run. These variables can be obtained and stored in an 'rc' file much like 
-.profile when logging into a linux server. The environment variables are 
-different per project that you work on. If you log into the dashboard, you 
+run. These variables can be obtained from the dashboard and then stored in an 'rc' file
+that you can source (much like your .profile) when logging into a linux server.
+
+<para>The environment variables are different for project you work on.</para>
+
+<para>If you log into the dashboard, you 
 will find an <menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>
-menu on the left hand side. Then choose the 
-<menuchoice><guimenu>API Access</guimenu></menuchoice> Tab to select the 
+under the <menuchoice><guimenu>Compute</guimenu></menuchoice> menu on the left hand side. 
+Choose the <menuchoice><guimenu>API Access</guimenu></menuchoice> Tab to select the 
 options related to using the program interfaces. Select the 
 <menuchoice><guimenu>Download OpenStack RC file</guimenu></menuchoice> option 
-on the top right to download the rc file for your current project. 
+to download the rc file for your current project. 
 </para>
 
 <mediaobject>
@@ -329,48 +332,49 @@ on the top right to download the rc file for your current project.
 </mediaobject>
 
 <para>
-This file 
-is different for each of the projects you are working on. This file should be 
-saved onto the machine where you want to run the commands from. If you use 
+This file should be 
+saved onto the machineyou want to run the commands from. If you use 
 csh rather than bash/zsh for your shell, you would need to create a new 
-version using 'setenv' rather than export.
+version using <replaceable>setenv</replaceable> rather than <replaceable>export</replaceable>.
 </para>
 
 <para>
-In the production cloud, since services are secured using SSL, you need to
-edit the RC file adding the line:
+In the CEDC cloud, since services are secured using SSL, you will need the
+<literal>cedc-chain.pem</literal> "certification authority" file. This file can be downloaded
+
+<ulink url="https://somewhere.over.the.rainbow/at/the/CSIA/site">Somewhere from the CSIA site</ulink> 
+</para>
+
+<para>Once you get the file you need to edit the RC file to set the
+<literal>OS_CACERT</literal> variable like this:
 
 <screen>
-export OS_CACERT=/etc/grid-security/certificates/INFN-CA-2006.pem
+export OS_CACERT=/etc/grid-security/certificates/cedc-chain.pem
 </screen>
 
-and you need to make sure that this file exists on the relevant client
-machine. 
-The content of this '/etc/grid-security/certificates/INFN-CA-2006.pem' file
-must be the certificate of the INFN-CA in PEM format. This file is provided by
-the <literal>ca_INFN-CA-2006</literal> package (that can be downloaded
-e.g. from the <ulink url="http://www.eugridpma.org/">EUGridPMA web 
-site</ulink>. The certificate can also be downloaded from the
-<ulink url="https://security.fi.infn.it/CA/mgt/INFNCA.pem">INFN CA web 
-site</ulink>.
+</para>
+
+<note>The certificate can be put anywhere on the client as long as the path
+you specify is consistent.</note>
+
 </para>
 
 <para>
-To test it works, run the rc script source file and enter your password to 
+To test it works, source the rc script file and enter your password to 
 authenticate. The OpenStack command line tools (nova for compute resources, 
-glance for images) can then be used, etc:
+glance for images) can then be used, e.g.:
 </para>
 <screen>
-$ . ALICE-openrc.sh 
+$ . demo-openrc.sh 
 Please enter your OpenStack Password: 
 $ nova list
 +--------------------------------------+---------------------------------------------+--------+------------+-------------+----------------------+
 | ID                                   | Name                                        | Status | Task State | Power State | Networks             |
 +--------------------------------------+---------------------------------------------+--------+------------+-------------+----------------------+
-| d85a4221-b2cc-4bcd-8c56-af21afa8ce5c | Monitoring_Server                           | ACTIVE | -          | Running     | alice-lan=10.62.13.5 |
-| 60005bae-93df-454e-9e1f-07c3be27157c | MySQL_Server                                | ACTIVE | -          | Running     | alice-lan=10.62.13.6 |
-| 6cbb5ded-ba65-4850-8078-1e9f1836e7de | Server 6cbb5ded-ba65-4850-8078-1e9f1836e7de | ACTIVE | -          | Running     | alice-lan=10.62.13.2 |
-| 5ce6926a-2796-4dbd-82f2-d84ced6acf38 | Xrootd_Server                               | ACTIVE | -          | Running     | alice-lan=10.62.13.4 |
+| d85a4221-b2cc-4bcd-8c56-af21afa8ce5c | Monitoring_Server                           | ACTIVE | -          | Running     |  demo_net=10.62.13.5 |
+| 60005bae-93df-454e-9e1f-07c3be27157c | MySQL_Server                                | ACTIVE | -          | Running     |  demo_net=10.62.13.6 |
+| 6cbb5ded-ba65-4850-8078-1e9f1836e7de | Server 6cbb5ded-ba65-4850-8078-1e9f1836e7de | ACTIVE | -          | Running     |  demo_net=10.62.13.2 |
+| 5ce6926a-2796-4dbd-82f2-d84ced6acf38 | Xrootd_Server                               | ACTIVE | -          | Running     |  demo_net=10.62.13.4 |
 +--------------------------------------+---------------------------------------------+--------+------------+-------------+----------------------+
 </screen>
 
@@ -382,7 +386,7 @@ when you issue some OpenStack command.
 
 </section>
 
-
+<!--
 <section id="AccessingtheCloudthroughEC2">
 <title>Accessing the Cloud through the euca2ools EC2 command line tools</title>
 <para>
@@ -457,6 +461,7 @@ INSTANCEi-000015b2ami-0000001emonitoring-serverrunningvenaruzzo-cloudpp0m1.small
 
 </section>
 
+-->
 
 
 
