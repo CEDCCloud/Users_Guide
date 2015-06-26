@@ -300,9 +300,8 @@ To switch between projects just open the dropdown menu
 It is possible to manage the Cloud using command line tools, 
 even if most of the functionality provided by 
 the Cloud can be accessed through the dashboard web interface.
-The <ulink url="http://docs.openstack.org">Openstack End User Guide</ulink>
-contains extended information on the command line tools in OpenStack.
-Documentation at <ulink url="http://docs.openstack.org/user-guide/content/install_clients.html">http://docs.openstack.org/user-guide/content/install_clients.html</ulink> explains how to install the Openstack client.
+The <ulink url="http://docs.openstack.org/icehouse/">documentation</ulink> on the OpenStack site
+contains extended information on the syntax and installation procedure of the command line tools.
 </para>
 
 <para>
