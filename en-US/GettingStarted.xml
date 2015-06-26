@@ -273,19 +273,19 @@ with the INFN-AAI password.
 
 <para>
 As introduced in <xref linkend="Projects"/>,
-a user can be on multiple projects at the same time. It is possible 
-to switch between them using the Dashboard, clicking on 
-<menuchoice><guimenu>CURRENT PROJECT</guimenu></menuchoice> 
-as shown in the following
-figure.
+a user can be on multiple projects at the same time. The current 
+project is indicated by the top left dropdown menu near the logo.
+</para>
 
+<para>
+To switch between projects just open the dropdown menu
+(as shown in the following figure) and select one of your available projects.
 
 <mediaobject>
 <imageobject>
   <imagedata fileref="./images/ProjectSwitch.png" />
 </imageobject>
 </mediaobject>
-
 
 </para>
 
