@@ -18,19 +18,20 @@ used for this VM.
 </para>
 
 <para>
-To create a VM, the steps are as follows:
+To create a VM proceed as follows:
 </para>
 
 
 <itemizedlist>
 
 <listitem><para>
-On the left hand menu, select the Project that must be used for this VM.
+Be sure you have selected the right Project from the dropdown menu on the top.
 </para></listitem>
 
 
 <listitem><para>
-Go to <menuchoice><guimenu>Instances</guimenu></menuchoice> on the left hand 
+Go to <menuchoice><guimenu>Compute</guimenu></menuchoice> -> 
+<menuchoice><guimenu>Instances</guimenu></menuchoice> on the left hand 
 menu. This will display a list of VMs currently running in your project.
 
 
@@ -46,8 +47,8 @@ menu. This will display a list of VMs currently running in your project.
 
 
 <listitem><para>
-Select the <menuchoice><guimenu>+ Launch Instance</guimenu></menuchoice> 
-button. A new menu appears. 
+Select the <menuchoice><guimenu>"+ Launch Instance"</guimenu></menuchoice> 
+button. A new window appears. 
 
 <mediaobject>
 <imageobject>
@@ -69,9 +70,9 @@ machine you want to create.
 <listitem><para>
 <menuchoice><guimenu>Flavor</guimenu></menuchoice> is the size of the machine 
 you want to create. These are specified using VCPUs (number of virtual CPUs, 
-disk space for the system disk, size for the RAM memory). Selecting small 
-flavors is more economical and the flavor of a virtual machine can be changed 
-later if required. Flavors are discussed in <xref linkend="Flavors"/>.
+disk space for the system disk, size for the RAM memory). You are advised to
+start small (the flavor of a virtual machine can be changed 
+later if required). Flavors are discussed in <xref linkend="Flavors"/>.
 </para></listitem>
 
 <listitem><para>
@@ -90,8 +91,8 @@ specify its name.
 </listitem>
 
 <listitem><para>
-Switch the tab for 
-<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>.
+Switch to the
+<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice> tab.
 
 <mediaobject>
 <imageobject>
@@ -115,7 +116,7 @@ this SSH key.
 You can also specify the admin (usually root) password of the instance. 
 
 <warning><para>
-Please note that this setting of the admin password is not guaranteed to 
+Please note that setting the admin password is not guaranteed to 
 always work (the image can't 
 support the “injection” of this password). It is therefore suggested to use 
 the ssh-key mechanisms.
@@ -133,7 +134,7 @@ discussed in <xref linkend="SecurityGroups"/>).
 </listitem>
 
 <listitem><para>
-Swith the tab for <menuchoice><guimenu>Networking</guimenu></menuchoice>.
+Now switch to the <menuchoice><guimenu>Networking</guimenu></menuchoice> tab.
 
 <mediaobject>
 <imageobject>
@@ -164,8 +165,8 @@ project, please contact <email>cedc-support@lists.pd.infn.it</email>.
 
 <listitem><para>
 Select <menuchoice><guimenu>Launch</guimenu></menuchoice> to start the 
-virtual machine being created. When this returns to the overview screen, 
-there will be a line with the instance name, ip adress and status. The status 
+virtual machine being created. You will be returned to the <menuchoice><guimenu>Overview</guimenu></menuchoice> screen, 
+where there will be a line with the instance name, ip adress and status. The status 
 should be 'Active' once the install is complete.
 </para></listitem>
 
@@ -173,9 +174,11 @@ should be 'Active' once the install is complete.
 
 <para>
 Once the status of the machine is 'Active', you can watch the console to see 
-it installing and booting. On the right hand side of the table, under 
-<menuchoice><guimenu>More</guimenu></menuchoice>, there is a pull down menu. 
-Options include <menuchoice><guimenu>View Log</guimenu></menuchoice> and 
+it installing and booting. You can click on the VM name and go to a dedicated
+window or from this same table you can access a pull down menu on the right hand side under 
+<menuchoice><guimenu>More</guimenu></menuchoice>.
+There you will see various options and among them
+<menuchoice><guimenu>View Log</guimenu></menuchoice> and 
 <menuchoice><guimenu>Console</guimenu></menuchoice>. 
 
 
