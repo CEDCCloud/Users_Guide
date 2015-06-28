@@ -7,9 +7,6 @@
 <title>Getting Started</title>
 
 
-
-
-
 <section id="AccessTheCloudThroughTheDashboard">
 <title>Access the Cloud through the Dashboard</title>
 <para>
@@ -214,6 +211,7 @@ also enabled (e.g. via firewalld) on the Virtual Machine.
 
 </section>
 
+
 <section id="SettingPassword">
 <title>Setting/changing password</title>
 
@@ -289,9 +287,6 @@ To switch between projects just open the dropdown menu
 
 </section>
 
-
-
-
 <section id="AccessingtheCloudthroughCLI">
 <title>Accessing the Cloud through the Openstack command line tools</title>
 <para>
@@ -310,6 +305,7 @@ The OpenStack client is also installed on <literal>lx.pd.infn.it</literal>.
 The OpenStack tools require a set of shell environment variables in order to 
 run. These variables can be obtained from the dashboard and then stored in an 'rc' file
 that you can source (much like your .profile) when logging into a linux server.
+</para>
 
 <para>The environment variables are different for project you work on.</para>
 
@@ -351,10 +347,8 @@ export OS_CACERT=/etc/grid-security/certificates/cedc-chain.pem
 
 </para>
 
-<note>The certificate can be put anywhere on the client as long as the path
-you specify is consistent.</note>
-
-</para>
+<note><para>The certificate can be put anywhere on the client as long as the path
+you specify is consistent.</para></note>
 
 <para>
 To test it works, source the rc script file and enter your password to 
