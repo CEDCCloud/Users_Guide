@@ -30,8 +30,7 @@ Be sure you have selected the right Project from the dropdown menu on the top.
 
 
 <listitem><para>
-Go to <menuchoice><guimenu>Compute</guimenu></menuchoice> -> 
-<menuchoice><guimenu>Instances</guimenu></menuchoice> on the left hand 
+Go to <menuchoice><guimenu>Compute</guimenu><guisubmenu>Instances</guisubmenu></menuchoice> on the left hand 
 menu. This will display a list of VMs currently running in your project.
 
 

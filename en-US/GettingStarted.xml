@@ -132,8 +132,7 @@ rules to a project, if needed.
 
 <listitem><para>
 Log in to the dashboard, choose a project, and click 
-<menuchoice><guimenu>Compute</guimenu></menuchoice> -> 
-<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>. The 
+<menuchoice><guimenu>Compute</guimenu><guisubmenu>Access &amp; Security</guisubmenu></menuchoice>. The 
 <menuchoice><guimenu>Security Groups</guimenu></menuchoice> tab shows the security 
 groups that are available for this project.
 </para></listitem>
@@ -251,8 +250,7 @@ in <xref linkend="AccessingtheCloudthroughCLI"/>.
 
 <para>
 To set such password (or to change it) use the same procedure:
-from the OpenStack dashboard select <menuchoice><guimenu>your_user</guimenu></menuchoice>
--> <menuchoice><guimenu>Settings</guimenu></menuchoice> and
+from the OpenStack dashboard select <menuchoice><guimenu>your_user</guimenu><guisubmenu>Settings</guisubmenu></menuchoice> and
 then <menuchoice><guimenu>Activate Password</guimenu></menuchoice>.
 
 </para>
