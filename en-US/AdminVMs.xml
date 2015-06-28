@@ -279,11 +279,11 @@ and you have correctly configured firewall (iptables, firewalld etc.) on the rel
 
 
 <section id="AccessingFromVMs">
-<title>Accessing to other hosts/services from Virtual Machines</title>
+<title>Accessing other hosts/services from Virtual Machines</title>
 
 <para>
-From a VM of the Cloud, it is possible to access the outside 
-Internet network, but by default it is not possible to      
+From a VM on the Cloud it is possible to access the outside 
+Internet network but by default it is not possible to      
 access a host/service hosted in Padova or Legnaro. 
 If, for some reasons, you need to access some
 services hosted in Padova or Legnaro from the Cloud, please contact
@@ -303,7 +303,6 @@ If a VM needs to be visible on the Internet, in addition to the fixed IP
 address a public (floating) IP address must be attached to the instance.
 Floating IP addresses can have their associations modified at any time, 
 regardless of the state of the instances involved. 
-
 </para>
 
 <para>
@@ -319,7 +318,7 @@ address with a specific instance.
 
 <listitem><para>
 From the dashboard click 
-<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>.
+<menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice> on the <menuchoice><guimenu>Compute</guimenu></menuchoice> menu.
 </para></listitem>
 
 
@@ -336,7 +335,7 @@ which shows the floating IP addresses allocated to instances.
 </para></listitem>
 
 <listitem><para>
-Click <menuchoice><guimenu>Allocate IP to Project</guimenu></menuchoice>.
+Click <menuchoice><guimenu>Allocate IP To Project</guimenu></menuchoice>.
 
 <mediaobject>
 <imageobject>
@@ -348,7 +347,7 @@ Click <menuchoice><guimenu>Allocate IP to Project</guimenu></menuchoice>.
 </para></listitem>
 
 <listitem><para> 
-Choose <replaceable>Ext</replaceable> as the pool from which to pick the 
+Choose the pool from which to pick the 
 IP address and click <menuchoice><guimenu>Allocate IP</guimenu></menuchoice>. 
 </para></listitem>
 
@@ -389,7 +388,7 @@ their fixed IP addresses).
 
 
 <listitem><para>
-Click  <menuchoice><guimenu>Associate</guimenu></menuchoice>.
+Finally click  <menuchoice><guimenu>Associate</guimenu></menuchoice>.
 </para></listitem>
 
 
