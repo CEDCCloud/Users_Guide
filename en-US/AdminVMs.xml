@@ -494,8 +494,8 @@ contact <email>cedc-support@lists.pd.infn.it</email>.
 <title>Stopping and Starting VMs</title>
 
 <para>
-VMs can be stopped and started in different ways, available in the Dashboad 
-menu (<menuchoice><guimenu>Instances</guimenu><guisubmenu>More</guisubmenu></menuchoice>).
+VMs can be stopped and started in different ways available from the <menuchoice><guimenu>More</guimenu></menuchoice>
+menu of every instance found on the (<menuchoice><guimenu>Compute</guimenu><guisubmenu>Instances</guisubmenu></menuchoice>) table.
 
 <mediaobject>
 <imageobject>
@@ -509,7 +509,7 @@ menu (<menuchoice><guimenu>Instances</guimenu><guisubmenu>More</guisubmenu></men
 The cleanest way to shutdown (or reboot) an instance is 
 however to log on the VM and 
 issue from the shell the 
-<command>shutdown</command>/<command>reboot</command> command. In fact if the 
+<command>shutdown</command> or <command>reboot</command> command. In fact if the 
 <menuchoice><guimenu>Soft Reboot</guimenu></menuchoice> 
 or <menuchoice><guimenu>Hard Reboot</guimenu></menuchoice> or 
 <menuchoice><guimenu>Shutdown</guimenu></menuchoice> actions are chosen, 
@@ -525,8 +525,8 @@ memory but it is not allocated any CPU time.
 <para>
 <menuchoice><guimenu>Suspend</guimenu></menuchoice>/<menuchoice><guimenu>Resume</guimenu></menuchoice> 
 stores the VM onto disk and recovers it later. This is faster 
-than stop/start and the VM returns to the place is was when the suspend was 
-performed rather than a new boot cycle.
+than stop/start and the VM returns to the status is was when the suspend was 
+performed as opposed to a new boot cycle.
 </para>
 
 </section>
