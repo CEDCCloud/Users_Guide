@@ -204,7 +204,7 @@ using their IP numbers.
 </section>
 
 <section id="AccessingVMs">
-<title>Accessing to Virtual Machines</title>
+<title>Accessing Virtual Machines</title>
 <para>
 Assuming you created a Linux virtual machine using the 
 <replaceable>&lt;ProjectName&gt;-lan</replaceable> network, you can 
@@ -230,20 +230,20 @@ you must use the IP address.
 </para>
 
 <para>
-If it is necessary to log on this VM from the Internet, it is 
-necessary to go through a gate machine. For this purpose you can rely
+If it's necessary to log on this VM from the Internet you must
+go through a gate machine. For this purpose you can rely
 on the existing gate hosts in Padova and Legnaro. 
 If you don't have an account on one of such gate hosts, you can use 
-a Cloud specific gate host (<literal>cld-gate.pd.infn.it</literal>): contact 
-<email>cedc-support@lists.pd.infn.it</email> if you need an account on such 
-machine.
+a Cloud specific gate host (<literal>cld-gate.pd.infn.it</literal> and 
+<literal>cld-blu-gate.pd.infn.it</literal>): contact 
+<email>cedc-support@lists.pd.infn.it</email> if you need an account on these machines.
 </para>
 
 
 <para>
 If needed, e.g. if a VM should host a service accessible from the 
 Internet, such VM on the Cloud can be given a public IP. For this purpose
-it is needed:
+you will need:
 
 <itemizedlist>
 
@@ -270,8 +270,8 @@ If public IPs are needed for your project, please contact
 
 <para>
 To control which services/ports of your virtual machine can be accessed,
-please use the security groups (discussed in <xref linkend="SecurityGroups"/>) 
-and firewalls (e.g. iptables) on the relevant VM.
+be sure you are using the right security group (as discussed in <xref linkend="SecurityGroups"/>) 
+and you have correctly configured firewall (iptables, firewalld etc.) on the relevant VM.
 </para>
 
 
