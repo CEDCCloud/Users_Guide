@@ -209,42 +209,81 @@ single instance. However it can be shared with other virtual machines of the
 Cloud (and/or with other hosts) using NFS.
 </para>
 
-<para>
-Once a volume has been created, attached to an instance (acting as
-a NFS server) and formatted (the procedure has been
-explained in <xref linkend="Volumes"/>, create the mount point and mount the 
-volume on this virtual machine:
+<orderedlist>
+<listitem>
+	<para><literal>Configure NFS server</literal></para>
+	<orderedlist>
+		<listitem>
+			<para>
+			Once a volume has been created, formatted and attached to this instance
+			(see <xref linkend="Volumes"/> for details) acting as NFS server, create the mount point and mount the 
+			volume on this virtual machine:
 <screen>
 mkdir /dataNfs
 mount /dev/sdb /dataNfs
 </screen>
-</para>
+			</para>
+		</listitem>
 
-<para>
-Ensure that on this virtual machine the follow packages are installed:
+		<listitem>
+			<para>
+			Ensure that on this virtual machine the packages providing the <command>rpc.nfsd</command> daemon are installed:
 <screen>
-nfs-utils
-nfs-utils-lib
-rpcbind
-</screen>
-</para>
+# yum whatprovides "*/rpc.nfsd"
 
-<para>
-Insert the correct export directive in the /etc/exports file. For example 
-if the volume must be visible to 
-all the virtual machines of the same subnet 10.64.15.* (check the subnet with 
-the <command>ifconfig</command> command) the content of the /etc/exports file 
-should be:
+Loaded plugins: dellsysid, fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos.fastbull.org
+ * epel: mirror.23media.de
+ * extras: centos.fastbull.org
+ * updates: fr2.rpmfind.net
+1:nfs-utils-1.3.0-0.8.el7.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
+Repo        : base
+Matched from:
+Filename    : /usr/sbin/rpc.nfsd
+
+
+
+1:nfs-utils-1.3.0-0.8.el7.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
+Repo        : @base
+Matched from:
+Filename    : /usr/sbin/rpc.nfsd
+
+# yum install nfs-utils
+</screen>
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+			Insert the correct export directive in the /etc/exports file. For example 
+			if the volume must be visible to 
+			all the virtual machines of the same subnet 10.67.1.* (check the subnet with 
+			the <command>ifconfig</command> command) the content of the /etc/exports file 
+			will be:
 <screen>
-/dataNfs 10.62.15.*(async,rw,no_root_squash)
+/dataNfs 10.67.1.* (async,rw,no_root_squash)
 </screen>
-</para>
-
-<para>
-Check the firewall on the virtual machine. Ensure that the other instances
-can access to ports 111, 2049, 875 UPD and TCP.
-So considering iptables, the /etc/sysconfig/iptables file should be 
-something like this:
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+			Check the firewall on the virtual machine. Ensure that the other instances
+			have both UDP and TCP access to ports 111, 2049 and 875:</para>
+			<itemizedlist> <!-- iptables/firewalld -->
+				<listitem>
+				<para>
+				For newer distributions using <command>firewalld</command> issue the following
+				commands:
+<screen>
+firewall-cmd --add-service=nfs
+firewall-cmd --permanent --add-service=nfs
+</screen>
+				</para>
+				</listitem>
+				<listitem>
+				<para>
+				For older distributions using iptables, the /etc/sysconfig/iptables file should be 
+				something like this:
 <screen>
 *filter
 :INPUT ACCEPT [0:0]
@@ -264,49 +303,89 @@ something like this:
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
 </screen>
-</para>
-
-<para>
-Please remember to restart iptables after any change on that file:
+				</para>
+				<para>
+				Please remember to restart iptables after any change on that file:
 <screen>
 service iptables restart
 </screen>
-</para>
-
-<para>
-Check the security group (see <xref linkend="SecurityGroups"/>): 
-access to ports 111, 875 and 2049
-(IPv4 Ingress TCP and UDP) should be guaranteed: 
-<mediaobject>
-<imageobject>
-  <imagedata fileref="./images/AccessAndSecurity.jpg"/>
-</imageobject>
-</mediaobject>
-
-</para>
-
-<para>
-Restart nfs server:
+				</para>
+				</listitem>
+			</itemizedlist>  <!-- iptables/firewalld -->
+		</listitem>
+		<listitem>
+			<para>
+			Check the security group (see <xref linkend="SecurityGroups"/>): 
+			access to ports 111, 875 and 2049 (IPv4 Ingress both TCP and UDP) should be guaranteed: 
+			<mediaobject>
+			<imageobject>
+				<imagedata fileref="./images/AccessAndSecurity.jpg"/>
+			</imageobject>
+			</mediaobject>
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+			Restart nfs server using:
+<screen>
+systemctl restart nfs
+</screen>
+			or
 <screen>
 service nfs restart
 </screen>
-</para>
+			</para>
+		</listitem>
+	</orderedlist>  <!-- configure NFS server -->
+</listitem>
 
-<para>
-To mount the volume on the other VMs, check that the 
-<literal>rpcbind</literal> package is installed, and then issue a mount
-command such as this one:
+<listitem>
+	<para><literal>Configure client machine(s)</literal></para>
+	<orderedlist>  <!-- configure client -->
+		<listitem>
+			<para>
+			To mount the volume on the other VMs, check that the 
+			package providing the <command>mount.nfs</command> command is installed:
+			</para>
 <screen>
-mount -t nfs 10.62.15.4:/dataNfs /mnt
+# yum whatprovides "*/mount.nfs"
+Loaded plugins: dellsysid, fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos.fastbull.org
+ * epel: mirror.23media.de
+ * extras: centos.fastbull.org
+ * updates: fr2.rpmfind.net
+1:nfs-utils-1.3.0-0.8.el7.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
+Repo        : base
+Matched from:
+Filename    : /sbin/mount.nfs
+
+
+
+1:nfs-utils-1.3.0-0.8.el7.x86_64 : NFS utilities and supporting clients and daemons for the kernel NFS server
+Repo        : @base
+Matched from:
+Filename    : /sbin/mount.nfs
+
+# yum install nfs-utils
 </screen>
-</para>
-
-
-<note><para>
-Please note that this procedure can be used to mount a volume also on hosts
-outside the Cloud: it is just necessary to specify the IP address of these
-hosts in the /etc/exports file on the instance acting as NFS server.
-</para></note>
+		</listitem>
+		<listitem>
+			<para>
+			issue a mount command such as this one (assuming 10.67.1.4 is the NFS server):
+<screen>
+mount -t nfs 10.67.1.4:/dataNfs /mnt
+</screen>
+			</para>
+			<note><para>
+			Please note that this procedure can be used to mount a volume also on hosts
+			outside the Cloud: it is sufficient to specify the IP address of these
+			hosts in the /etc/exports file on the instance acting as NFS server.
+			</para></note>
+		</listitem>
+	</orderedlist> <!-- configure client -->
+</listitem>
+</orderedlist>
 
 </section>
 </section>
