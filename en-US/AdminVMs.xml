@@ -683,8 +683,8 @@ To resize a VM using the Horizon graphical Interface:
 
 <para>
 <itemizedlist>
-<listitem><para>Select the <menuchoice><guimenu>Instances</guimenu></menuchoice> 
-menu and the <menuchoice><guimenu>Resize Instance</guimenu></menuchoice> 
+<listitem><para>Select the <menuchoice><guimenu>Compute</guimenu><guisubmenu>Instances</guisubmenu></menuchoice> 
+menu and then <menuchoice><guimenu>Resize Instance</guimenu></menuchoice> 
 option on the actions.
 </para></listitem>
 
@@ -735,20 +735,20 @@ The status will then change to 'Active' once completed.
 <title>Snapshotting Virtual Machines</title>
 
 <para>
-It is possible to create a snapshot of a VM, and then the saved snapshot can 
-be used to start new instance(s).
+It is possible to create a new instance from a previously saved snapshot of a VM.
 </para>
 
 <para>
-The new instance can also have a flavor different (but not smaller for what 
-concern the disk size) than the source VM. It is therefore suggested to use 
-the smallest (in terms of disk) possible flavor for the source VM (for SL6.x 
-related images this is <literal>cloudareapd.xsmall</literal>).
+The new instance can also have a different flavor from the source VM (but not smaller
+disk size!). It is therefore suggested to use 
+the smallest (in terms of disk size) possible flavor for the source VM.
 </para>
+<!--  (for SL6.x related images this is <literal>cloudareapd.xsmall</literal>). -->
 
 <para>
-Before doing a snapshot, it is needed to clean the network configurations of 
-the “source” VM. For SL6.x related OS this can be done using the following instructions, once logged as root on the “source” VM:
+Before creating a snapshot you need to "clean up" the network configurations of 
+the “source” VM. For a RedHat based OS (CentOS, Fedora, ...) this can be done using 
+the following instructions, once logged as root on the “source” VM:
 </para>
 
 <screen>
@@ -757,20 +757,33 @@ the “source” VM. For SL6.x related OS this can be done using the following i
 </screen>
 
 <para>
-Before doing the snapshot (that can be done using the web-based dashboard
-selecting the <menuchoice><guimenu>Instances</guimenu></menuchoice> 
-menu and the <menuchoice><guimenu>Create Snapshot</guimenu></menuchoice> 
-option on the actions), it 
-is recommended to shut down the VM to make sure that all data is 
-flushed to disk. To perform this shutdown of the VM, please don't do it 
-through Openstack. Instead please do the shutdown within the VM (i.e. log as root to the VM and issue <command>shutdown -h now</command> or 
-<command>poweroff</command>).
+To save a snapshot of your VM:
 </para>
 
-<warning><para>
+<itemizedlist>
+<listitem>
+	<para><literal>Shutdown your VM:</literal>
+	Log in as root to your VM. Please DO NOT shutdown the VM from the Openstack dashboard
+    to make sure all data are correctly flushed on disk;
+	</para>
+</listitem>
+<listitem>
+	<para>
+    Issue the <command>shutdown -h now</command> or <command>poweroff</command> command;
+    </para>
+</listitem>
+<listitem>
+	<para>
+	From the <menuchoice><guimenu>Compute</guimenu><guisubmenu>Instances</guisubmenu></menuchoice>
+    table select the desired VM and click <menuchoice><guimenu>Create Snapshot</guimenu></menuchoice>
+    </para>
+</listitem>
+</itemizedlist>
+
+<!-- warning><para>
 In the production Cloud it is possible to save in the Image service
 only snapshots with a maximum size of 25 GB. 
-</para></warning>
+</para></warning  -->
 
 
 </section>
@@ -784,11 +797,11 @@ VMs can be deleted using the <menuchoice><guimenu>Terminate Instance</guimenu></
 option in the OpenStack dashboard.
 </para>
 
-<important><para>
-Note: This will immediately terminate the instance, delete all content of the 
+<warning><para>
+This command will immediately terminate the instance, delete all content of the 
 virtual machine and erase the ephemeral disk. This operation is not 
 recoverable.
-</para></important>
+</para></warning>
 
 </section>
 
