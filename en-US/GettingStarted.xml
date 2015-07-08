@@ -287,7 +287,7 @@ To switch between projects just open the dropdown menu
 </section>
 
 <section id="AccessingtheCloudthroughCLI">
-<title>Accessing the Cloud through the Openstack command line tools</title>
+<title>Accessing the Cloud with command line tools</title>
 <para>
 It is possible to manage the Cloud using command line tools, 
 even if most of the functionality provided by 
