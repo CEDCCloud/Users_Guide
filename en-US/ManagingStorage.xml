@@ -103,8 +103,8 @@ The new defined volume will appear in the
 <listitem><para>
 To attach this volume to an 
 existing instance, click on 
-<menuchoice><guimenu>Edit attachments</guimenu></menuchoice> and select the 
-relevant Virtual Machine.
+<menuchoice><guimenu>More</guimenu><guisubmenu>Edit attachments</guisubmenu></menuchoice> ... 
+
 
 <mediaobject>
 <imageobject>
@@ -112,12 +112,15 @@ relevant Virtual Machine.
 </imageobject>
 </mediaobject>
 
+... select the relevant Virtual Machine...
+
 <mediaobject>
 <imageobject>
   <imagedata fileref="./images/AttachVolumeToInstance1.jpg" />
 </imageobject>
 </mediaobject>
 
+...adn click on "Attach Volume".
 </para></listitem>
 
 </itemizedlist>
@@ -129,11 +132,11 @@ Log in to the instance and check if the disk has been added:
 
 <screen>
 grep vdb /proc/partitions
- 252       48   12582912 vdb
+ 253       16   12582912 vdb
 </screen>
 
 <para>
-If needed, create a file system on it (this will scratch the disk !):
+If needed, create a file system on it (this will scratch the disk!):
 </para>
 
 <screen>
@@ -145,7 +148,7 @@ Mount the volume:
 </para>
 
 <screen>
-mount /dev/sdb /mnt
+mount /dev/vdb /mnt
 </screen>
 
 
@@ -161,11 +164,11 @@ umount /mnt
 <para>
 Then, using the Dashboard, click on 
 <menuchoice><guimenu>Volumes</guimenu></menuchoice>, click on 
-<menuchoice><guimenu>Edit attachments</guimenu></menuchoice> for the relevant 
+<menuchoice><guimenu>More</guimenu><guisubmenu>Edit attachments</guisubmenu></menuchoice> for the relevant 
 volume and select <menuchoice><guimenu>Detach Volume</guimenu></menuchoice>. 
 The detached volume can then be associated to another VM, as described above 
 (you won't have to re-create the file system, otherwise you will lose the 
-content of the volume !)
+content of the volume!)
 </para>
 
 <para>
@@ -182,7 +185,7 @@ if needed, detach the volume from the associated instance
 
 <listitem><para>
 using the Dashboard, click on 
-<menuchoice><guimenu>Volumes</guimenu></menuchoice>, select the relevant 
+<menuchoice><guimenu>Compute</guimenu><guisubmenu>Volumes</guisubmenu></menuchoice>, select the relevant 
 volume and then select 
 <menuchoice><guimenu>Delete Volumes</guimenu></menuchoice>
 </para></listitem>
