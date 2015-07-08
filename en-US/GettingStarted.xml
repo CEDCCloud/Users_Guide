@@ -227,9 +227,8 @@ this section.
 If you access the cloud through username and password, and
 you want to change such password, 
 from the OpenStack dashboard click on your user's name (on the top), select 
-<menuchoice><guimenu>Settings</guimenu></menuchoice> and
-then <menuchoice><guimenu>Change Password</guimenu></menuchoice>
-from the menu on the left.
+<menuchoice><guimenu>Settings</guimenu></menuchoice> from the dropdown menu and
+then <menuchoice><guimenu>Change Password</guimenu></menuchoice>.
 
 <mediaobject>
 <imageobject>
