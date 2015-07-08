@@ -80,18 +80,12 @@ The steps to add a Volume are:
 <itemizedlist>
 <listitem><para>
 Using the Dashboard, click on 
-<menuchoice><guimenu>Volumes</guimenu></menuchoice> and then 
+<menuchoice><guimenu>Compute</guimenu><guisubmenu>Volumes</guisubmenu></menuchoice> and then 
 <menuchoice><guimenu>Create Volume</guimenu></menuchoice>. 
 In the "Create Volume” window specify the name of the volume 
 (<replaceable>testvol</replaceable> in the example below) and the desired 
 size (<replaceable>12 GB</replaceable> in the example).
 As <menuchoice><guimenu>Volume Source</guimenu></menuchoice> specify “No source, empty volume”. 
-
-<mediaobject>
-<imageobject>
-  <imagedata fileref="./images/CreateVolumeCinder.jpg" />
-</imageobject>
-</mediaobject>
 
 <mediaobject>
 <imageobject>
