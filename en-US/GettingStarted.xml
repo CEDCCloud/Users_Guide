@@ -80,11 +80,10 @@ You will need to give the keypair a name, such as
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/create_keypair.png" />
+  <imagedata condition="web" fileref="./images/create_keypair.png" />
+  <imagedata condition="pdf" fileref="./images/create_keypair.png" width="450" />
 </imageobject>
 </mediaobject>
-
-
 
 <para>
 On completion of the operation, a file <replaceable>my_key.pem</replaceable> will be downloaded to your computer.
@@ -232,7 +231,8 @@ then <menuchoice><guimenu>Change Password</guimenu></menuchoice>.
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/changepasswd_prod.png" />
+  <imagedata condition="web" fileref="./images/changepasswd_prod.png" />
+  <imagedata condition="pdf" fileref="./images/changepasswd_prod.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -278,7 +278,8 @@ To switch between projects just open the dropdown menu
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/ProjectSwitch.png" />
+  <imagedata condition="web" fileref="./images/ProjectSwitch.png" />
+  <imagedata condition="pdf" fileref="./images/ProjectSwitch.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -319,7 +320,8 @@ to download the rc file for your current project.
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/download_rc.png" />
+  <imagedata condition="web" fileref="./images/download_rc.png" />
+  <imagedata condition="pdf" fileref="./images/download_rc.png" width="450" />
 </imageobject>
 </mediaobject>
 
