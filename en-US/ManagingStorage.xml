@@ -89,7 +89,8 @@ As <menuchoice><guimenu>Volume Source</guimenu></menuchoice> specify “No sourc
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/testvolCreation.jpg" />
+  <imagedata condition="web" fileref="./images/testvolCreation.jpg" />
+  <imagedata condition="pdf" fileref="./images/testvolCreation.jpg" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -108,7 +109,8 @@ existing instance, click on
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/AttachVolumeToInstance.jpg" />
+  <imagedata condition="web" fileref="./images/AttachVolumeToInstance.jpg" />
+  <imagedata condition="pdf" fileref="./images/AttachVolumeToInstance.jpg" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -116,7 +118,8 @@ existing instance, click on
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/AttachVolumeToInstance1.jpg" />
+  <imagedata condition="web" fileref="./images/AttachVolumeToInstance1.jpg" />
+  <imagedata condition="pdf" fileref="./images/AttachVolumeToInstance1.jpg" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -316,7 +319,8 @@ service iptables restart
 			access to ports 111, 875 and 2049 (IPv4 Ingress both TCP and UDP) should be guaranteed: 
 			<mediaobject>
 			<imageobject>
-				<imagedata fileref="./images/AccessAndSecurity.jpg"/>
+  				<imagedata condition="web" fileref="./images/AccessAndSecurity.jpg" />
+  				<imagedata condition="pdf" fileref="./images/AccessAndSecurity.jpg" width="450" />
 			</imageobject>
 			</mediaobject>
 			</para>
