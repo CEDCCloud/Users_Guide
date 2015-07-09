@@ -36,7 +36,8 @@ menu. This will display a list of VMs currently running in your project.
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/instances.png" />
+  <imagedata condition="web" fileref="./images/instances.png" />
+  <imagedata condition="pdf" fileref="./images/instances.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -51,7 +52,8 @@ button. A new window appears.
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/launchinstance.png" />
+  <imagedata condition="web" fileref="./images/launchinstance.png" />
+  <imagedata condition="pdf" fileref="./images/launchinstance.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -95,7 +97,8 @@ Switch to the
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/launch-accesssec.png" />
+  <imagedata condition="web" fileref="./images/launch-accesssec.png" />
+  <imagedata condition="pdf" fileref="./images/launch-accesssec.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -137,7 +140,8 @@ Now switch to the <menuchoice><guimenu>Networking</guimenu></menuchoice> tab.
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/launch-net.png" />
+  <imagedata condition="web" fileref="./images/launch-net.png" />
+  <imagedata condition="pdf" fileref="./images/launch-net.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -183,7 +187,8 @@ There you will see various options and among them
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/instance-more.png" />
+  <imagedata condition="web" fileref="./images/instance-more.png" />
+  <imagedata condition="pdf" fileref="./images/instance-more.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -327,25 +332,29 @@ which shows the floating IP addresses allocated to instances.
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/floatingips.png" />
+  <imagedata condition="web" fileref="./images/floatingips.png" />
+  <imagedata condition="pdf" fileref="./images/floatingips.png" width="450" />
 </imageobject>
 </mediaobject>
 
 </para></listitem>
 
 <listitem><para>
+
 Click <menuchoice><guimenu>Allocate IP To Project</guimenu></menuchoice>.
-
-<mediaobject>
-<imageobject>
-  <imagedata fileref="./images/allocatefloatingip.png" />
-</imageobject>
-</mediaobject>
-
 
 </para></listitem>
 
 <listitem><para> 
+
+<mediaobject>
+<imageobject>
+  <imagedata condition="web" fileref="./images/allocatefloatingip.png" />
+  <imagedata condition="pdf" fileref="./images/allocatefloatingip.png" width="450" />
+</imageobject>
+</mediaobject>
+
+
 Choose the pool from which to pick the 
 IP address and click <menuchoice><guimenu>Allocate IP</guimenu></menuchoice>. 
 </para></listitem>
@@ -377,7 +386,8 @@ their fixed IP addresses).
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/associatefloatingip.png" />
+  <imagedata condition="web" fileref="./images/associatefloatingip.png" />
+  <imagedata condition="pdf" fileref="./images/associatefloatingip.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -403,7 +413,8 @@ To disassociate an IP address from an instance, click the
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/disassociatefloatingip.png" />
+  <imagedata condition="web" fileref="./images/disassociatefloatingip.png" />
+  <imagedata condition="pdf" fileref="./images/disassociatefloatingip.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -418,7 +429,8 @@ option.
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/releasefloatingip.png" />
+  <imagedata condition="web" fileref="./images/releasefloatingip.png" />
+  <imagedata condition="pdf" fileref="./images/releasefloatingip.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -499,7 +511,8 @@ menu of every instance found on the (<menuchoice><guimenu>Compute</guimenu><guis
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/instance-shutdown.png" />
+  <imagedata condition="web" fileref="./images/instance-shutdown.png" />
+  <imagedata condition="pdf" fileref="./images/instance-shutdown.png" width="450" />
 </imageobject>
 </mediaobject>
 
