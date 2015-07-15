@@ -75,6 +75,10 @@ in the Dashboard. However this is not yet operational.
 <section id="ApplyUsingAAI">                                                   
 <title> Apply for an account using INFN-AAI</title>
 
+<para>Coming soon.</para>
+
+<!-- 
+
 <para>
 If you already have an account on the INFN Authenticaton and Authorization     
 Infrastructure (INFN AAI) and therefore you have access to the INFN portal,
@@ -193,11 +197,17 @@ can start using the CEDC Cloud) or if for some reason
 your request is refused.
 </para>
 
+-->
+
 </section>
 
 
 <section id="ApplyUsingUserPasswd">  
 <title> Apply for an account using User and Password</title>
+
+<para>Coming soon.</para>
+
+<!--
 
 <para>
 If and only if you don't have an account on the INFN Authenticaton and
@@ -322,7 +332,7 @@ can start using the CEDC Cloud) or if for some reason
 your request is refused.
 </para>
 
-
+-->
 
 </section>
 
@@ -336,6 +346,11 @@ After you have been given an account on the CEDC Cloud, at any
 time you can ask the creation of a new project or the membership to
 an already existing project.
 </para>
+
+<para>For the time being mail your request to <email>cedc-support@lists.pd.infn.it</email> 
+to request access for other projects.</para>
+
+<!-- 
 
 <para>
 This can be done using the OpenStack dashboard clicking on 
@@ -356,10 +371,16 @@ Using this window you can then ask the creation of a new project or the
 affiliation to already existing projects.
 </para>
 
+-->
+
 </section>
 
 <section id="ManageProjectMembershipRequests">
 <title>Manage project membership requests (only for project managers)</title>
+
+<para>To Be Done.</para>
+
+<!-- 
 
 <para>
 If you are the manager of a project, you will receive membership requests
@@ -414,6 +435,8 @@ the request.
 Otherwise, to reject the request, click on the 
 <menuchoice><guimenu>Reject</guimenu></menuchoice> button.
 </para>
+
+-->
 
 </section>
 
