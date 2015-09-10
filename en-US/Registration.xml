@@ -28,18 +28,15 @@ the Horizon Openstack web service interface.
 Go to 
 <ulink url="https://cloud.cedc.csia.unipd.it/dashboard">https://cloud.cedc.csia.unipd.it/dashboard</ulink> in a browser. 
 The following page should appear:       
+</para>
     
+<para>
 <mediaobject>
 <imageobject>
   <imagedata fileref="./images/dashboard_prod.png" />
 </imageobject>
 </mediaobject>
-
-
-
-
 </para>
-
 
 <para>                                                                             
 
@@ -47,8 +44,7 @@ The following page should appear:
 
 <listitem><para>
 If you already have an account on the INFN Authenticaton and 
-Authorization         
-Infrastructure (INFN AAI) and therefore you have access to the INFN portal, 
+Authorization Infrastructure (INFN AAI) and therefore you have access to the INFN portal, 
 proceed with <xref linkend="ApplyUsingAAI"/>. 
 </para></listitem>
 
