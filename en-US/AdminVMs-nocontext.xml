@@ -239,7 +239,7 @@ go through a gate machine. For this purpose you can rely
 on the existing gate hosts in Padova and Legnaro. 
 If you don't have an account on one of such gate hosts, you can use 
 a Cloud specific gate host (<literal>cld-gate.pd.infn.it</literal> and 
-<literal>cld-blu-gate.pd.infn.it</literal>): contact 
+<literal>cld-blu-gate.cedc.csia.unipd.it</literal>): contact 
 <email>cedc-support@lists.pd.infn.it</email> if you need an account on these machines.
 </para>
 
