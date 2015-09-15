@@ -120,7 +120,7 @@ You can also specify the admin (usually root) password of the instance.
 <warning><para>
 Please note that setting the admin password is not guaranteed to 
 always work (the image can't 
-support the “injection” of this password). It is therefore suggested to use 
+support the “injection” of this password). It is therefore strongly suggested to use 
 the ssh-key mechanisms.
 </para></warning>
 
