@@ -45,12 +45,18 @@ The following page should appear:
 <listitem><para>
 If you already have an account on the INFN Authenticaton and 
 Authorization Infrastructure (INFN AAI) and therefore you have access to the INFN portal, 
-proceed with <xref linkend="ApplyUsingAAI"/>. 
+click on the INFN AAI logo and proceed with <xref linkend="Enrollment"/>. 
+</para></listitem>
+
+<listitem><para>
+If you instead have an account on the UniPD Single Sign-On (oSO)
+Infrastructure (e.g. you have a username @unipd.it or @studenti.unipd.it), 
+click on the UniPD logo and proceed with <xref linkend="Enrollment"/>. 
 </para></listitem>
 
 <listitem><para> 
-If and only if you don't have an account on the INFN Authenticaton and
-Authorization Infrastructure (INFN AAI), proceed with 
+If and only if you don't have neither an account on the INFN Authenticaton and
+Authorization Infrastructure (INFN AAI) nor on the UniPD SSO, proceed with 
 <xref linkend="ApplyUsingUserPasswd"/>.
 </para></listitem>
 
@@ -68,29 +74,21 @@ in the Dashboard. However this is not yet operational.
 
 
 
-<section id="ApplyUsingAAI">                                                   
-<title> Apply for an account using INFN-AAI</title>
+<section>                                                   
+<title id="Enrollment">Enrollment procedure through INFN AAI or UniPD SSO</title>
 
-<para>Coming soon.</para>
-
-<!-- 
 
 <para>
-If you already have an account on the INFN Authenticaton and Authorization     
-Infrastructure (INFN AAI) and therefore you have access to the INFN portal,
-from the OpenStack dashboard click on the icon on the left (INFN AAI).
+Once authenticated a form like the one in the following picture should appear.
 </para>
 
 <para>
-Once logged, click on the <menuchoice><guimenu>Register</guimenu></menuchoice> 
-button. A form such as the one in the following picture should appear.
-
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/RegisterFormAAI.png" />
+  <imagedata condition="web" fileref="./images/RegisterFormAAI.png" />
+  <imagedata condition="pdf" fileref="./images/RegisterFormAAI.png" scale="50" />
 </imageobject>
 </mediaobject>
-
 </para>
 
 <para>
@@ -103,12 +101,11 @@ your phone number, the name of a contact person in Padova/Legnaro
 <para>
 For what concerns the <menuchoice><guimenu>Project Action</guimenu></menuchoice>
 (projects have been discussed in <xref linkend="Projects"/>) you 
-have three options:
+have two options:
 
 <itemizedlist>
 <listitem><para>Select Existing Projects</para></listitem>
 <listitem><para>Create new project</para></listitem>
-<listitem><para>Use guest project</para></listitem>
 </itemizedlist>
 
 </para>
@@ -147,21 +144,16 @@ project should be done by the relevant experiment/group leader.
 </para></note>
 
 <para>
-Select <literal>Use guest project</literal> if you want to apply membership
-for the guest project, i.e. the project with 
-a small quota used to test the Cloud infrastructure.
-</para>
-
-
-<para>
 When you have filled the form, click on the 
 <menuchoice><guimenu>Read the AUP</guimenu></menuchoice> button. The following
 window will appear.
+</para>
 
-
+<para>
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/ReadAUP.jpg" />
+  <imagedata condition="web" fileref="./images/ReadAUP.jpg" />
+  <imagedata condition="pdf" fileref="./images/ReadAUP.jpg" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -193,6 +185,7 @@ can start using the CEDC Cloud) or if for some reason
 your request is refused.
 </para>
 
+<!-- 
 -->
 
 </section>
