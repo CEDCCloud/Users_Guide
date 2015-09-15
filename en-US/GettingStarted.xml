@@ -87,12 +87,19 @@ You will need to give the keypair a name, such as
 
 <para>
 On completion of the operation, a file <replaceable>my_key.pem</replaceable> will be downloaded to your computer.
- This should be stored in a safe location. 
-To keep it private, run:
+</para>
+
+<warning><para>
+Be careful not to lose the file you just downloaded since there is no easy way to download it again.
+</para></warning>
+
+<para>
+This file should be stored in a safe location.  To keep it private, run:
 <command>
 chmod 600 <replaceable>my_key.pem</replaceable>
 </command>
 </para>
+
 </section>
 
 
