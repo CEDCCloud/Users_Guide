@@ -43,24 +43,21 @@ memory, storage, etc.
 
 <para>                                                                             
 A project can have a single user as member (personal project) but the typical use  
-case are shared projects, with multiple users as members, which can map to experiments,                                                                              
-organizations, research groups, etc.                                               
+case are shared projects, with multiple users as members, which can map to experiments,                                                          organizations, research groups, etc.                                               
 A user can be on multiple projects at the same time and switch between them.       
 </para>
 
 
-<para>                                                                             
+<para>
 In the CEDC Cloud projects usually map to experiments or other research 
-groups                                                                              
-who "own" resources in the cloud service.                                          
-Each project has a manager (usually the team leader), who is responsible to manage
+groups. Among the project's users there is a team leader who is responsible to manage
 (accepting or refusing) membership requests for the project.                       
 </para>
 
-<para>                                                                             
+<!-- para>                                                                             
 A special shared project, called <literal>guest</literal> is used for all other    
 users: it has a small quota to allow testing the Cloud infrastructure.             
-</para>
+</para -->
 
 <warning><para>                                                                
 <literal>Personal private</literal> projects are instead discouraged and are created only for 
@@ -108,7 +105,7 @@ If this is the case please contact
 
 <listitem><para><literal>UNIPD users:</literal></para>
 <para>
-VM may be accessed from a gate (<literal>cld-blu-gate.pd.infn.it</literal>): please contact
+VM may be accessed from a gate (<literal>cld-blu-gate.cedc.csia.unipd.it</literal>): please contact
 <email>cedc-support@lists.pd.infn.it</email> if you need an account on such
 machine.
 </para>
