@@ -12,6 +12,7 @@
 	<!--xi:include href="AdminVMs.xml" xmlns:xi="http://www.w3.org/2001/XInclude" /-->
 	<xi:include href="AdminVMs-nocontext.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="ManagingStorage.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="MicroPrimers.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<!--xi:include href="ManagingImages.xml" xmlns:xi="http://www.w3.org/2001/XInclude" /-->
 
 	<!--xi:include href="Revision_History.xml" xmlns:xi="http://www.w3.org/2001/XInclude" /-->

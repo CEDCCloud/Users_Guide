@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Users_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="MicroHOWTO">
+<title>Linux Micro Primers</title>
+
+<section>
+<title>Some basics on Linux administration</title>
+
+<para>
+<blockquote>
+<attribution>William Lamb, 2nd Viscount Melbourne</attribution>
+<para>The possession of great power necessarily implies great responsibility.</para>
+</blockquote>
+</para>
+
+<para>
+The <literal>CEDC Cloud</literal> provides an infrastructure where your virtual machines can live.
+After you have activated your virtual machine(s) you are on your own for the most part of the day to day 
+administration tasks.
+</para>
+
+<warning><para>
+We will only focus on Linux VMs, showing differences between the RedHat (CentOS, Fedora, ... ) and Debian (Ubuntu, Mint, ... ) distributions.
+</para>
+<para>
+Througout this chapter we will address the former with RH and the latter with DEB.
+</para>
+</warning>
+
+<para>
+Some of these tasks might be:
+<itemizedlist>
+<listitem><para>Use your VM as root only when needed;</para></listitem>
+<listitem><para>Installing/deinstalling software;</para></listitem>
+<listitem><para>Adding another user to your VM;</para></listitem>
+<listitem><para>Formatting the volume you just attached to your VM;</para></listitem>
+<listitem><para>Automatically remount the volume on next reboot.</para></listitem>
+</itemizedlist>
+In this chapter we provide some very small introductory instructions on performing such tasks.
+</para>
+</section>
+
+<section id="sudo"><title>Setting up 'sudo'</title>
+<para>
+Nobody (not even administrators) use a Unix/Linux system <literal>always</literal> as root.
+</para>
+<para>If you do you should stop immediately (no jokes!).</para>
+<para>
+Normally you have your user with limited privileges and, when needed, you use <literal>su</literal> (which stands for 'switch user') to become root,
+perform the privileged task and then you go back to the normal user.
+</para>
+<para>
+A more flexible approach is using <literal>sudo</literal> (Super User DO) to perform the 'one shot' task or to allow certain users to perform only
+some tasks as the superuser. The configuration of sudo is performed by modifying the <literal>/etc/sudoers</literal> file or (better) by adding a
+file in the <literal>/etc/sudoers.d</literal> directory.
+</para>
+<para>
+Follow these instructions to allow the user <literal>paolo</literal> (change this to your username) to perform any command as the superuser
+providing his own password, or to modify your user privileges (in this case there is already a file with your username in the <literal>/etc/sudoers.d</literal> directory):
+<itemizedlist>
+   <listitem><para>Become the <literal>root</literal> user:
+      <itemizedlist>
+         <listitem><para>RH: using <command>su</command> and providing the root password</para></listitem>
+         <listitem><para>DEB: using <command>sudo su -</command> and providing your password</para></listitem>
+      </itemizedlist>
+      </para>
+   </listitem>
+   <listitem><para>Create the file <literal>/etc/sudoers.d/paolo</literal> using your preferred editor;</para></listitem>
+   <listitem><para>Add this line inside the file:
+      <screen>
+      paolo            ALL = (ALL) ALL 
+      </screen>
+      </para>
+      <para>If you want the user to do everything without even providing the password put this line instead:
+      <screen>
+      paolo            ALL = NOPASSWD: ALL
+      </screen>
+      </para>
+   </listitem>
+   <listitem><para>change the file permissions: <command>chmod 0440 /etc/sudoers.d/paolo</command></para></listitem>
+</itemizedlist>
+</para>
+<para>
+Now when paolo logs in to the VM he is allowed to perform superuser tasks by prefixing the command with <command>sudo</command>.
+</para>
+<para>
+If you want to limit the user to perform only certain commands (or classes of commands, e.g. installing/deinstalling software) you can look at
+the sudo documentation on your VM using <screen>man sudoers</screen>
+</para>
+</section>
+<section id="ManagingSoftware"><title>Managing software through the package manager</title>
+<para>
+RedHat and Debian based linux distributions both have their software management system. On RH each software is packaged in <literal>rpm</literal>
+form (RPM stands for RedHat Package Manager) while DEB uses <literal>deb</literal> packages. 
+</para>
+
+</section>
+
+</chapter>
