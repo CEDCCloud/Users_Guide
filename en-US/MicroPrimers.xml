@@ -91,11 +91,159 @@ If you want to limit the user to perform only certain commands (or classes of co
 the sudo documentation on your VM using <screen>man sudoers</screen>
 </para>
 </section>
+
 <section id="ManagingSoftware"><title>Managing software through the package manager</title>
 <para>
 RedHat and Debian based linux distributions both have their software management system. On RH each software is packaged in <literal>rpm</literal>
 form (RPM stands for RedHat Package Manager) while DEB uses <literal>deb</literal> packages. 
 </para>
+<para>Package contents are not only copied on the VM when installed, but are also listed on a database that can be queried to search for new software,
+to find out which package installed which files and so on. (Note: there is no such functionality on Windows servers...).</para>
+
+<para>Rather than manipulating the packages directly whith the <command>rpm</command> (RH) or <command>dpkg</command> (DEB) commands, you will
+mostly use a command line package manager such as <command>yum</command> or <command>apt</command>.</para>
+<para>We will now try to install the <literal>wget</literal> package on a RH and a DEB system.</para>
+
+<section id="YUM"><title>Managing software on RH distributions</title>
+<para>Let's try to install the wget software on CentOS or Fedora linux.</para>
+<para>We will use <command>yum</command> (<command>dnf</command> on Fedora 21) and <command>rpm</command> for the task.</para>
+<para>Since we will be performing operations as the superuser, if you haven't already, please set up sudo as explained in <xref linkend="sudo"/></para>
+<para>
+   <orderedlist>
+      <listitem>
+         <para>Query the system to search for wget (no need to be root for that):</para>
+         <screen>
+[paolo@maz03 ~]$ yum search wget
+Loaded plugins: fastestmirror
+Trying other mirror.
+base                                                     | 3.6 kB     00:00     
+extras                                                   | 3.4 kB     00:00     
+updates                                                  | 3.4 kB     00:00     
+(1/4): base/7/x86_64/group_gz                              | 154 kB   00:00     
+(2/4): extras/7/x86_64/primary_db                          |  87 kB   00:00     
+(3/4): updates/7/x86_64/primary_db                         | 3.9 MB   00:00     
+(4/4): base/7/x86_64/primary_db                            | 5.1 MB   00:01     
+Determining fastest mirrors
+ * base: mi.mirror.garr.it
+ * extras: mi.mirror.garr.it
+ * updates: mi.mirror.garr.it
+============================== N/S matched: wget ===============================
+wget.x86_64 : A utility for retrieving files using the HTTP or FTP protocols
+
+  Name and summary matches only, use "search all" for everything.
+         </screen>
+         </listitem>
+      <listitem>
+         <para>Install the wget package (note that we are using <literal>sudo</literal> here):</para>
+         <screen>
+[paolo@maz03 ~]$ sudo yum install wget
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mi.mirror.garr.it
+ * extras: mi.mirror.garr.it
+ * updates: mi.mirror.garr.it
+Resolving Dependencies
+--> Running transaction check
+---> Package wget.x86_64 0:1.14-10.el7_0.1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package        Arch             Version                   Repository      Size
+================================================================================
+Installing:
+ wget           x86_64           1.14-10.el7_0.1           base           545 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 545 k
+Installed size: 2.0 M
+Is this ok [y/d/N]: y
+Downloading packages:
+wget-1.14-10.el7_0.1.x86_64.rpm                            | 545 kB   00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : wget-1.14-10.el7_0.1.x86_64                                  1/1 
+  Verifying  : wget-1.14-10.el7_0.1.x86_64                                  1/1 
+
+Installed:
+  wget.x86_64 0:1.14-10.el7_0.1                                                 
+
+Complete!
+         </screen>
+         </listitem>
+      <listitem>
+         <para>Query the rpm database to see what has been installed:</para>
+         <screen>
+[paolo@maz03 ~]$ rpm -ql wget
+/etc/wgetrc
+/usr/bin/wget
+/usr/share/doc/wget-1.14
+/usr/share/doc/wget-1.14/AUTHORS
+/usr/share/doc/wget-1.14/COPYING
+/usr/share/doc/wget-1.14/MAILING-LIST
+/usr/share/doc/wget-1.14/NEWS
+/usr/share/doc/wget-1.14/README
+/usr/share/doc/wget-1.14/sample.wgetrc
+/usr/share/info/wget.info.gz
+/usr/share/locale/be/LC_MESSAGES/wget.mo
+.....
+.....
+/usr/share/locale/sv/LC_MESSAGES/wget.mo
+/usr/share/locale/tr/LC_MESSAGES/wget.mo
+/usr/share/locale/uk/LC_MESSAGES/wget.mo
+/usr/share/locale/vi/LC_MESSAGES/wget.mo
+/usr/share/locale/zh_CN/LC_MESSAGES/wget.mo
+/usr/share/locale/zh_TW/LC_MESSAGES/wget.mo
+/usr/share/man/man1/wget.1.gz
+         </screen>
+         </listitem>
+      <listitem>
+         <para>Remove the package (root needed!):</para>
+         <screen>
+[paolo@maz03 ~]$ sudo yum remove wget
+Loaded plugins: fastestmirror
+Resolving Dependencies
+--> Running transaction check
+---> Package wget.x86_64 0:1.14-10.el7_0.1 will be erased
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package       Arch            Version                     Repository      Size
+================================================================================
+Removing:
+ wget          x86_64          1.14-10.el7_0.1             @base          2.0 M
+
+Transaction Summary
+================================================================================
+Remove  1 Package
+
+Installed size: 2.0 M
+Is this ok [y/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Erasing    : wget-1.14-10.el7_0.1.x86_64                                  1/1 
+  Verifying  : wget-1.14-10.el7_0.1.x86_64                                  1/1 
+
+Removed:
+  wget.x86_64 0:1.14-10.el7_0.1                                                 
+
+Complete!
+         </screen>
+         </listitem>
+   </orderedlist>
+</para>
+</section>
 
 </section>
 
