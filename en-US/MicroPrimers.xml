@@ -107,7 +107,7 @@ mostly use a command line package manager such as <command>yum</command> or <com
 <section id="YUM"><title>Managing software on RH distributions</title>
 <para>Let's try to install the wget software on CentOS or Fedora linux.</para>
 <para>We will use <command>yum</command> (<command>dnf</command> on Fedora 21) and <command>rpm</command> for the task.</para>
-<para>Since we will be performing operations as the superuser, if you haven't already, please set up sudo as explained in <xref linkend="sudo"/></para>
+<para>Since we will be performing operations as the superuser, if you haven't already, please <link linkend="sudo">set up sudo</link> first.</para>
 <para>
    <orderedlist>
       <listitem>
@@ -248,7 +248,7 @@ Complete!
 <section id="DEB"><title>Managing software on DEB distributions</title>
 <para>Let's try to install the wget software on Debian or Ubuntu linux.</para>
 <para>We will use <command>apt</command> and <command>dpkg</command> for the task.</para>
-<para>Since we will be performing operations as the superuser, if you haven't already, please set up sudo as explained in <xref linkend="sudo"/></para>
+<para>Since we will be performing operations as the superuser, if you haven't already, please <link linkend="sudo">set up sudo</link> first.</para>
 <para>
    <orderedlist>
       <listitem>
@@ -343,7 +343,7 @@ ubuntu@maz03:~$ dpkg -L wget
          </listitem>
       <listitem>
          <para>Remove the wget software from the system (keep config files).</para>
-         <para>Note: you can alternatively 'purge' the software completely as described in step <xref linkend="purge"/>.</para>
+         <para>Note: you can alternatively 'purge' the software completely as described in the <link linkend="purge">'purge'</link> section.</para>
          <screen>
 ubuntu@maz03:~$ sudo apt-get remove wget
 sudo: unable to resolve host maz03
@@ -390,7 +390,77 @@ Purging configuration files for wget (1.15-1ubuntu1.14.04.1) ...
    </orderedlist>
 </para>
 </section>
-
 </section>
 
+<section><title>Adding a user to your VM</title>
+<para>You may have the need to give access to your VM another user. Given that 
+there are no graphical tools or fancy icons to do the task you are going to user 
+some command line tools.
+</para>
+<para>We are going to add the user 'pemazzon' (Paolo E. Mazzon) to your system.</para>
+<orderedlist>
+      <listitem>
+         <screen>
+$ sudo useradd -m -c 'Paolo E. Mazzon' pemazzon
+         </screen>
+         <para>The meaning of parameters is:
+            <itemizedlist>
+               <listitem><para><literal>-m</literal> = create a 'home directory' for the user under /home</para></listitem>
+               <listitem><para><literal>-c</literal> = set this as a description of the user</para></listitem>
+            </itemizedlist>
+         </para>
+         </listitem>
+      <listitem>
+         <warning>
+            <para>It may be necessary to enable password authentications through ssh.
+                  Check the file <literal>/etc/ssh/sshd_config</literal> and be sure that you have</para>
+                  <para><literal>ChallengeResponseAuthentication yes</literal></para><para> inside. If you
+                  modified that file restart the ssh service using</para>
+                  <para>DEB systems: <literal>sudo restart ssh</literal></para><para>or</para>
+                  <para>RH systems: <literal>sudo systemctl restart sshd</literal></para>
+         </warning>
+         </listitem>
+      <listitem>
+          <para>Set a password for the user:</para>
+              <screen>
+$ sudo passwd pemazzon
+
+... enter twice times the
+    password you want to
+    set for the user ...
+              </screen>
+            </listitem>
+      <listitem>
+         <para>Alternatively, if you need to repeatedly change/generate passwords, you 
+         can use a tool called <literal>mkpasswd</literal> provided with the 'expect' software. Install the expect 
+         package using</para>
+
+         <para>RH systems: <literal>sudo yum install expect</literal></para>
+         <para>or</para>
+         <para>DEB systems: <literal>sudo apt-get install expect</literal></para>
+
+         <para>Now use mkpasswd to generate a random, 8 character password:
+             <screen>
+$ sudo mkpasswd -s 0 pemazzon
+
+... a random eight chars password 
+    with 0 special characters (-s 0)
+    will be created for the user and
+    echoed on the screen. 
+    Note it somewhere ...
+             </screen>
+         </para>
+         </listitem>
+      <listitem>
+         <para>Force the user to change his password on first logon:
+         <screen>
+$ sudo chage -d 0 pemazzon
+         </screen>
+         </para>
+         </listitem>
+      <listitem>
+         <para>Mail the user the password you have set or generated.</para>
+         </listitem>
+</orderedlist>
+</section>
 </chapter>
