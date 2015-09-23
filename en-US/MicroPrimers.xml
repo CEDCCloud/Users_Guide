@@ -393,7 +393,7 @@ Purging configuration files for wget (1.15-1ubuntu1.14.04.1) ...
 </section>
 
 <section><title>Adding a user to your VM</title>
-<para>You may have the need to give access to your VM another user. Given that 
+<para>You may need to give access to your VM to another user. Given that 
 there are no graphical tools or fancy icons to do the task you are going to user 
 some command line tools.
 </para>
@@ -421,7 +421,8 @@ $ sudo useradd -m -c 'Paolo E. Mazzon' pemazzon
          </warning>
          </listitem>
       <listitem>
-          <para>Set a password for the user:</para>
+          <para>Set a password for the user: you will decide a password that will be valid just
+                for the first login. You will force the user to change it immediately.</para>
               <screen>
 $ sudo passwd pemazzon
 
@@ -431,27 +432,6 @@ $ sudo passwd pemazzon
               </screen>
             </listitem>
       <listitem>
-         <para>Alternatively, if you need to repeatedly change/generate passwords, you 
-         can use a tool called <literal>mkpasswd</literal> provided with the 'expect' software. Install the expect 
-         package using</para>
-
-         <para>RH systems: <literal>sudo yum install expect</literal></para>
-         <para>or</para>
-         <para>DEB systems: <literal>sudo apt-get install expect</literal></para>
-
-         <para>Now use mkpasswd to generate a random, 8 character password:
-             <screen>
-$ sudo mkpasswd -s 0 pemazzon
-
-... a random eight chars password 
-    with 0 special characters (-s 0)
-    will be created for the user and
-    echoed on the screen. 
-    Note it somewhere ...
-             </screen>
-         </para>
-         </listitem>
-      <listitem>
          <para>Force the user to change his password on first logon:
          <screen>
 $ sudo chage -d 0 pemazzon
@@ -459,7 +439,7 @@ $ sudo chage -d 0 pemazzon
          </para>
          </listitem>
       <listitem>
-         <para>Mail the user the password you have set or generated.</para>
+         <para>Mail the user the password you have set.</para>
          </listitem>
 </orderedlist>
 </section>
