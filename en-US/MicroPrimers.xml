@@ -31,7 +31,7 @@ Througout this chapter we will address the former with RH and the latter with DE
 </warning>
 
 <para>
-Some of these tasks might be:
+Some of these everyday tasks might be:
 <itemizedlist>
 <listitem><para>Use your VM as root only when needed;</para></listitem>
 <listitem><para>Installing/deinstalling software;</para></listitem>
@@ -443,4 +443,156 @@ $ sudo chage -d 0 pemazzon
          </listitem>
 </orderedlist>
 </section>
+
+<section><title>Formatting/resizing a volume you just attached</title>
+<para>We already show on <xref linkend='CreateFS'/> how to start 
+using a volume you have attached to your VM.
+We will give you here some more details.</para>
+<para>If you just created an empty volume you first need to create a filesystem on it before you can put some
+data inside. The volume you just attached is merely 'raw space' and has no concept about files and directories.</para>
+<para>You may also think about partitioning your volume, e.g. to split volume
+space in 'slices', as you may have done installing linux.</para>
+<para>Given that in the CEDC Cloud you can add as many volumes you want (up to your volume quota, of course)
+partitioning a volume is simply <literal>not recommended</literal>.</para>
+<para>Suppose now that you have filled the volume space. You have the option to resize it from the cloud dashboard but
+the result may not be the one you expect until you do some operations from inside your VM.</para>
+<para>We are going to resize the volume 'test' from 2 to 4 GB and use the newly available space on a VM.</para>
+<para>We will create the volume from scratch. Obviously you can jump to step <xref linkend='ResizeVolume'/> if you are resizing an
+existing volume.</para>
+<para>
+<orderedlist>
+   <listitem>
+      <para>Create a 2 GB volume named 'test' and attach it to one of your VM as described in <xref linkend='Volumes'/></para>
+      </listitem>
+   <listitem>
+      <para>Create a filesystem and mount it as described in <xref linkend='CreateFS'/></para>
+      </listitem>
+   <listitem>
+      <para>Check the available space is 2 GB and the filesystem is filling up the partition
+         <screen>
+ubuntu@maz03:~$ sudo fdisk -l /dev/vdb
+
+Disk /dev/vdb: 2154 MB, 2154823680 bytes
+15 heads, 30 sectors/track, 9352 cylinders, total 4208640 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/vdb doesn't contain a valid partition table
+
+ubuntu@maz03:~$ df -k /mnt
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/vdb         2005688  3096   1880992   1% /mnt
+         </screen>
+      </para>
+      </listitem>
+</orderedlist>
+</para>
+<para id='ResizeVolume'>Let's resize the volume</para>
+<orderedlist>
+   <listitem>
+      <para>Umount it first from the VM (if mounted):
+      <screen>
+ubuntu@maz03:~$ sudo umount /dev/vdb
+      </screen>
+      </para>
+      </listitem>
+   <listitem>
+      <para>Detach it from the VM using the dashboard: use "Edit Attachments" and confirm your request.
+      <mediaobject>
+      <imageobject>
+        <imagedata condition="web" fileref="./images/detach_test.png" />
+        <imagedata condition="pdf" fileref="./images/detach_test.png" width="450" />
+      </imageobject>
+      </mediaobject>
+      </para>
+      </listitem>
+   <listitem>
+      <para>When the volume is detached the "Extend Volume" option will be available. Select it...
+      <mediaobject>
+      <imageobject>
+        <imagedata condition="web" fileref="./images/resize_test.png" />
+        <imagedata condition="pdf" fileref="./images/resize_test.png" width="450" />
+      </imageobject>
+      </mediaobject>
+      </para>
+      </listitem>
+   <listitem>
+      <para>... and grow the volume to, say, 4GB:
+      <mediaobject>
+      <imageobject>
+        <imagedata condition="web" fileref="./images/resize_to_4GB_test.png" />
+        <imagedata condition="pdf" fileref="./images/resize_to_4GB_test.png" width="450" />
+      </imageobject>
+      </mediaobject>
+      </para>
+      </listitem>
+   <listitem>
+      <para>Now attach again the volume to the VM and let's check, from inside the VM, what's happening:
+      <screen>
+ubuntu@maz03:~$ sudo mount /dev/vdb /mnt
+ubuntu@maz03:~$ sudo fdisk -l /dev/vdb
+
+Disk /dev/vdb: 4309 MB, 4309647360 bytes
+16 heads, 63 sectors/track, 8350 cylinders, total 8417280 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/vdb doesn't contain a valid partition table
+      </screen>
+      The disk size is now 4309 MB, so the system recognize the fact that the volume have grown.
+      </para>
+      <para>
+      Let's check the available space:
+      <screen>
+ubuntu@maz03:~$ df -k /mnt
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/vdb         2005688  3096   1880992   1% /mnt
+      </screen>
+      we see here that it is <literal>still 2 GB!</literal>. This is due to the fact that the filesystem
+      has not been touched by the resize operation: the volume service of the cloud has no knowledge of
+      what's inside your volume.</para>
+      <para>To use the new space we need to resize the filesystem, obviously from inside the VM, to let it
+      span all the volume:
+      <screen>
+ubuntu@maz03:~$ sudo umount /mnt
+ubuntu@maz03:~$ sudo resize2fs /dev/vdb
+resize2fs 1.42.9 (4-Feb-2014)
+old_desc_blocks = 1, new_desc_blocks = 1
+The filesystem on /dev/vdb is now 1052160 blocks long.
+
+ubuntu@maz03:~$ sudo mount /dev/vdb /mnt
+ubuntu@maz03:~$ df -k /mnt
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/vdb         4078888  4120   3873956   1% /mnt
+      </screen>
+      You can now see you have all the 4 GB available.
+      </para>
+      </listitem>
+</orderedlist>
+</section>
+<section><title>Automatically remount volumes on reboot</title>
+<para>Connecting a volume to your VM using the 'mount' command is a one-shot solution. If you need to reboot your VM
+for some reason you will have to re-issue the command again.</para>
+<para>Forget to do so might cause the following:
+<orderedlist>
+      <listitem>
+      <para>You write data under the /mnt directory (or wherever you mount your volume) thinking you are writing on your volume with, say, 1 TB of space;</para>
+      </listitem>
+      <listitem>
+      <para>You write instead on the same space where your operating system live;</para>
+      </listitem>
+      <listitem>
+      <para>You eventually fill up your filesystem and your VM crash;</para>
+      </listitem>
+      <listitem>
+      <para>Your VM might not boot anymore and you have to call for help.</para>
+      </listitem>
+</orderedlist>
+</para>
+</section>
+
 </chapter>

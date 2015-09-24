@@ -123,13 +123,13 @@ existing instance, click on
 </imageobject>
 </mediaobject>
 
-...adn click on "Attach Volume".
+...and click on "Attach Volume".
 </para></listitem>
 
 </itemizedlist>
 </para>
 
-<para>
+<para id="CreateFS">
 Log in to the instance and check if the disk has been added:
 </para>
 
