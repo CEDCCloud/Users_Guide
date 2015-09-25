@@ -204,7 +204,7 @@ Complete!
          </screen>
          </listitem>
       <listitem>
-         <para>Remove the package (root needed!):</para>
+         <para>You now decide you don't need wget anymore. Remove the package (root needed!):</para>
          <screen>
 [paolo@maz03 ~]$ sudo yum remove wget
 Loaded plugins: fastestmirror
@@ -342,7 +342,7 @@ ubuntu@maz03:~$ dpkg -L wget
          </screen>
          </listitem>
       <listitem>
-         <para>Remove the wget software from the system (keep config files).</para>
+         <para>You now decide you don't need wget anymore. Remove the wget software from the system (keep config files).</para>
          <para>Note: you can alternatively 'purge' the software completely as described in the <link linkend="purge">'purge'</link> section.</para>
          <screen>
 ubuntu@maz03:~$ sudo apt-get remove wget
