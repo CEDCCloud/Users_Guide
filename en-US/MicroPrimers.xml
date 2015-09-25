@@ -4,10 +4,10 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="MicroHOWTO">
-<title>Linux Micro Primers</title>
+<title>Some basics on Linux administration</title>
 
 <section>
-<title>Some basics on Linux administration</title>
+<title>Introduction</title>
 
 <para>
 <blockquote>
@@ -26,7 +26,7 @@ administration tasks.
 We will only focus on Linux VMs, showing differences between the RedHat (CentOS, Fedora, ... ) and Debian (Ubuntu, Mint, ... ) distributions.
 </para>
 <para>
-Througout this chapter we will address the former with RH and the latter with DEB.
+Throughout this chapter we will address the former with RH and the latter with DEB.
 </para>
 </warning>
 
@@ -39,7 +39,7 @@ Some of these everyday tasks might be:
 <listitem><para>Formatting the volume you just attached to your VM;</para></listitem>
 <listitem><para>Automatically remount the volume on next reboot.</para></listitem>
 </itemizedlist>
-In this chapter we provide some very small introductory instructions on performing such tasks.
+In the following sections we provide some very small introductory instructions on performing such tasks.
 </para>
 </section>
 
@@ -346,7 +346,6 @@ ubuntu@maz03:~$ dpkg -L wget
          <para>Note: you can alternatively 'purge' the software completely as described in the <link linkend="purge">'purge'</link> section.</para>
          <screen>
 ubuntu@maz03:~$ sudo apt-get remove wget
-sudo: unable to resolve host maz03
 Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
@@ -373,7 +372,6 @@ ubuntu@maz03:~$ dpkg -L wget
          <para>Completely remove (purge) all the files installed by wget:</para>
          <screen>
 ubuntu@maz03:~$ sudo apt-get purge wget
-sudo: unable to resolve host maz03
 Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
@@ -574,25 +572,92 @@ Filesystem     1K-blocks  Used Available Use% Mounted on
       </listitem>
 </orderedlist>
 </section>
+
 <section><title>Automatically remount volumes on reboot</title>
 <para>Connecting a volume to your VM using the 'mount' command is a one-shot solution. If you need to reboot your VM
 for some reason you will have to re-issue the command again.</para>
 <para>Forget to do so might cause the following:
 <orderedlist>
       <listitem>
-      <para>You write data under the /mnt directory (or wherever you mount your volume) thinking you are writing on your volume with, say, 1 TB of space;</para>
-      </listitem>
+         <para>You write data under the /mnt directory (or wherever you mount your volume) thinking you are writing on your volume with, say, 1 TB of space;</para>
+         </listitem>
       <listitem>
-      <para>You write instead on the same space where your operating system live;</para>
-      </listitem>
+         <para>The volume is not mounted there so you are writing instead on the same space where your operating system lives;</para>
+         </listitem>
       <listitem>
-      <para>You eventually fill up your filesystem and your VM crash;</para>
-      </listitem>
+         <para>You eventually fill up your filesystem and your VM crash/starts malfunctioning;</para>
+         </listitem>
       <listitem>
-      <para>Your VM might not boot anymore and you have to call for help.</para>
-      </listitem>
+         <para>Your VM might not boot anymore and you have to call for help.</para>
+         </listitem>
 </orderedlist>
 </para>
+<para>We will now create an entry on the <literal>/etc/fstab</literal> file to remount the volume (the volumes?) upon reboot.</para>
+<warning>
+<para>A big warning! DO NOT edit the /etc/fstab file by transferring it on a windows machine and then back to your VM. Bad things will happen...</para>
+</warning>
+<para>
+The /mnt directory is normally used as the 'mount point' for various devices. Normally you would create a directory under /mnt for each device and 
+attach the device on that directory. Obviously this is not mandatory: you can mount filesystems almost everywhere (e.g. /data, /opt/myprograms and so on.)</para>
+<para>All the operations will be performed as the supersuser.</para>
+<orderedlist>
+      <listitem>
+         <para>Acquire root privileges
+         <screen>
+ubuntu@maz03:~$ sudo su -
+root@maz03:~#
+         </screen>
+         </para>
+         </listitem>
+      <listitem>
+         <para>Create the 'mount point'
+         <screen>
+root@maz03:~# mkdir -p /mnt/volume1
+         </screen>
+         </para>
+         </listitem>
+      <listitem>
+         <para>Edit the /etc/fstab file: we will use the 'nano' editor for that:
+         <screen>
+root@maz03:~# nano /etc/fstab
+         </screen>
+         Your screen should look like this one:
+         <mediaobject>
+         <imageobject>
+           <imagedata condition="web" fileref="./images/edit_fstab.png" />
+           <imagedata condition="pdf" fileref="./images/edit_fstab.png" width="450" />
+         </imageobject>
+         </mediaobject>
+         </para>
+         </listitem>
+      <listitem>
+         <para>Add a line telling you want to mount the device /dev/vdb under /mnt/volume1 (you have already created an ext4 filesystem on it).</para>
+         <para>This should be the content of your file:
+         <mediaobject>
+         <imageobject>
+           <imagedata condition="web" fileref="./images/add_vol1_to_fstab.png" />
+           <imagedata condition="pdf" fileref="./images/add_vol1_to_fstab.png" width="450" />
+         </imageobject>
+         </mediaobject>
+         </para>
+         </listitem>
+      <listitem>
+         <para>Write your file to disk by pressing <literal>CTRL+o</literal> ... 
+         <mediaobject>
+         <imageobject>
+           <imagedata condition="web" fileref="./images/write_fstab.png" />
+           <imagedata condition="pdf" fileref="./images/write_fstab.png" width="450" />
+         </imageobject>
+         </mediaobject>
+         ... and confirming with enter.</para>
+         </listitem>
+      <listitem>
+         <para>Exit the editor by pressing <literal>CTRL+x</literal>. Go back to your normal user by issuing the 'exit' command or by pressing CTRL+d</para>
+         </listitem>
+</orderedlist>
+<para>Now your volume will appear under the '/mnt/volume1' directory everytime your VM boots up. You can also mount the volume just issuing
+<screen>sudo mount /mnt/volume1</screen>
+The system will lookup in /etc/fstab and mount the correct volume corresponding to the /mnt/volume1 mount point.</para>
 </section>
 
 </chapter>
