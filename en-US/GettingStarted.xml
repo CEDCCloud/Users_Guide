@@ -48,8 +48,6 @@ in the Dashboard. However this is not yet operational.                          
 </section>
 
 
-
-
 <section id="CreatingAKeypair">
 <title>Creating a keypair</title>
 <para>
@@ -70,7 +68,7 @@ The steps are as follows:
 </guimenu></menuchoice></para></listitem>
 
 <listitem><para>In the <menuchoice><guimenu>Key Pairs</guimenu></menuchoice> 
-section, select <menuchoice><guimenu>Create a keypair</guimenu></menuchoice>. 
+section, select <menuchoice><guimenu>Create Key Pair</guimenu></menuchoice>. 
 </para></listitem>
 </itemizedlist>
 <para>
@@ -98,6 +96,60 @@ This file should be stored in a safe location.  To keep it private, run:
 <command>
 chmod 600 <replaceable>my_key.pem</replaceable>
 </command>
+</para>
+
+</section>
+
+<section id="ImportingAKeypair">
+<title>Importing your keypair</title>
+<para>
+You might already have an ssh key you use to remotely access machines. This
+mean you already have under the <replaceable>.ssh</replaceable> directory in
+your home folder a couple of files named <replaceable>id_rsa</replaceable> (or id_dsa)
+and <replaceable>id_rsa.pub</replaceable> (or id_dsa.pub). If, on the machine you
+want to log on, your id_rsa.pub has been authorized you can access the
+machine without providing a password. </para>
+
+<para>Importing your public key allow you to 'inject' it on any newly created
+VM in your project.
+</para>
+
+<para>
+The steps are as follows:
+</para>
+<itemizedlist>
+<listitem><para>Open the <menuchoice><guimenu>Compute
+</guimenu></menuchoice> tab on the left side</para></listitem>
+
+<listitem><para>Select <menuchoice><guimenu>Access &amp; Security
+</guimenu></menuchoice></para></listitem>
+
+<listitem><para>In the <menuchoice><guimenu>Key Pairs</guimenu></menuchoice> 
+section, select <menuchoice><guimenu>Import Key Pair</guimenu></menuchoice>. 
+</para></listitem>
+</itemizedlist>
+<para>
+You will need to give the keypair a name (your full username is a good choice), e.g.
+<replaceable>paolomazzon</replaceable>.</para>
+<para>On the "Public Key" field paste the content of your id_rsa.pub file</para>
+
+<mediaobject>
+<imageobject>
+  <imagedata condition="web" fileref="./images/import_keypair.png" />
+  <imagedata condition="pdf" fileref="./images/import_keypair.png" width="450" />
+</imageobject>
+</mediaobject>
+
+<para>
+Finally click on the <guimenu>Import Key Pair</guimenu> button
+</para>
+
+<warning><para>
+Be careful not to paste the content of your private key, the one without the '.pub' extension.
+</para></warning>
+
+<para>
+You can now choose your key pair when installing a VM as an access method.
 </para>
 
 </section>
