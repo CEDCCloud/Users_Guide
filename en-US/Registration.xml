@@ -13,14 +13,14 @@ The procedure to be followed is described in this chapter.
 
 
 <section id="RegistrationProd">
-<title>Registration in the Production service</title>
+<title>Registration in the cloud service</title>
 
 
 <section id="ApplyForAccount">
 <title> Apply for an account</title>
 
 <para>                                                                         
-The registration procedure in the production service is managed through     
+The registration procedure in the cloud is managed through     
 the Horizon Openstack web service interface.           
 </para>
 
