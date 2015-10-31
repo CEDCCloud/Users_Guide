@@ -129,20 +129,49 @@ be the only member) or not.
 Public (i.e. not private) projects are projects where other users can apply
 for membership. They are supposed to be used for experiments or other research
 groups.
-</para></note>
+</para>
+<para><literal>Personal private</literal> projects are <literal>discouraged</literal> and are created 
+only for convincing reasons. </para>
+</note>
 
-<warning><para>
-<literal>Personal private</literal> projects are discouraged and are created 
-only for convincing reasons. 
-</para></warning>
-
-
-<note><para>
+<note>
+<para>
 The person who asks for the creation of a new project is automatically
 defined as the manager of this project, i.e. he/she will have to
 manage the membership requests for this project. So the request to create a new
 project should be done by the relevant experiment/group leader.
-</para></note>
+</para>
+</note>
+
+<para>
+Requests for new project creation will only be accepted from selected people
+from the relevant Departments/Institutions. Please refer to the following table
+to contact the appropriate person:
+<table>
+   <title>Table of allowed requesters for project creation</title>
+   <tgroup cols='2' align='left'>
+   <thead>
+      <row>
+      <entry>Department/Institution</entry><entry>Referent</entry>
+      </row>
+   </thead>
+   <tbody>
+      <row> <entry>Physics and Astronomy Dept.</entry>               <entry>prof. Alberto Garfagnini</entry> </row>
+      <row> <entry>Biology Dept.</entry>                             <entry>prof. Giorgio Valle</entry> </row>
+      <row> <entry>Geoscience Dept.</entry>                          <entry>prof. Manuele Faccenda</entry> </row>
+      <row> <entry>Information Engineering Dept.</entry>             <entry>prof. Barbara Di Camillo</entry> </row>
+      <row> <entry>Civil and Environmental Engineering Dept.</entry> <entry>prof. Lorenzo Sanavia</entry> </row>
+      <row> <entry>Mathematics Dept.</entry>                         <entry>prof. Alessandro Sperduti</entry> </row>
+      <row> <entry>Molecular Medicine Dept.</entry>                  <entry>prof. Stefano Toppo</entry> </row>
+      <row> <entry>Biomedical Sciences Dept.</entry>                 <entry>prof. Silvio Tosatto</entry> </row>
+      <row> <entry>Chemical Sciences Dept.</entry>                   <entry>prof. Antonino Polimeno</entry> </row>
+      <row> <entry>Pharmaceutical Sciences Dept.</entry>             <entry>prof. Stefano Moro</entry> </row>
+      <row> <entry>INFN - Padova</entry>                             <entry>dott. Mauro Morandin</entry> </row>
+      <row> <entry>INFN - Legnaro</entry>                            <entry>dott. Michele Gulmini</entry> </row>
+   </tbody>
+   </tgroup>
+</table>
+</para>
 
 <para>
 When you have filled the form, click on the 
