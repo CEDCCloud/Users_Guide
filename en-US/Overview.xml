@@ -4,9 +4,9 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="Overview">
-<title>Overview of the CEDC Cloud</title>
+<title>Overview of the CloudVeneto</title>
 <para>                                                                          
-The <literal>CEDC Cloud</literal> is an OpenStack based cloud.         
+The <literal>CloudVeneto</literal> is an OpenStack based cloud.         
 </para>
 
 <para>
@@ -24,7 +24,7 @@ different locations: CSIA Padova, INFN Padova and INFN Laboratori Nazionali di L
 </para>
 
 <para>                                                                          
-The CEDC Cloud is currently based on the Icehouse version of the    
+The CloudVeneto is currently based on the Icehouse version of the    
 OpenStack middleware.                     
 </para>
 
@@ -49,7 +49,7 @@ A user can be on multiple projects at the same time and switch between them.
 
 
 <para>
-In the CEDC Cloud projects usually map to experiments or other research 
+In the CloudVeneto projects usually map to experiments or other research 
 groups. Among the project's users there is a team leader who is responsible to manage
 (accepting or refusing) membership requests for the project.                       
 </para>
@@ -70,7 +70,7 @@ convincing  reasons.
 
 <title>Network access</title>
 <para>                                                                         
-Access to Virtual Machines created in the CEDC Cloud depends on your affiliation.
+Access to Virtual Machines created in the CloudVeneto depends on your affiliation.
 
 <itemizedlist>
 

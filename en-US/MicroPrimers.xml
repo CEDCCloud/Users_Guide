@@ -17,7 +17,7 @@
 </para>
 
 <para>
-The <literal>CEDC Cloud</literal> provides an infrastructure where your virtual machines can live.
+The <literal>CloudVeneto</literal> provides an infrastructure where your virtual machines can live.
 After you have activated your virtual machine(s) you are on your own for the most part of the day to day 
 administration tasks.
 </para>
@@ -450,7 +450,7 @@ We will give you here some more details.</para>
 data inside. The volume you just attached is merely 'raw space' and has no concept about files and directories.</para>
 <para>You may also think about partitioning your volume, e.g. to split volume
 space in 'slices', as you may have done installing linux.</para>
-<para>Given that in the CEDC Cloud you can add as many volumes you want (up to your volume quota, of course)
+<para>Given that in the CloudVeneto you can add as many volumes you want (up to your volume quota, of course)
 partitioning a volume is simply <literal>not recommended</literal>.</para>
 <para>Suppose now that you have filled the volume space. You have the option to resize it from the cloud dashboard but
 the result may not be the one you expect until you do some operations from inside your VM.</para>

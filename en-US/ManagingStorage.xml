@@ -7,7 +7,7 @@
 <title>Managing Storage</title>
 
 <para>
-There are several ways of handling disk storage in the CEDC Cloud:
+There are several ways of handling disk storage in the CloudVeneto:
 </para>
 
 <para>
@@ -399,7 +399,7 @@ mount -t nfs 10.67.1.4:/dataNfs /mnt
 As explained in <xref linkend="NetworkAccess"/> from an instance of the Cloud
 by default it is not possible to access a host/service hosted in Padova or 
 Legnaro. This also means that by default on a virtual machine of
-the CEDC Cloud it is not possible to mount a file system 
+the CloudVeneto it is not possible to mount a file system 
 exported from a storage server hosted in Padova or Legnaro.
 </para>
 

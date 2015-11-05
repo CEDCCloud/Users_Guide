@@ -14,7 +14,7 @@ the Glance OpenStack component.
 <section id="PublicImages">
 <title>Public Images</title>
 <para>
-Some images in the CEDC Cloud are provided by the Cloud 
+Some images in the CloudVeneto are provided by the Cloud 
 administrators. These images are public, and visible to all users.
 They appear in the <menuchoice><guimenu>Public</guimenu></menuchoice> 
 tab of the <menuchoice><guimenu>Images &amp; Snapshots</guimenu></menuchoice> 
@@ -259,14 +259,14 @@ resizable images in QCOW2 format are available
 </para>
 
 <para>
-The public SL6.x images of the CEDC Cloud are built using OZ.
+The public SL6.x images of the CloudVeneto are built using OZ.
 The relevant source files are available 
 <ulink url="https://github.com/CloudPadovana/OZImages">here</ulink>.
 </para>
 
 
 <para>
-A machine where Oz is installed is available to the users of the CEDC Cloud.
+A machine where Oz is installed is available to the users of the CloudVeneto.
 To have access to this machine, please contact the 
 administrators at <email>cedc-support@lists.pd.infn.it</email>.
 Oz requires a configuration file that should be created as follows exchanging 
