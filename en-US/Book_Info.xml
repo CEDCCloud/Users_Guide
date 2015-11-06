@@ -26,7 +26,7 @@ that in turn was heavily inspired from
 	<corpauthor>
 		<inlinemediaobject>
 			<imageobject>
-				<imagedata fileref="Common_Content/images/title_logo.svg" format="SVG" />
+				<imagedata fileref="Common_Content/images/title_logo.png" format="PNG" width="256"/>
 			</imageobject>
 		</inlinemediaobject>
 	</corpauthor>
