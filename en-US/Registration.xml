@@ -125,7 +125,20 @@ if this project must be private (a personal project where you will
 be the only member) or not.
 </para>
 
-<note><para>
+<para>
+Newly created projects will get a default quota of:
+<itemizedlist>
+<listitem><para>20 VCPU</para></listitem>
+<listitem><para>40 GB RAM</para></listitem>
+<listitem><para>200 GB for Volume (e.g. non ephemeral) storage</para></listitem>
+</itemizedlist>
+Allocation of more resources must be approved by the Cloud "governance".</para>
+<para>Mail your request to <email>cloud-unipd-gov@lists.pd.infn.it</email> 
+if you want more resources to be allocated to your project.
+</para>
+
+<note>
+<para>
 Public (i.e. not private) projects are projects where other users can apply
 for membership. They are supposed to be used for experiments or other research
 groups.
