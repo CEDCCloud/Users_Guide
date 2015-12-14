@@ -559,16 +559,24 @@ performed as opposed to a new boot cycle.
 If the size of a virtual machine needs to be changed, such as adding more 
 memory or cores, this can be done using the resize operations. Using resize, 
 you can select a new flavor for your virtual machine. The operation will 
-reboot the virtual machine and will take several minutes of downtime, so this 
-operation should be scheduled as it will lead to application downtime.
+reboot the virtual machine and might take several minutes of downtime, so this 
+operation should be planned as it will lead to application downtime.
 </para>
 
 <para>
-To resize a VM using the Horizon graphical Interface:
+To resize a VM using the graphical Interface:
 </para>
 
 <para>
 <itemizedlist>
+<listitem><para>
+Detach any attached volume as decribed in <xref linkend="DetachVolume"/>
+</para>
+<warning><para>
+Failure in doing so might lead to VM and/or Volume corruption!
+</para></warning>
+</listitem>
+
 <listitem><para>Select the <menuchoice><guimenu>Compute</guimenu><guisubmenu>Instances</guisubmenu></menuchoice> 
 menu and then <menuchoice><guimenu>Resize Instance</guimenu></menuchoice> 
 option on the actions.
