@@ -71,14 +71,13 @@ may be detached or re-attached to a different instance while retaining all
 data, much like a USB drive.
 </para>
 
+<section id="CreateVolumes">
+<title>Create a Volume</title>
 <para>
 The steps to add a Volume are:
 </para>
 
 <para>
-
-<itemizedlist>
-<listitem><para>
 Using the Dashboard, click on 
 <menuchoice><guimenu>Compute</guimenu><guisubmenu>Volumes</guisubmenu></menuchoice> and then 
 <menuchoice><guimenu>Create Volume</guimenu></menuchoice>. 
@@ -94,14 +93,17 @@ As <menuchoice><guimenu>Volume Source</guimenu></menuchoice> specify “No sourc
 </imageobject>
 </mediaobject>
 
-</para></listitem>
+</para>
+</section>
 
-<listitem><para>
+<section id="AttachVolume">
+<title>Using (attaching) a Volume</title>
+<para>
 The new defined volume will appear in the 
 <menuchoice><guimenu>Volumes</guimenu></menuchoice> tab. 
-</para></listitem>
+</para>
 
-<listitem><para>
+<para>
 To attach this volume to an 
 existing instance, click on 
 <menuchoice><guimenu>More</guimenu><guisubmenu>Edit attachments</guisubmenu></menuchoice> ... 
@@ -124,9 +126,6 @@ existing instance, click on
 </mediaobject>
 
 ...and click on "Attach Volume".
-</para></listitem>
-
-</itemizedlist>
 </para>
 
 <para id="CreateFS">
@@ -153,8 +152,10 @@ Mount the volume:
 <screen>
 mount /dev/vdb /mnt
 </screen>
+</section>
 
-
+<section id="DetachVolume">
+<title>Detaching a Volume</title>
 <para>
 To detach a volume from an instance, first of all log into the virtual 
 machine that has the volume mounted, and unmount it:
@@ -173,7 +174,10 @@ The detached volume can then be associated to another VM, as described above
 (you won't have to re-create the file system, otherwise you will lose the 
 content of the volume!)
 </para>
+</section>
 
+<section id="DeleteVolume">
+<title>Deleting a Volume</title>
 <para>
 If a volume is not needed any longer, to completely remove it (note that 
 this step cannot be reverted!):
@@ -199,6 +203,7 @@ volume and then select
 <warning><para>
 Please note that backups are not performed on volumes.
 </para></warning>
+</section>
 
 <section id="SharingVolume">
 <title>Sharing a volume between multiple (virtual) machines </title>
