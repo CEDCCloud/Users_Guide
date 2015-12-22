@@ -266,8 +266,9 @@ Filename    : /usr/sbin/rpc.nfsd
 			the <command>ifconfig</command> command) the content of the /etc/exports file 
 			will be:
 <screen>
-/dataNfs 10.67.1.* (async,rw,no_root_squash)
+/dataNfs 10.67.1.*(async,rw,no_root_squash)
 </screen>
+            Note that there are no spaces between the '*' and the '('.
 			</para>
 		</listitem>
 		<listitem>
