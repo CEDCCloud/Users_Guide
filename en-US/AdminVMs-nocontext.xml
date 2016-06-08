@@ -268,7 +268,7 @@ Proceed as follows: we suppose your VM IP address is 10.X.Y.Z.
 <para>
 <itemizedlist>
    <listitem><para>
-   Choose a free TCP port in the range 1025-65536 (e.g. 2002);
+   Choose a free TCP port on your machine in the range 1025-65535 (e.g. 2002);
    </para></listitem>
    <listitem><para>
    Set up the tunnel using your access to one of the gate machines of the cloud (e.g. cld-blu-gate.cedc.csia.unipd.it)
@@ -282,7 +282,7 @@ Proceed as follows: we suppose your VM IP address is 10.X.Y.Z.
 </para>
 
 <para>
-The syntax is depicted on the following picture:
+The syntax is explained in the following picture:
 <mediaobject>
 <imageobject>
   <imagedata condition="web" fileref="./images/ssh-tunnel.png" />
@@ -291,13 +291,13 @@ The syntax is depicted on the following picture:
 </mediaobject>
 <itemizedlist>
    <listitem><para>
-   The green part is <replaceable>your side</replaceable> of the connection (e.g. the port open on your PC);
+   The green part is <replaceable>your side</replaceable> of the connection (e.g. the port opened on your PC);
    </para></listitem>
    <listitem><para>
    user@cld-blu-gate..... is the <replaceable>transport part</replaceable> of the connection;
    </para></listitem>
    <listitem><para>
-   10.X.Y.Z:22 in red is the <replaceable>remote part</replaceable> of the connection.
+   10.X.Y.Z:22 in red is the <replaceable>remote end</replaceable> of the connection.
    </para></listitem>
 </itemizedlist>
 The blu arrows depict the data flow.
@@ -314,15 +314,15 @@ Please note the <literal>remoteuser@localhost</literal> part of the command.
 </para>
 
 <note><para>
-Tip 1: if the last part of your VM IP is Z, choosing 2000+Z as the local TCP port
+<literal>Tip 1:</literal> if the last part of your VM IP is Z, choosing 2000+Z as the local TCP port
 is a good way to memorize the (local port, remote VM) association of your tunnel. 
 </para>
 
 <para>
-Tip 2: you can open many ssh tunnels at once by simply repeating the 
+<literal>Tip 2:</literal> you can open many ssh tunnels at once by simply repeating the 
 -L 200Z:10.X.Y.Z:22 part of the command, e.g.
 <screen>
-ssh -L 2002:10.63.1.2:22 -L 2003:10.63.1.3:22 -L 2010:10.63.1.10 user@cld-blu-gate....
+ssh -L2002:10.63.1.2:22 -L2003:10.63.1.3:22 -L2010:10.63.1.10:22 user@cld-blu-gate...
 </screen>
 You can now specify 2002,2003 or 2010 after '-P' to get to the chosen VM.
 </para></note>
