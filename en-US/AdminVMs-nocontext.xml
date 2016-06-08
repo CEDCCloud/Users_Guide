@@ -308,7 +308,7 @@ Once you have opened the tunnel you have, on your machine, a direct entry point 
 You can use the <literal>-P</literal> (capital 'p') parameter of the scp command and the <literal>remote
 username on your VM</literal> to copy files to the VM:
 <screen>
-ssh -P 2002 -i ~/private/my_key  my_local_file.txt  remoteuser@localhost:/remote/path/
+scp -P 2002 -i ~/private/my_key  my_local_file.txt  remoteuser@localhost:/remote/path/
 </screen>
 Please note the <literal>remoteuser@localhost</literal> part of the command.
 </para>
