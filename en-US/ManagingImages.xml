@@ -17,56 +17,20 @@ the Glance OpenStack component.
 Some images in the CloudVeneto are provided by the Cloud 
 administrators. These images are public, and visible to all users.
 They appear in the <menuchoice><guimenu>Public</guimenu></menuchoice> 
-tab of the <menuchoice><guimenu>Images &amp; Snapshots</guimenu></menuchoice> 
+tab of the <menuchoice><guimenu>Images</guimenu></menuchoice> 
 menu.
-
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/public_images.png"/>
+  <imagedata condition="web" fileref="./images/public_images.png"/>
+  <imagedata condition="pdf" fileref="./images/public_images.png" width="450" />
 </imageobject>
 </mediaobject>
 
-
 </para>
 
 <para>
-The <literal>SL6x-x86-64-&lt;date&gt;</literal> is a basic 
-SL6.x image which
-also includes cloud-init to perform contextualization based on the user data 
-specified when the VM are instantiated. It also configures CVMFS and the
-relevant squid servers.
-</para>
-
-<para>
-The <literal>SL6x-x86-64-&lt;date&gt;</literal> image, wrt the
-<literal>SL6x-x86-64-&lt;date&gt;</literal> image, also configures the
-Padova LDAP server for user authentication. This means that it is just 
-necessary to “enable” the relevant accounts on the VM adding in the 
-/etc/passwd file:
-
-<screen>
-+name1::::::
-+name2::::::
-...
-</screen>
-and creating their home directories.
-</para>
-
-<para>
-Changes done in /etc/passwd could not be applied immediately by the system. 
-In this case a:
-
-<screen>
-nscd -i passwd
-</screen>
-
-should help.
-</para>
- 
-
-<para>
-In the production cloud SL 6.x images are provided in QCOW2 format.
+In the CloudVeneto cloud images are provided in QCOW2 format.
 They are fully resizable also with respect to the disk size.
 </para>
 
@@ -85,7 +49,7 @@ of the project they are uploaded for.
 <note><para>
 Users are not allowed to publish public (i.e. available to all projects) 
 images.
-This means that you don't have to use the <literal>--public</literal> flag
+This means you cannot use the <literal>--public</literal> flag
 with the <literal> glance image-create</literal> command, otherwise you will 
 get a quite cryptic error message such as:
 
@@ -99,35 +63,36 @@ Access was denied to this resource.
 
 
 <para>
-Many open source projects such as Ubuntu and Fedora now produce pre-build 
+Many open source projects such as Ubuntu and Fedora now produce pre-built 
 images which can be used for certain clouds. If these are available, it is 
-much easier to use these compared to building your own.
+much easier to use them compared to building your own.
 
 <itemizedlist>
-<listitem><para><ulink url="http://cloud.fedoraproject.org/">Fedora repository</ulink></para></listitem> 
-<listitem><para><ulink url="http://uec-images.ubuntu.com/">Ubuntu repository</ulink></para></listitem> 
-
+   <listitem><para><ulink url="https://getfedora.org/cloud/">Fedora repository</ulink></para></listitem> 
+   <listitem><para><ulink url="https://cloud-images.ubuntu.com/">Ubuntu repository</ulink></para></listitem> 
 </itemizedlist>
 
 </para>
 
 <para>
-Building your own images is also possible, as described in 
-<xref linkend="BuildingImages"/>.
-</para>
-
-<para>
-Taking an example of the Ubuntu image, after having downloaded the
+Using an Ubuntu image as an example, after you downloaded the
 image from the relevant web site, to upload such image 
-(using the command line tools) it is necessary first of all to 
-authenticate to OpenStack using the openrc source, and then the
-following command must be issued:
+using the command line tools you need to:
 
-<screen>
-glance image-create --name=ubuntu-trusty --disk-format=qcow2 \
---container-format=bare --property hypervisor_type=qemu \
---file trusty-server-cloudimg-amd64-disk1.img
-</screen>
+<itemizedlist>
+   <listitem><para>Authenticate to OpenStack using the openrc source:
+      <screen>
+$ . demo-openrc.sh
+      </screen>
+   </para></listitem>
+   <listitem><para>Issue th following command:
+      <screen>
+$ glance image-create --name=ubuntu-trusty --disk-format=qcow2 \
+      --container-format=bare --property hypervisor_type=qemu \
+      --file trusty-server-cloudimg-amd64-disk1.img
+      </screen>
+   </para></listitem>
+</itemizedlist>
 
 Once loaded, the image can then be used to create virtual machines. 
 </para>
@@ -135,23 +100,22 @@ Once loaded, the image can then be used to create virtual machines.
 <para>
 Some system software is delivered in ISO image format. 
 For example, these steps show how to create an image from the Freedos ISO 
-available at http://www.freedos.org/download/and downloaded to fd11src.iso:
+available from <ulink url="http://www.freedos.org/download/download/fd11src.iso">here</ulink>
 
 <screen>
-glance image-create --name freedos11 --disk-format=iso \
+$ glance image-create --name freedos11 --disk-format=iso \
 --container-format=bare --file=fd11src.iso
 </screen>
 </para>
 
 
 <note><para>
-In the production Cloud only images with a maximum size of 25 GB are
-allowed.
+In the CloudVeneto cloud image size is limited to 25 GB.
 </para></note>
 
 
 <warning><para>
-No backup is currently done on user provided images and on snapshots.
+No backup is currently done on user provided images or snapshots.
 Therefore users with private images should keep a copy of the images they 
 have uploaded in their private archives. 
 </para></warning>
@@ -235,174 +199,22 @@ glance member-list --image-id e0d35322-d509-4202-9b40-7d74e7aca0b6 # check it is
 
 </section>
 
-<section id="BuildingImages">
-<title>Building Images</title>
-<para>
-Users can also build custom images, that can then been uploaded in
-the Cloud Image service as described in 
-<xref linkend="UserProvidedImages"/>.
-</para>
+
+<section id="DeletingImages">
+<title>Deleting Images</title>
+
+<para>Images that are not used anymore can be deleted. Deletion of images is permanent and cannot be reversed.</para>
 
 <para>
-There are several tools providing support for image creation. Some of them
-are described in the <ulink url="http://docs.openstack.org/image-guide/content/ch_creating_images_automatically.html">Openstack documentation</ulink>.
+To delete an image, log in to the dashboard and select the appropriate project from the drop down menu at the top left.
+On the <menuchoice><guimenu>Compute</guimenu><guisubmenu>Images</guisubmenu></menuchoice> page select the images you want to delete
+and click <menuchoice><guimenu>Delete Images</guimenu></menuchoice>. 
+Confirm your action pressing the <menuchoice><guimenu>Delete Images</guimenu></menuchoice> again on the confirmation dialog box.
 </para>
 
-<para>
-<literal>Oz</literal> is one of such tools that automates the process of 
-creating a virtual machine image file.
-Besides the <ulink url="https://github.com/clalancette/oz/wiki">official 
-OZ documentation</ulink>, some notes (and examples) to build Scientific
-Linux 6.x and CentOS 6.x
-resizable images in QCOW2 format are available 
-<ulink url="https://github.com/CloudPadovana/qcow2-resizable-images">here</ulink>.
-</para>
-
-<para>
-The public SL6.x images of the CloudVeneto are built using OZ.
-The relevant source files are available 
-<ulink url="https://github.com/CloudPadovana/OZImages">here</ulink>.
-</para>
-
-
-<para>
-A machine where Oz is installed is available to the users of the CloudVeneto.
-To have access to this machine, please contact the 
-administrators at <email>cedc-support@lists.pd.infn.it</email>.
-Oz requires a configuration file that should be created as follows exchanging 
-USERNAME for the login name of your user:
-
-<screen>
-$ cat ~/.oz/oz.cfg
-
-[paths]
-output_dir = /tmp/USERNAME/oz/images
-data_dir = /tmp/USERNAME/oz/data
-screenshot_dir = /tmp/USERNAME/oz/screenshot
-
-[libvirt]
-uri=qemu:///system
-
-[cache]
-original_media = yes
-modified_media = no
-jeos = no
-</screen>
-</para>
- 
-<para>
-The directories specified in this configuration file must be manually created.
-</para>
-
-
-<section id="EnablingINFNPadovaLDAP">
-<title>Enabling INFN Padova LDAP based authentication on the Virtual Machine</title>
-
-<para>
-When creating a custom image, it might be needed to enable a LDAP server
-to manage authentication for users.
-
-This section explains how to enable the INFN Padova's LDAP server for user 
-authentication on the VMs of the Cloud.
-
-To do that, the following LDAP client configurations, targeted to SL6.x 
-systems, need to be available on the image used to start the VMs. 
-</para>
-
-<para>
-First of all, the following packages must be installed:
-
-<itemizedlist>
-<listitem><para>openssl</para></listitem>
-<listitem><para>openldap</para></listitem>
-<listitem><para>openldap-clients</para></listitem>
-<listitem><para>pam-ldap</para></listitem>
-<listitem><para>nss-pam-ldapd</para></listitem>
-<listitem><para>nss-tools</para></listitem>
-<listitem><para>nscd</para></listitem>
-
-</itemizedlist>
-
-</para>
-
-<para>
-Then the following files (included in this
-<ulink url="https://wiki.infn.it/_media/progetti/cloud-areapd/user_s_guides/ldap.tar">ldap.tar</ulink>
-tar file) must be 
-installed on the Virtual Machine:
-
-<itemizedlist>
-
-<listitem><para>/etc/openldap/cacerts/cacert.pem</para></listitem>
-<listitem><para>/etc/openldap/ldap.conf</para></listitem>
-<listitem><para>/etc/pam_ldap.conf</para></listitem>
-<listitem><para>/etc/nsswitch.conf</para></listitem>
-<listitem><para>/etc/nslcd.conf</para></listitem>
-<listitem><para>/etc/pam.d/system-auth-ac</para></listitem>
-<listitem><para>/etc/pam.d/password-auth-ac</para></listitem>
-</itemizedlist>
-
-</para>
-<para>
-
-To do that, it is enough to log on the VM and:
-
-<screen>
-cd /
-tar xvf / path/ldap.tar
-</screen>
-
-</para>
-
-<para>
-Then it is necessary to start the nslcd and nscd services:
-
-<screen>
-service nslcd start
-service nscd start
-chkconfig nslcd on
-chkconfig nscd on
-</screen>
-</para>
-
-<para>
-Then it is just necessary to “enable” the relevant accounts on the VM adding 
-in the /etc/passwd file:
-
-<screen>
-+name1::::::
-+name2::::::
-...
-</screen>
-and creating their home directories.
-</para>
-
-<para>
-Changes done in /etc/passwd could not be applied immediately by the system. 
-In this case a:
-
-<screen>
-nscd -i passwd
-should help.
-</screen>
-
-</para>
-
-<note><para>
-Please note that the images <literal>SL6x-Padova-x86-64-&lt;date&gt;</literal>
-have already the LDAP client 
-properly configured to use the Padova LDAP server. 
-Using these images it is just necessary to enable the 
-relevant users in /etc/passwd and create their home directories.
-</para></note>
-
+<warning><para>
+Don't delete an image if are there are virtual machines created using this image, otherwise these VMs won't be able to start if hard rebooted.
+</para></warning>
 </section>
-
-
-
-</section>
-
-
-
 
 </chapter>
