@@ -243,6 +243,89 @@ a Cloud specific gate host (<literal>cld-gate.pd.infn.it</literal> and
 <email>cedc-support@lists.pd.infn.it</email> if you need an account on these machines.
 </para>
 
+<para>
+Copying files to your VM might be a little more complex since VMs don't have an 
+access facing the internet. You can make it in a two step fashion:
+<itemizedlist>
+<listitem><para>
+Copy your file from your machine to the gate;
+</para></listitem>
+<listitem><para>
+Copy file from the gate machine to your VM;
+</para></listitem>
+</itemizedlist>
+This is clearly not very practical.
+</para>
+<para>
+A more clever approach is to use an <replaceable>SSH tunnel</replaceable> (port forwarding mechanism): you
+set up a special TCP port on your PC that act as an entrance point and then you
+<replaceable>inject</replaceable> your files in that port to get them copyed on your VM.
+</para>
+
+<para>
+Proceed as follows: we suppose your VM IP address is 10.X.Y.Z.
+</para>
+<para>
+<itemizedlist>
+   <listitem><para>
+   Choose a free TCP port in the range 1025-65536 (e.g. 2002);
+   </para></listitem>
+   <listitem><para>
+   Set up the tunnel using your access to one of the gate machines of the cloud (e.g. cld-blu-gate.cedc.csia.unipd.it)
+   and providing your TCP port of choice and the IP address of your remote VM:
+      <screen>
+      ssh -L2002:10.X.Y.Z:22 user@cld-blu-gate.cedc.csia.unipd.it
+      </screen>
+   The tunnel needs to stay open as long as you need to copy files toward the VM.
+   </para></listitem>
+</itemizedlist>
+</para>
+
+<para>
+The syntax is depicted on the following picture:
+<mediaobject>
+<imageobject>
+  <imagedata condition="web" fileref="./images/ssh-tunnel.png" />
+  <imagedata condition="pdf" fileref="./images/ssh-tunnel.png" width="450" />
+</imageobject>
+</mediaobject>
+<itemizedlist>
+   <listitem><para>
+   The green part is <replaceable>your side</replaceable> of the connection (e.g. the port open on your PC);
+   </para></listitem>
+   <listitem><para>
+   user@cld-blu-gate..... is the <replaceable>transport part</replaceable> of the connection;
+   </para></listitem>
+   <listitem><para>
+   10.X.Y.Z:22 in red is the <replaceable>remote part</replaceable> of the connection.
+   </para></listitem>
+</itemizedlist>
+The blu arrows depict the data flow.
+</para>
+
+<para>
+Once you have opened the tunnel you have, on your machine, a direct entry point to your VM.
+You can use the <literal>-P</literal> (capital 'p') parameter of the scp command and the <literal>remote
+username on your VM</literal> to copy files to the VM:
+<screen>
+ssh -P 2002 -i ~/private/my_key  my_local_file.txt  remoteuser@localhost:/remote/path/
+</screen>
+Please note the <literal>remoteuser@localhost</literal> part of the command.
+</para>
+
+<note><para>
+Tip 1: if the last part of your VM IP is Z, choosing 2000+Z as the local TCP port
+is a good way to memorize the (local port, remote VM) association of your tunnel. 
+</para>
+
+<para>
+Tip 2: you can open many ssh tunnels at once by simply repeating the 
+-L 200Z:10.X.Y.Z:22 part of the command, e.g.
+<screen>
+ssh -L 2002:10.63.1.2:22 -L 2003:10.63.1.3:22 -L 2010:10.63.1.10 user@cld-blu-gate....
+</screen>
+You can now specify 2002,2003 or 2010 after '-P' to get to the chosen VM.
+</para></note>
 
 <para>
 If needed, e.g. if a VM should host a service accessible from the 
