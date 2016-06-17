@@ -393,9 +393,9 @@ version using <replaceable>setenv</replaceable> rather than <replaceable>export<
 
 <para>
 In the CEDC cloud, since services are secured using SSL, you will need the
-<literal>cedc-chain.pem</literal> "certification authority" file. This file can be downloaded
+<literal>cedc-chain.pem</literal> "certification authority" file. This file can be downloaded (zipped)
 
-<ulink url="https://somewhere.over.the.rainbow/at/the/CSIA/site">Somewhere from the CSIA site</ulink> 
+<ulink url="https://cloud.cedc.csia.unipd.it/User_Guide/cedc-chain.zip">from here.</ulink> 
 </para>
 
 <para>Once you get the file you need to edit the RC file to set the
