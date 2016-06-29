@@ -237,7 +237,6 @@ To add an ICMP rule, click <menuchoice><guimenu>Add Rule</guimenu></menuchoice>.
 <listitem><para>
 In the Add Rule dialog box, enter the following values:
 
-
 <informaltable>
 <tgroup cols="2">
 <tbody>
@@ -248,7 +247,6 @@ In the Add Rule dialog box, enter the following values:
 </tbody>
 </tgroup>
 </informaltable>
-
 
 </para></listitem> 
 
@@ -266,27 +264,39 @@ specific IP rules through security groups, be sure that the relevant ports are
 also enabled (e.g. via firewalld) on the Virtual Machine.
 </para></warning>
 
-
 </section>
 
+
+<section id="PasswordManagement">
+<title>Password management</title>
+
+<section id="Foreword">
+<title>Foreword</title>
+<warning><para>
+If you access the cloud either through UniPD SSO or INFN AAI you already
+have a password <replaceable>that you cannot change with this procedure.</replaceable>
+</para></warning>
+
+<para>
+You need to use this procedure only if:
+<itemizedlist>
+   <listitem><para>
+      You access the cloud through username and password and you want to change that password;
+   </para></listitem>
+   <listitem><para>
+      You want to use the cloud resources through command line (see <xref linkend="AccessingtheCloudthroughCLI"/> ).
+   </para></listitem>
+</itemizedlist>
+</para>
+</section>
 
 <section id="SettingPassword">
 <title>Setting/changing password</title>
 
-
-<note><para>
-If you log on the production cloud through INFN-AAI and if you don't need 
-to access the cloud service using the OpenStack command line tools discussed
-in <xref linkend="AccessingtheCloudthroughCLI"/> you can safely ignore
-this section.
-</para></note>
-
 <para>
-If you access the cloud through username and password, and
-you want to change such password, 
-from the OpenStack dashboard click on your user's name (on the top), select 
+From the OpenStack dashboard click on your user's name (on the top), select 
 <menuchoice><guimenu>Settings</guimenu></menuchoice> from the dropdown menu and
-then <menuchoice><guimenu>Change Password</guimenu></menuchoice>.
+then <menuchoice><guimenu>Manage Password</guimenu></menuchoice>.
 
 <mediaobject>
 <imageobject>
@@ -297,29 +307,13 @@ then <menuchoice><guimenu>Change Password</guimenu></menuchoice>.
 
 </para>
 
-<para>
-If instead you log through INFN-AAI, you don't need
-to know this OpenStack password. You need to know it only if you need
-to access the service using the OpenStack command line tools discussed
-in <xref linkend="AccessingtheCloudthroughCLI"/>.
-</para>
-
-<para>
-To set such password (or to change it) use the same procedure:
-from the OpenStack dashboard select <menuchoice><guimenu>your_user</guimenu><guisubmenu>Settings</guisubmenu></menuchoice> and
-then <menuchoice><guimenu>Activate Password</guimenu></menuchoice>.
-
-</para>
-
 <important><para>
-This is the password to authenticate with the Cloud service. It has
-nothing to do with the password of the Cloud virtual machines nor
-with the INFN-AAI password.
+Once again: this is the password to authenticate with the Cloud "internal" authentication
+mechanism. It is uncorrelated from the UniPD SSO or INFN-AAI one.
 </para></important>
-
 </section>
 
-
+</section>
 
 
 <section id="SwitchingBetweenProjects">
@@ -359,6 +353,12 @@ contains extended information on the syntax and installation procedure of the co
 <para>
 The OpenStack client is also installed on <literal>lx.pd.infn.it</literal>.
 </para>
+
+<important><para>
+Command line tools can only be used with the Cloud "internal" authentication
+mechanism. Even if you normally access the cloud dashboard using the UniPD SSO or INFN-AAI
+it's now time to <link linkend="SettingPassword">set a password.</link>
+</para></important>
 
 <para>
 The OpenStack tools require a set of shell environment variables in order to 
