@@ -277,7 +277,7 @@ If you access the cloud either through UniPD SSO or INFN AAI you already
 have a password <replaceable>that you cannot change with this procedure.</replaceable>
 </para></warning>
 
-<para>
+<para id="PasswordOnlyIf">
 You need to use this procedure only if:
 <itemizedlist>
    <listitem><para>
@@ -357,7 +357,7 @@ The OpenStack client is also installed on <literal>lx.pd.infn.it</literal>.
 <important><para>
 Command line tools can only be used with the Cloud "internal" authentication
 mechanism. Even if you normally access the cloud dashboard using the UniPD SSO or INFN-AAI
-it's now time to <link linkend="SettingPassword">set a password.</link>
+it's now time to <link linkend="PasswordOnlyIf">set a password.</link>
 </para></important>
 
 <para>
