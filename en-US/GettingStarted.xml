@@ -350,10 +350,6 @@ The <ulink url="http://docs.openstack.org/icehouse/">documentation</ulink> on th
 contains extended information on the syntax and installation procedure of the command line tools.
 </para>
 
-<para>
-The OpenStack client is also installed on <literal>lx.pd.infn.it</literal>.
-</para>
-
 <important><para>
 Command line tools can only be used with the Cloud "internal" authentication
 mechanism. Even if you normally access the cloud dashboard using the UniPD SSO or INFN-AAI
