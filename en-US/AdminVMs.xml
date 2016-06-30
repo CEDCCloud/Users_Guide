@@ -209,40 +209,53 @@ using their IP numbers.
 
 <section id="AccessingVMs">
 <title>Accessing Virtual Machines</title>
-<para>
-Assuming you created a Linux virtual machine using the 
-<replaceable>&lt;ProjectName&gt;-lan</replaceable> network, you can 
-now log to this VM from the Local Area Networks (LANs) of both Padova 
-and LNL.
-</para>
-
-<para>
-Assuming you stored your <replaceable>my_key</replaceable> keypair in 
-<replaceable>~/private</replaceable> and the IP number of this VM is
-<replaceable>10.64.15.3</replaceable>:
-</para>
-
-<screen>
-$ ssh -i ~/private/my_key root@10.64.15.3
-</screen>
 
 <para>
 <warning><para>
-Please note that VMs of the Cloud are not registered in the DNS, and therefore 
-you must use the IP address.
+Please note that cloud VMs are not registered in the DNS, and therefore 
+you must use their IP address.
 </para></warning>
 </para>
 
 <para>
-If it's necessary to log on this VM from the Internet you must
-go through a gate machine. For this purpose you can rely
-on the existing gate hosts in Padova and Legnaro. 
-If you don't have an account on one of such gate hosts, you can use 
-a Cloud specific gate host (<literal>cld-gate.pd.infn.it</literal> and 
-<literal>cld-blu-gate.cedc.csia.unipd.it</literal>): contact 
-<email>cedc-support@lists.pd.infn.it</email> if you need an account on these machines.
+Virtual machines created on the cloud have their IP assigned on a private
+network associated with the project they belong to, therefore they cannot
+be accessed directly from the internet.
 </para>
 
+<para>
+Projects that gets their private network on the subnet 10.65.0.0/16 are
+peculiar: the VMs can be accessed from the INFN or LNL lan. Those projects
+are created mostly for INFN internal use.
+</para>
+
+<para>
+If you need to log on your VMs from the Internet you must
+go through the <literal>cld-blu-gate.cedc.csia.unipd.it</literal> gate machine.
+When your account on the cloud is created you also got access to the gate.
+Contact <email>cedc-support@lists.pd.infn.it</email> in case of problems with this account.
+</para>
+
+<para>
+Assuming that
+<itemizedlist>
+   <listitem><para>
+      You created a Linux virtual machine using the <replaceable>&lt;ProjectName&gt;-lan</replaceable> network;
+   </para></listitem>
+   <listitem><para>
+      Your VM got the 10.64.15.3 IP address; The VM is CentOS based so there is a default user called 'centos';
+   </para></listitem>
+   <listitem><para>
+      You stored your <replaceable>my_key</replaceable> keypair in <replaceable>~/private</replaceable> on the gate machine;
+   </para></listitem>
+</itemizedlist>
+
+you can access your VM from the gate machine issuing
+
+<screen>
+$ ssh -i ~/private/my_key centos@10.64.15.3
+</screen>
+</para>
 
 <para>
 If needed, e.g. if a VM should host a service accessible from the 
