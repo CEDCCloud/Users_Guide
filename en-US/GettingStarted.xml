@@ -433,7 +433,6 @@ when you issue some OpenStack command.
 
 </section>
 
-<!--
 <section id="AccessingtheCloudthroughEC2">
 <title>Accessing the Cloud through the euca2ools EC2 command line tools</title>
 <para>
@@ -443,11 +442,9 @@ standard for computational clouds.
 
 <para>
 The <literal>euca2ools</literal> are command line tools that can be used to 
-interact with an 
-EC2 based cloud.
+interact with an EC2 based cloud.
 The euca2ools require a set of shell environment variables in order to run. 
-These environment 
-variables are different per project that you work on.
+These environment variables are different per project that you work on.
 </para>
 <para>
 If you log into the dashboard, you 
@@ -457,12 +454,13 @@ menu on the left hand side. Then choose the
 options related to using the program interfaces. Select the 
 <menuchoice><guimenu>Download EC2 Credentials</guimenu></menuchoice> option 
 on the top right to download the zip file for your current project.
-This zip file will be downloaded to the browser. 
+This zip file will be downloaded from the browser. 
 </para>
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/download_rc.png" />
+  <imagedata condition="web" fileref="./images/download_ec2rc.png" />
+  <imagedata condition="pdf" fileref="./images/download_ec2rc.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -507,9 +505,6 @@ INSTANCEi-000015b2ami-0000001emonitoring-serverrunningvenaruzzo-cloudpp0m1.small
 </screen>
 
 </section>
-
--->
-
 
 
 </chapter>
