@@ -470,8 +470,8 @@ you want to run the commands from and unzipped into a private directory, e.g:
 </para>
 
 <screen>
-$ unzip alice-x509.zip 
-Archive:  alice-x509.zip
+$ unzip testing-x509.zip 
+Archive:  testing-x509.zip
 extracting: pk.pem                  
 extracting: cert.pem                
 extracting: cacert.pem              
@@ -492,16 +492,24 @@ it, you can e.g. try the following:
 <screen>
 $ . ec2rc.sh 
 $ euca-describe-instances
-RESERVATIONr-41vjiwomae4b3654ea08441fabe232390ae908b6
-INSTANCEi-000015b8ami-00000061mysql-serverrunningvenaruzzo-cloudpp0m1.small2014-09-02T08:44:24.000Znovaaki-00000064ari-0000006710.62.13.6instance-store
-RESERVATIONr-bf7v6v6mae4b3654ea08441fabe232390ae908b6
-INSTANCEi-000015b5ami-00000012server-6cbb5ded-ba65-4850-8078-1e9f1836e7derunningvenaruzzo-cloudpp0m1.small2014-09-01T10:41:34.000Znova10.62.13.2instance-store
-BLOCKDEVICE/dev/vdbvol-0000001ffalse
-RESERVATIONr-yanua8rgae4b3654ea08441fabe232390ae908b6
-INSTANCEi-0000153bami-00000061xrootd-serverrunningvenaruzzo-cloudpp0m1.small2014-08-27T14:09:35.000Znovaaki-00000064ari-0000006710.62.13.4instance-store
-BLOCKDEVICE/dev/vdbvol-00000031false
-RESERVATIONr-sll3yfjlae4b3654ea08441fabe232390ae908b6
-INSTANCEi-000015b2ami-0000001emonitoring-serverrunningvenaruzzo-cloudpp0m1.small2014-09-01T09:34:31.000Znova10.62.13.5instance-store
+
+
+RESERVATION	r-t7x3t9zx	f96899662ae5413a95d75bea2bc180b7	
+INSTANCE	i-0004efde	ami-0000001b		rigo1	running	None (f96899662ae5413a95d75bea2bc180b7, cld-blu-10.cloud.pd.infn.it)	0		cloudveneto.small	2016-06-29T12:56:35.000Z	nova		10.67.10.6			instance-store											
+RESERVATION	r-y3z5nc4p	eb366f2f594d4bc3a4fb19a45f0eca48	
+INSTANCE	i-00028167	ami-00000013		centos-test-xrdp	running	test-kvm (eb366f2f594d4bc3a4fb19a45f0eca48, cld-blu-10.cloud.pd.infn.it)	0		cloudveneto.small	2015-12-27T19:20:55.000Z	nova						10.67.4.20			instance-store											
+RESERVATION	r-wqia3uhs	f96899662ae5413a95d75bea2bc180b7	
+INSTANCE	i-0004efdb	ami-0000001b		rigobello1	error	None (f96899662ae5413a95d75bea2bc180b7, cld-blu-10.cloud.pd.infn.it)	0		cloudveneto.tiny	2016-06-29T12:52:39.000Z	nova	instance-store											
+RESERVATION	r-kemjhamo	7114e3c97144459a9c8afbb9f09b4def	
+INSTANCE	i-00001aca	ami-00000018	90.147.143.153	cld-blu-gate	running	None (7114e3c97144459a9c8afbb9f09b4def, cld-blu-13.cloud.pd.infn.it)	0		cloudveneto.small	2015-06-30T12:56:56.000Z	nova	90.147.143.153	10.68.1.2			instance-store											
+RESERVATION	r-rmy09zqr	7114e3c97144459a9c8afbb9f09b4def	
+INSTANCE	i-00060b43	ami-00000002		cld-blu-13.cloud.pd.infn.it-nagiostest-2016-09-23-153310	running	None (7114e3c97144459a9c8afbb9f09b4def, cld-blu-13.cloud.pd.infn.it)	0		cloudveneto.tiny	2016-09-23T13:33:13.000Z	nova						192.168.1.193			instance-store											
+RESERVATION	r-l22sm2tk	7e4579b80d1546ac86b13700d86f55e0	
+INSTANCE	i-0004c143	ami-00000045		vmblack3	running	mattia_keypair (7e4579b80d1546ac86b13700d86f55e0, cld-blu-09.cloud.pd.infn.it)	0		cloudveneto.xlarge	2016-06-15T16:49:14.000Z	nova	10.67.7.19			instance-store											
+RESERVATION	r-8ejrnbkp	66958fd42fb743a9a9ab267cf42072df	
+INSTANCE	i-0004941c	ami-00000057		cld-blu-09.cloud.pd.infn.it-2016-06-02-141417	stopped	None (66958fd42fb743a9a9ab267cf42072df, cld-blu-09.cloud.pd.infn.it)	0		cloudveneto.medium	2016-06-02T12:14:21.000Z	nova
+....
+....
 </screen>
 
 </section>
