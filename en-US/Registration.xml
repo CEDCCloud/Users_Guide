@@ -79,8 +79,7 @@ in the Dashboard. However this is not yet operational.
 
 
 <para>
-Once authenticated on your SSO system you will be redirected on the cloud we site and 
-a form like the one in the following picture should appear:
+Once authenticated on your SSO system you will be redirected to a form like this:
 </para>
 
 <para>
@@ -98,6 +97,35 @@ your phone number, the name of a contact person in Padova/Legnaro
 (e.g. your team leader), and if needed some notes.
 </para>
 
+<para>
+<literal>Your request will be accepted only if you specify a
+valid reference person from your Department/Institution.</literal> Please refer to the following table
+to contact the appropriate person:
+<table>
+   <title>Table of reference persons for project creation</title>
+   <tgroup cols='2' align='left'>
+   <thead>
+      <row>
+      <entry>Department/Institution</entry><entry>Referent</entry>
+      </row>
+   </thead>
+   <tbody>
+      <row> <entry>Physics and Astronomy Dept.</entry>               <entry>prof. Alberto Garfagnini</entry> </row>
+      <row> <entry>Biology Dept.</entry>                             <entry>prof. Giorgio Valle</entry> </row>
+      <row> <entry>Geoscience Dept.</entry>                          <entry>prof. Manuele Faccenda</entry> </row>
+      <row> <entry>Information Engineering Dept.</entry>             <entry>prof. Barbara Di Camillo</entry> </row>
+      <row> <entry>Civil and Environmental Engineering Dept.</entry> <entry>prof. Lorenzo Sanavia</entry> </row>
+      <row> <entry>Mathematics Dept.</entry>                         <entry>prof. Alessandro Sperduti</entry> </row>
+      <row> <entry>Molecular Medicine Dept.</entry>                  <entry>prof. Stefano Toppo</entry> </row>
+      <row> <entry>Biomedical Sciences Dept.</entry>                 <entry>prof. Silvio Tosatto</entry> </row>
+      <row> <entry>Chemical Sciences Dept.</entry>                   <entry>prof. Antonino Polimeno</entry> </row>
+      <row> <entry>Pharmaceutical Sciences Dept.</entry>             <entry>prof. Stefano Moro</entry> </row>
+      <row> <entry>INFN - Padova</entry>                             <entry>dott. Mauro Morandin</entry> </row>
+      <row> <entry>INFN - Legnaro</entry>                            <entry>dott. Michele Gulmini</entry> </row>
+   </tbody>
+   </tgroup>
+</table>
+</para>
 
 <para>
 For what concerns the <menuchoice><guimenu>Project Action</guimenu></menuchoice>
@@ -143,7 +171,7 @@ Public (i.e. not private) projects are projects where other users can apply
 for membership. They are supposed to be used for experiments or other research
 groups.
 </para>
-<para><literal>Personal private</literal> projects are <literal>discouraged</literal> and are created 
+<para><literal>Personal private projects are discouraged</literal> and are created 
 only for convincing reasons. </para>
 </note>
 
@@ -155,36 +183,6 @@ manage the membership requests for this project. So the request to create a new
 project should be done by the relevant experiment/group leader.
 </para>
 </note>
-
-<para>
-Requests for new project creation will only be accepted from selected people
-from the relevant Departments/Institutions. Please refer to the following table
-to contact the appropriate person:
-<table>
-   <title>Table of allowed requesters for project creation</title>
-   <tgroup cols='2' align='left'>
-   <thead>
-      <row>
-      <entry>Department/Institution</entry><entry>Referent</entry>
-      </row>
-   </thead>
-   <tbody>
-      <row> <entry>Physics and Astronomy Dept.</entry>               <entry>prof. Alberto Garfagnini</entry> </row>
-      <row> <entry>Biology Dept.</entry>                             <entry>prof. Giorgio Valle</entry> </row>
-      <row> <entry>Geoscience Dept.</entry>                          <entry>prof. Manuele Faccenda</entry> </row>
-      <row> <entry>Information Engineering Dept.</entry>             <entry>prof. Barbara Di Camillo</entry> </row>
-      <row> <entry>Civil and Environmental Engineering Dept.</entry> <entry>prof. Lorenzo Sanavia</entry> </row>
-      <row> <entry>Mathematics Dept.</entry>                         <entry>prof. Alessandro Sperduti</entry> </row>
-      <row> <entry>Molecular Medicine Dept.</entry>                  <entry>prof. Stefano Toppo</entry> </row>
-      <row> <entry>Biomedical Sciences Dept.</entry>                 <entry>prof. Silvio Tosatto</entry> </row>
-      <row> <entry>Chemical Sciences Dept.</entry>                   <entry>prof. Antonino Polimeno</entry> </row>
-      <row> <entry>Pharmaceutical Sciences Dept.</entry>             <entry>prof. Stefano Moro</entry> </row>
-      <row> <entry>INFN - Padova</entry>                             <entry>dott. Mauro Morandin</entry> </row>
-      <row> <entry>INFN - Legnaro</entry>                            <entry>dott. Michele Gulmini</entry> </row>
-   </tbody>
-   </tgroup>
-</table>
-</para>
 
 <para>
 When you have filled the form, click on the 
@@ -228,8 +226,6 @@ can start using the CloudVeneto) or if for some reason
 your request is refused.
 </para>
 
-<!-- 
--->
 
 </section>
 
@@ -237,15 +233,8 @@ your request is refused.
 <section id="ApplyUsingUserPasswd">  
 <title> Apply for an account using User and Password</title>
 
-<para>Coming soon.</para>
-
-<!--
-
 <para>
-If and only if you don't have an account on the INFN Authenticaton and
-Authorization Infrastructure (INFN AAI), click on the icon on the right.
-The following image should appear: 
-
+If and only if you don't have an account on the UniPD SSO or INFN AAI, click on the icon on the left:
 
 <mediaobject>
 <imageobject>
@@ -256,13 +245,14 @@ The following image should appear:
 
 <para>
 Click then on the 
-<menuchoice><guimenu>Register</guimenu></menuchoice> button.
+<menuchoice><guimenu>Register</guimenu></menuchoice> button below.
 A form such as the one of the following image will appear.
 
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/RegisterFormUserPasswd.png" />
+  <imagedata condition="web" fileref="./images/RegisterFormUserPasswd.png" />
+  <imagedata condition="pdf" fileref="./images/RegisterFormUserPasswd.png" width="450" />
 </imageobject>
 </mediaobject>
 
@@ -274,8 +264,38 @@ Organization (e.g. 'INFN Padova'), Phone number.
 Choose a User name (please note that it could be changed by the Cloud
 admins during the registration process) and a Password.
 Specify the name of a contact person in Padova/Legnaro
-(e.g. your team leader), and if needed provide some other info in the
+(e.g. your team leader), and optionally provide some other info in the
 'Notes' field. 
+</para>
+
+<para>
+<literal>Your request will be accepted only if you specify a
+valid reference person from your Department/Institution.</literal> Please refer to the following table
+to contact the appropriate person:
+<table>
+   <title>Table of reference persons for project creation</title>
+   <tgroup cols='2' align='left'>
+   <thead>
+      <row>
+      <entry>Department/Institution</entry><entry>Referent</entry>
+      </row>
+   </thead>
+   <tbody>
+      <row> <entry>Physics and Astronomy Dept.</entry>               <entry>prof. Alberto Garfagnini</entry> </row>
+      <row> <entry>Biology Dept.</entry>                             <entry>prof. Giorgio Valle</entry> </row>
+      <row> <entry>Geoscience Dept.</entry>                          <entry>prof. Manuele Faccenda</entry> </row>
+      <row> <entry>Information Engineering Dept.</entry>             <entry>prof. Barbara Di Camillo</entry> </row>
+      <row> <entry>Civil and Environmental Engineering Dept.</entry> <entry>prof. Lorenzo Sanavia</entry> </row>
+      <row> <entry>Mathematics Dept.</entry>                         <entry>prof. Alessandro Sperduti</entry> </row>
+      <row> <entry>Molecular Medicine Dept.</entry>                  <entry>prof. Stefano Toppo</entry> </row>
+      <row> <entry>Biomedical Sciences Dept.</entry>                 <entry>prof. Silvio Tosatto</entry> </row>
+      <row> <entry>Chemical Sciences Dept.</entry>                   <entry>prof. Antonino Polimeno</entry> </row>
+      <row> <entry>Pharmaceutical Sciences Dept.</entry>             <entry>prof. Stefano Moro</entry> </row>
+      <row> <entry>INFN - Padova</entry>                             <entry>dott. Mauro Morandin</entry> </row>
+      <row> <entry>INFN - Legnaro</entry>                            <entry>dott. Michele Gulmini</entry> </row>
+   </tbody>
+   </tgroup>
+</table>
 </para>
 
 <para>
@@ -326,27 +346,17 @@ a small quota used to test the Cloud infrastructure.
 
 
 <para>
-When you have filled the form, click on the 
-<menuchoice><guimenu>Read the AUP</guimenu></menuchoice> button. The following
-window will appear.
-
-<mediaobject>
-<imageobject>
-  <imagedata fileref="./images/ReadAUP.jpg" />
-</imageobject>
-</mediaobject>
-
+When you have filled the form, read and accept the AUP clicking on the 
+<menuchoice><guimenu>Accept the AUP</guimenu></menuchoice> button on the right.
 </para>
 
 <para>
-Read the AUP that you need to accept (by clicking the 
-<menuchoice><guimenu>Accept</guimenu></menuchoice> button) to be allowed
-to have an account.
+Once you have accepted the AUP the <menuchoice><guimenu>Register</guimenu></menuchoice>
+button will be available for you to click.
 </para>
 
 <para>
-Finally click on the <menuchoice><guimenu>Register</guimenu></menuchoice> 
-button and you are done.
+After you clicked the <menuchoice><guimenu>Register</guimenu></menuchoice> button this page should appear:
 
 <mediaobject>
 <imageobject>
@@ -364,8 +374,6 @@ can start using the CloudVeneto) or if for some reason
 your request is refused.
 </para>
 
--->
-
 </section>
 
 
@@ -379,31 +387,24 @@ time you can ask the creation of a new project or the membership to
 an already existing project.
 </para>
 
-<para>For the time being mail your request to <email>cedc-support@lists.pd.infn.it</email> 
-to request access for other projects.</para>
-
-<!-- 
-
 <para>
-This can be done using the OpenStack dashboard clicking on 
-<menuchoice><guimenu>Request for projects</guimenu></menuchoice> (on the 
-bottom-left).
-
-A window such as this one will appear:
+Both operations are performed by accessing the
+<menuchoice><guimenu>Identity</guimenu><guisubmenu>Projects</guisubmenu></menuchoice>
+tab of the OpenStack dashboard and clicking on 
+<menuchoice><guimenu>Subscribe to project</guimenu></menuchoice>
+as depicted on the following image:
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/ProjectRequest.png" />
+  <imagedata condition="web" fileref="./images/ProjectRequest.png" />
+  <imagedata condition="pdf" fileref="./images/ProjectRequest.png" width="450" />
 </imageobject>
 </mediaobject>
 </para>
 
 <para>
-Using this window you can then ask the creation of a new project or the
-affiliation to already existing projects.
+Fulfill your request selectiong the relevant choice under the <menuchoice><guimenu>Project action</guimenu></menuchoice> dropdown list.
 </para>
-
--->
 
 </section>
 
