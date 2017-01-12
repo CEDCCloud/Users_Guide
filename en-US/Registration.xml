@@ -408,6 +408,8 @@ Fulfill your request selecting the relevant choice under the <menuchoice><guimen
 
 </section>
 
+</section>
+
 <section id="ManageProjectMembershipRequests">
 <title>Manage project membership requests (only for project managers)</title>
 
@@ -511,6 +513,5 @@ Otherwise, to reject the request, click on the
 
 </section>
 
-</section>
 
 </chapter>
