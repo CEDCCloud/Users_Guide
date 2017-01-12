@@ -403,17 +403,13 @@ as depicted on the following image:
 </para>
 
 <para>
-Fulfill your request selectiong the relevant choice under the <menuchoice><guimenu>Project action</guimenu></menuchoice> dropdown list.
+Fulfill your request selecting the relevant choice under the <menuchoice><guimenu>Project action</guimenu></menuchoice> dropdown list.
 </para>
 
 </section>
 
 <section id="ManageProjectMembershipRequests">
 <title>Manage project membership requests (only for project managers)</title>
-
-<para>To Be Done.</para>
-
-<!-- 
 
 <para>
 If you are the manager of a project, you will receive membership requests
@@ -427,7 +423,8 @@ an e-mail such as this one:
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/email_subreq.png" />
+  <imagedata condition="web" fileref="./images/email_subreq.png" />
+  <imagedata condition="pdf" fileref="./images/email_subreq.png" width="450" />
 </imageobject>
 </mediaobject>
 </para>
@@ -435,15 +432,16 @@ an e-mail such as this one:
 
 <para>
 To manage such requests, open the OpenStack web dashboard, log in, and then 
-click on
-<menuchoice><guimenu>Subscriptions</guimenu></menuchoice> (on the bottom-left).
+access
+<menuchoice><guimenu>Identity</guimenu><guisubmenu>Subscriptions</guisubmenu></menuchoice>
 An image such as the following one, with the list of the pending requests,
 will appear.
 
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/Subscriptions.png" />
+  <imagedata condition="web" fileref="./images/Subscriptions.png" />
+  <imagedata condition="pdf" fileref="./images/Subscriptions.png" width="450" />
 </imageobject>
 </mediaobject>
 </para>
@@ -456,7 +454,8 @@ A window such as the following one will appear:
 
 <mediaobject>
 <imageobject>
-  <imagedata fileref="./images/ProcessSubscription.png" />
+  <imagedata condition="web" fileref="./images/ProcessSubscription.png" />
+  <imagedata condition="pdf" fileref="./images/ProcessSubscription.png" width="450" />
 </imageobject>
 </mediaobject>
 </para>
@@ -468,8 +467,6 @@ the request.
 Otherwise, to reject the request, click on the 
 <menuchoice><guimenu>Reject</guimenu></menuchoice> button.
 </para>
-
--->
 
 </section>
 
