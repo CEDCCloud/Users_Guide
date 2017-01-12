@@ -470,6 +470,46 @@ Otherwise, to reject the request, click on the
 
 </section>
 
+<section id="ManageProjectMembers">
+<title>Manage project members requests (only for project managers)</title>
+
+<para>
+  If you are a project manager you can modify the members list of your
+  project.
+</para>
+
+<para>
+  Open the OpenStack web dashboard, i.e. go to
+  <ulink url="https://cloud.cedc.csia.unipd.it/dashboard">https://cloud.cedc.csia.unipd.it/dashboard</ulink>
+  in a browser. Log in using the relevant method an access the 
+  <menuchoice><guimenu>Identity</guimenu><guisubmenu>Project Members</guisubmenu></menuchoice>
+  panel. The list of users affiliated to your project will appear:
+
+  <mediaobject>
+    <imageobject>
+      <imagedata condition="web" fileref="./images/IdentityProjectMembers.png" />
+      <imagedata condition="pdf" fileref="./images/IdentityProjectMembers.png" width="450" />
+    </imageobject>
+  </mediaobject>
+  
+
+</para>
+
+<para>
+  From here you can also change the role of a specific user (by clicking on 'Toggle Role')
+  from 'Project User' to 'Project manager' or viceversa.
+</para>
+
+<note><para>
+  If a user is promoted to Project manager, she will then be allowed to manage affilitation requests
+  to the project, as described in <xref linkend="ManageProjectMembershipRequests"/>.
+</para> </note> 
+
+<para>
+  From this window you can also remove a specific user from the project you manage.
+</para>  
+
+</section>
 
 </section>
 
