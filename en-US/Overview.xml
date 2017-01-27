@@ -143,6 +143,24 @@ If you have problems using the CloudVeneto cloud, please
 contact the admins at <email>cedc-support@lists.pd.infn.it</email>.
 </para>
 
+<warning>
+<para>
+Disclaimer: technical support on the CloudVeneto platform is provided on <literal>best effort</literal> basis.
+The CloudVeneto provide and infrastructure where you can instantiate your servers but, once activated, your
+server are <literal>managed by you</literal>.
+</para>
+
+<para>This implies that the support crew <literal>doesn't provide support</literal> on topics like:</para>
+
+<itemizedlist>
+<listitem><para>How to install/compile/configure your software;</para></listitem>
+<listitem><para>ssh / scp basic usage (ask your Department / Institution technicians about that);</para></listitem>
+<listitem><para>Basic linux usage (except what's described in this guide);</para></listitem>
+<listitem><para>Accessing your VM 'the graphical way'.</para></listitem>
+</itemizedlist>
+
+</warning>
+
 <para>                                                                             
 Changes and planned interventions to the service will be posted on the             
 <email>cloud-users@pd.infn.it</email>.                                       
