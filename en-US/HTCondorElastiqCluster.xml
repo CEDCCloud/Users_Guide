@@ -1,0 +1,523 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Users_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="HTCondorElastiqCluster">
+<title>Creating Batch Clusters on the Cloud</title>
+
+<para>
+  The virtual machines provided by the CloudVeneto cloud platform can also be used to
+  implement batch clusters where users can run their jobs.
+</para>
+<para>
+In this chapter we explain how to implement a dynamic batch cluster based
+on <ulink url="http://research.cs.wisc.edu/htcondor/manual/">HTCondor</ulink>.
+</para>
+  
+ 
+
+  
+
+<section id="TheIdea">
+<title>Intro: the idea</title>
+<para>                                                                         
+  You create on the cloud a virtual machine that acts as a master for a dynamic
+  batch system (implemented using HTCondor).
+  When you create the master, using the instructions reported in
+  <xref linkend="CreatingVMs"/>, you will need to specify some user-data to describe the cluster
+  configuration, as described below.
+</para>  
+
+
+<para>
+  The master node will be able to
+  spawn (using the EC2 euca2ools) new slave nodes (where jobs are executed) when jobs are submitted to the batch system. The elastic cluster will provide a number of virtual resources that scales up or down depending on your needs. The total number of active virtual nodes is dynamic.
+</para>
+
+<para>
+  You can log in on the master node and submit jobs to the batch system. These jobs will be run on the slave nodes, get done, and eventually the slaves will be released. 
+</para>
+
+<note>
+<para>
+  The master and the slaves must use the same image (which should have
+  all the needed software). However the master can use a different flavor with
+  respect to the slave nodes.
+</para>
+</note>
+
+</section>
+
+
+
+
+
+<section id="Prerequisites">
+<title>Prerequisites</title>
+<para>
+<itemizedlist>
+  <listitem><para>You should be registered in the Cloud as member of a project.</para></listitem>
+
+<listitem><para>
+  You created a SSH key-pair, ad explained in
+  <xref linkend="CreatingAKeypair"/>.
+  This will allow you to log in the master and slave nodes.
+</para></listitem>
+
+<listitem><para>You need to download the EC2 credentials of the project you want to use (see <xref linkend="AccessingtheCloudthroughEC2"/>). You can download them from the dashboard as following:</para>
+<para>Open the dashboard, select the project (drop down menu on top left of the dashboard), go to Access &amp; Security (under the 'Compute' section), go to
+'Api Access' section and here click on [Download EC2 credentials].</para>
+<para>You'll get a zip file with a name like: testing-x509.zip , where Project is the one you have chosen. The zip contains the following files:
+<screen>
+$ unzip testing-x509.zip
+Archive:  testing-x509.zip
+extracting: pk.pem
+extracting: cert.pem
+extracting: cacert.pem
+extracting: ec2rc.sh
+</screen>
+Extract all these files somewhere safe. The content of your ec2rc.sh file is something like:
+<screen>
+$ cat ec2rc.sh
+
+#!/bin/bash
+
+NOVARC=$(readlink -f "${BASH_SOURCE:-${0}}" 2>/dev/null) || NOVARC=$(python -c 'import os,sys; print os.path.abspath(os.path.realpath(sys.argv[1]))' "${BASH_SOURCE:-${0}}")
+NOVA_KEY_DIR=${NOVARC%/*}
+export EC2_ACCESS_KEY=<literal>&lt;access_key&gt;</literal>
+export EC2_SECRET_KEY=<literal>&lt;secret_key&gt;</literal>
+export EC2_URL=https://cloud.cedc.csia.unipd.it:8773/services/Cloud
+export EC2_USER_ID=42 # nova does not use user id, but bundling requires it
+export EC2_PRIVATE_KEY=${NOVA_KEY_DIR}/pk.pem
+export EC2_CERT=${NOVA_KEY_DIR}/cert.pem
+export NOVA_CERT=${NOVA_KEY_DIR}/cacert.pem
+export EUCALYPTUS_CERT=${NOVA_CERT} # euca-bundle-image seems to require this set
+
+alias ec2-bundle-image="ec2-bundle-image --cert ${EC2_CERT} --privatekey ${EC2_PRIVATE_KEY} --user 42 --ec2cert ${NOVA_CERT}"
+alias ec2-upload-bundle="ec2-upload-bundle -a ${EC2_ACCESS_KEY} -s ${EC2_SECRET_KEY} --url ${S3_URL} --ec2cert ${NOVA_CERT}"
+</screen>
+where EC2_ACCESS_KEY and EC2_SECRET_KEY are different for each project and user. The elastiq service uses these values to instantiate and to kill VMs in the specific project.
+</para></listitem>
+
+<listitem><para>
+  You need to identify the image to be used for the master and for the
+  slaves. Currently supported operating systems are RHEL7.x and derivates
+  (CentOS7.x, etc.) and Ubuntu. uCernVM based images are also
+  supported.
+  For such image you also need to know the relevant EC2 (AMI) id
+  (see <xref linkend="HowToFindAMIID"/>).
+</para></listitem>
+
+
+<listitem><para>
+  You need to set a specific security group to be used for the master node.
+  This security group must include the following rules:
+</para>
+<screen>
+Direction    Ether Type    IP Protocol    Port Range         Remote IP Prefix
+Egress       IPv4          Any            Any                0.0.0.0/0	
+Egress       IPv6          Any            Any                ::/0	
+Ingress      IPv4          ICMP           Any                0.0.0.0/0 	
+Ingress      IPv4          TCP            22 (SSH)           0.0.0.0/0	
+Ingress      IPv4          TCP            9618               0.0.0.0/0	
+Ingress      IPv4          TCP            41000 - 42000      0.0.0.0/0
+</screen>
+<note><para>
+  Instead of modifying the rules of an existing security group, we suggest to
+  create a new security group named e.g. "master_security_group".
+  Security groups are discussed in 
+  <xref linkend="SecurityGroups"/>.
+</para></note>
+
+<para>
+  The slave nodes will instead use the <literal>default</literal> security
+  group of your project. This group must include the following rule: 
+<screen>
+Direction  Ether Type  IP Protocol  Port Range   Remote IP Prefix   Remote Security Group
+Ingress    IPv4        Any          Any          -                 <literal>&lt;master_security_group&gt;</literal> 
+</screen>
+</para>
+<para>where <literal>&lt;master_security_group&gt;</literal> is the name of the security group that was chosen for the master node.</para> 
+	</listitem>
+
+<listitem><para>
+  You need to download <ulink url="https://github.com/CEDCCloud/ECM.git">ECM</ulink> software.  As explained in <xref linkend="ClusterConfiguration"/>,
+  this will be used to create the batch cluster configuration:
+<screen>
+$ git clone https://github.com/CloudPadovana/ECM.git
+</screen>
+	</para></listitem>
+	
+
+
+
+</itemizedlist>
+
+</para>
+
+	
+</section>
+
+<section id="ClusterConfiguration">
+<title>The cluster configuration</title>
+
+<para>
+  You must edit the ecm.conf file stored in the ECM directory (created
+  when you downloaded via git the ECM software)
+</para>
+<screen>
+$ cat ecm.conf
+WNS_FLAVOR=<literal>&lt;flavor_name&gt;</literal>
+MAX_VMS=<literal>&lt;max_vms&gt;</literal>
+MIN_VMS=<literal>&lt;min_vms&gt;</literal>
+JOBS_PER_VM=<literal>&lt;jobs_per_vm&gt;</literal>
+IDLE_TIME=<literal>&lt;idle_time&gt;</literal>
+KEY_NAME==<literal>&lt;ssh_key_name&gt;</literal>
+</screen>
+
+<para>
+Where:
+</para>
+<itemizedlist>
+        <listitem><para> 
+	  <literal>&lt;WNS_FLAVOR&gt;</literal> is the name of the
+	  flavor to be used for the slave nodes.
+	  Flavors have been discussed in <xref linkend="Flavors"/>. 
+	  Available flavors are listed in the dashboard when you try to
+	  launch a VM.  You can use, as an example, the cloudveneto.small (1 VCPU, 2GB RAM) or cloudveneto.medium (2 VCPU, 4GB RAM).
+	</para></listitem>
+	
+	<listitem><para>
+	  <literal>&lt;MAX_VMS&gt;</literal> is the maximum number of
+	  slave nodes that can be instantiated.
+	</para></listitem>
+	
+	<listitem><para>
+		<literal>&lt;MIN_VMS&gt;</literal> is the minimum number of slave nodes (never terminated, always available).
+	</para></listitem>
+	
+	<listitem><para>
+	  <literal>&lt;JOBS_PER_VM&gt;</literal> is the maximum number of
+	  jobs that will be run in a single slave node.
+		<important><para>
+		You have to verify that the number of jobs per VM is compatible with the number of VCPU of the selected flavor.
+		</para></important>
+	</para></listitem>
+
+	
+	
+	<listitem><para>
+	  <literal>&lt;IDLE_TIME&gt;</literal> is the time (in seconds) after
+	  which inactive VMs will be killed.
+        </para></listitem>
+
+	<listitem><para>
+	  <literal>&lt;KEY_NAME&gt;</literal> is the name (without the .pem extension) of ssh key
+	  previously created (see <xref linkend="CreatingAKeypair"/>) to be injected in the batch cluster nodes.
+        </para></listitem>
+
+
+
+
+
+
+</itemizedlist>
+
+<note><para>
+The batch system will use each CPU as a separate job slot. So if you have a flavor with 4 cpu, and you submit 1 job, 
+the master will create 1 slave and use 1 of the 4 available CPUs.
+If you submit 4 jobs, again the master will create 1 slave, and 
+will use all the 4 CPUs. Large flavors means less machines to be 
+created but possibly a sub-optimal usage of resources.
+</para></note>
+</section>
+
+<section id="LaunchTheCluster">
+<title>Start the elastic cluster</title>
+<para>
+  To start the elastic cluster, you only need to instantiate the master node.
+</para>
+<para>
+  When you create such master,
+  you will need to specify some user-data to describe the cluster configuration.
+  The ecm.py script will create such user-data file for you, using the ecm.conf file you previously edited.
+  (see <xref linkend="ClusterConfiguration"/>).
+</para>
+
+<para>
+First of all you have to set the relevant EC2 credentials:
+</para>
+<screen>
+$ source ec2rc.sh
+</screen>
+<para>
+Then you must launch ecm.py file and follow the instructions. We will create a CentOS 7 cluster as an example.
+</para>
+<screen>
+$ python ecm.py
+
+Choose the Operating System (OS) you want 
+to use for your master and worker nodes:
+
+1: Scientific Linux 6
+2: Ubuntu
+3: uCernVM
+4: CentOS
+
+OS type => 4
+</screen>
+<important><para>
+The same OS will be used to instantiate both master node and worker node(s).
+</para></important>
+
+<screen>
+Select the image for your CentOS 7 based master and your CentOS 7 based WNs:
+1: CentOS 6
+2: CentOS 7
+3: Other image. [WARNING] You have to know the EC2-id of image
+
+Image => 2
+
+</screen>
+<warning><para>
+  If you choose "Other image" you have to manually insert the image id in EC2 format (see <xref linkend="HowToFindAMIID"/>).     
+</para></warning>
+
+<para>
+  The script will now print something like:
+
+  <screen>
+Now you can use the master-centos-2017-01-31-12.35.18 file to instantiate the master node of your elastiq cluster.
+  </screen>
+</para>
+
+
+
+
+<para>
+  Now you have to start the master node.
+  As explained in <xref linkend="CreatingVMs"/>. go to 'Instances' and create
+  a new instance with [Launch Instances].
+		</para>
+		<para>
+		In the details selects:
+		</para>
+		<para>
+		[details]
+		<itemizedlist>
+			<listitem><para>Instance Name => whatever you like</para></listitem>
+			<listitem><para>Flavor => whatever you like; can be different from the flavor chosen for the slave nodes</para></listitem>
+			<listitem><para>Image name => The same image chosen for the slaves.</para></listitem>
+		</itemizedlist>
+		</para>
+		<para>
+		[Access and Security]
+		<itemizedlist>
+			<listitem><para>Key pair => The key-pair that will be used to log on the nodes of the batch cluster</para></listitem>
+			<listitem><para>Security Group => the security group for the master (choose only this one)</para></listitem>
+		</itemizedlist>
+		</para>
+		<para>
+		[post creation]
+		<itemizedlist>
+			<listitem><para>Customization Script Source => the user_data_file created by the ecm.py script </para></listitem>
+		</itemizedlist>
+		</para>
+		<para>
+		Then press launch.
+		</para>
+
+
+
+		
+<para>
+  Once you requested the creation of the master node, after some minutes, you will see that the master virtual machine and some 
+(depending on the "MIN_VMS" attribute you defined in the ecm.conf) slave nodes are created.
+</para>
+<para>
+  Get the IP address of master, and log in on this machine using the key you have imported/created before i.e:
+<screen>
+$ ssh -i ~/.ssh/id_rsa root@10.64.YY.XXX
+</screen>
+</para>
+
+<para>
+  For security reasons, as root you can not submit jobs to the HTCondor cluster. So make sure that a 'normal' account exists in the master
+  node. In case you can create using the command:
+
+  <screen>
+# adduser <literal>&lt;username&gt;</literal>
+</screen>
+Create a password for this account:
+<screen>
+# passwd <literal>&lt;username&gt;</literal>
+</screen>
+
+</para>
+
+<para>
+  You have to import any external disk, create homes, etc, as you would do in a normal machine.
+</para>
+</section>
+
+<section id="UseTheCluster">
+<title>Use the elastic cluster</title>
+
+
+<para>
+  Log to the master node using your unpriviledged account.
+
+Check if condor is running with the command:
+<screen>
+$ condor_q
+-- Schedd: 10-64-20-181.virtual-analysis-facility : &lt;10.64.20.181:41742&gt;
+ ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD
+
+0 jobs; 0 completed, 0 removed, 0 idle, 0 running, 0 held, 0 suspended
+</screen>
+
+Check the status of the cluster:
+
+<screen>
+$ condor_status
+Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
+
+slot1@10-64-22-84. LINUX      X86_64 Unclaimed Idle      0.000 1977  2+12:44:58
+slot2@10-64-22-84. LINUX      X86_64 Unclaimed Idle      0.000 1977  2+12:45:25
+                     Total Owner Claimed Unclaimed Matched Preempting Backfill
+
+        X86_64/LINUX     2     0       0         2       0          0        0
+
+               Total     2     0       0         2       0          0        0
+</screen>
+</para>
+
+
+<para>
+Create you HTCondor 'job file'. A simple example is the following:
+</para>
+<screen>
+$ cat test.classad
+
+Universe = vanilla
+Executable = /home/&lt;username&gt;/test.sh
+Log = test.log.$(Cluster)$(Process)
+Output = test.out.$(Cluster)$(Process)
+Error = test.err.$(Cluster)$(Process)
+Queue &lt;number_of_jobs_to_submit&gt;
+</screen>
+
+<para>
+where <literal>test.sh</literal> is the executable you want to run.
+
+</para>
+<para>
+Submit your jobs issuing the command:
+<screen>
+$ condor_submit test.classad
+</screen>
+and check their status with: 
+<screen>
+$ condor_q
+</screen>
+
+You can find documentation about HTCondor <ulink url="http://research.cs.wisc.edu/htcondor/manual/">here</ulink>.
+</para>
+</section>
+
+
+<section id="HowToFindAMIID">
+<title>How to find the EC2 (AMI) id of an image</title>
+<para>
+  As explained above, to use the Elastic batch cluster you need to
+  know the EC2 (AMI) id of the image you want to use.
+</para>
+<para>
+  First of all you need to install the euca2ools and to download the EC2
+  credentials for your project, as explained in
+  <xref linkend="AccessingtheCloudthroughEC2"/>.
+</para>
+
+<para>
+  Uncompress (unzip) the EC2 zip file, and source the ec2rc.sh script to set
+  the correct environment:
+  
+<screen>
+$ source ec2rc.sh
+</screen>
+</para>
+<para>
+  To discover the EC2 id of your image or snapshot, use the
+  'euca-describe-images' command:
+
+<screen>
+$ euca-describe-images
+
+IMAGE   ami-0000031b    None (uCernVM 2.3-0)    beaeede3841b47efb6b665a1a667e5b1        available       public                  machine                         instance-store
+IMAGE   ami-00000447    snapshot        36b1ddb5dab8404dbe7fc359ec95ecf5        available       public                  machine                         instance-store
+</screen>
+</para>
+
+<para>
+  Please note that for some euca2ools distributions sourcing the ec2rc.sh
+  script is not enough. You need to explictly specify the access and secret
+  keys, and the endpoint, with the relevant command line options:
+
+<screen>
+  euca-describe-images -I ${EC2_ACCESS_KEY} -S ${EC2_SECRET_KEY} -U ${EC2_URL}
+</screen>
+</para>
+
+<para>
+  In the example above:
+<itemizedlist>
+  <listitem><para>
+  the EC2 image id of the uCernVM 2.3-0 image is ami-0000031b
+  </para></listitem>
+    
+  <listitem><para>    
+  there is a snapshot whose EC2 is is ami-00000447.
+  </para></listitem>
+</itemizedlist>  
+</para>
+
+
+<para>
+  You can also see all the information of an image, e.g.:
+  
+<screen>
+$ euca-describe-images --debug ami-00000447 
+</screen>
+
+or:
+<screen>
+$ euca-describe-images -I ${EC2_ACCESS_KEY} -S ${EC2_SECRET_KEY} -U ${EC2_URL} --debug ami-00000447 
+</screen>
+
+The returned output will be something like:
+
+<screen>
+  &lt;requestId&gt;req-c56c3694-c555-464a-b21d-2c86ccc020be&lt;/requestId&gt;
+  &lt;imagesSet&gt;
+    &lt;item&gt;
+      &lt;description/&gt;
+      &lt;imageOwnerId&gt;36b1ddb5dab8404dbe7fc359ec95ecf5&lt;/imageOwnerId&gt;
+      &lt;isPublic&gt;true&lt;/isPublic&gt;
+      &lt;imageId&gt;ami-00000447&lt;/imageId&gt;
+      &lt;imageState&gt;available&lt;/imageState&gt;
+      &lt;architecture/&gt;
+      &lt;imageLocation&gt;snapshot/imageLocation&gt;
+      &lt;rootDeviceType&gt;instance-store&lt;/rootDeviceType&gt;
+      &lt;rootDeviceName&gt;/dev/sda1&lt;/rootDeviceName&gt;
+      &lt;imageType&gt;machine&lt;/imageType&gt;
+      &lt;name&gt;cernvm_230_ldap_pd&lt;/name&gt;
+    &lt;/item&gt;
+  &lt;/imagesSet&gt;
+&lt;/DescribeImagesResponse&gt;
+</screen>
+
+</para>
+
+</section>
+</chapter>
