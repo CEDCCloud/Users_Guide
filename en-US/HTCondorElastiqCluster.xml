@@ -145,7 +145,7 @@ Ingress    IPv4        Any          Any          -                 <literal>&lt;
   You need to download <ulink url="https://github.com/CEDCCloud/ECM.git">ECM</ulink> software.  As explained in <xref linkend="ClusterConfiguration"/>,
   this will be used to create the batch cluster configuration:
 <screen>
-$ git clone https://github.com/CloudPadovana/ECM.git
+$ git clone https://github.com/CEDCCloud/ECM.git
 </screen>
 	</para></listitem>
 	
@@ -252,7 +252,7 @@ First of all you have to set the relevant EC2 credentials:
 $ source ec2rc.sh
 </screen>
 <para>
-Then you must launch ecm.py file and follow the instructions. We will create a CentOS 7 cluster as an example.
+Then you must launch ecm.py file and follow the instructions. We will create a CentOS 6 cluster as an example.
 </para>
 <screen>
 $ python ecm.py
@@ -260,24 +260,24 @@ $ python ecm.py
 Choose the Operating System (OS) you want 
 to use for your master and worker nodes:
 
-1: Scientific Linux 6
+1: Fedora
 2: Ubuntu
 3: uCernVM
-4: CentOS
+4: CentOS7
+5: CentOS6
 
-OS type => 4
+OS type => 5
 </screen>
 <important><para>
 The same OS will be used to instantiate both master node and worker node(s).
 </para></important>
 
 <screen>
-Select the image for your CentOS 7 based master and your CentOS 7 based WNs:
+Select the image for your CentOS6 based master and your CentOS6 based WNs:
 1: CentOS 6
-2: CentOS 7
-3: Other image. [WARNING] You have to know the EC2-id of image
+2: Other image. [WARNING] You have to know the EC2-id of image
 
-Image => 2
+Image => 1
 
 </screen>
 <warning><para>
@@ -288,7 +288,7 @@ Image => 2
   The script will now print something like:
 
   <screen>
-Now you can use the master-centos-2017-01-31-12.35.18 file to instantiate the master node of your elastiq cluster.
+Now you can use the master-centos6-2017-03-16-17.45.31 file to instantiate the master node of your elastiq cluster.
   </screen>
 </para>
 
@@ -321,7 +321,7 @@ Now you can use the master-centos-2017-01-31-12.35.18 file to instantiate the ma
 		<para>
 		[post creation]
 		<itemizedlist>
-			<listitem><para>Customization Script Source => the user_data_file created by the ecm.py script </para></listitem>
+			<listitem><para>Customization Script Source => Select "File" from the dropdown menu and use "Choose File" to upload the user_data_file created by the ecm.py script </para></listitem>
 		</itemizedlist>
 		</para>
 		<para>
@@ -482,6 +482,37 @@ IMAGE   ami-00000447    snapshot        36b1ddb5dab8404dbe7fc359ec95ecf5        
 </itemizedlist>  
 </para>
 
+<note><para>
+In case you have snapshot on the output of the euca-describe-images you notice that you have no
+name associated with the ami-id. To obtain a nicely formatted list of (ami-id, name) couples you
+can use the following command:
+<screen>
+$ euca-describe-images --debug 2&gt;&amp;1 | grep 'imageId\|name' | sed 'N;s/\n/ /'
+
+      &lt;imageId&gt;ami-00000002&lt;/imageId&gt;       &lt;name&gt;cirros&lt;/name&gt;
+      &lt;imageId&gt;ami-0000000d&lt;/imageId&gt;       &lt;name&gt;Fedora 20 x86_64&lt;/name&gt;
+      &lt;imageId&gt;ami-00000010&lt;/imageId&gt;       &lt;name&gt;Centos 6 x86_64&lt;/name&gt;
+      &lt;imageId&gt;ami-00000013&lt;/imageId&gt;       &lt;name&gt;Centos 7 x86_64&lt;/name&gt;
+      &lt;imageId&gt;ami-0000001b&lt;/imageId&gt;       &lt;name&gt;ubuntu-14.04.3-LTSx86_64&lt;/name&gt;
+      &lt;imageId&gt;ami-0000005d&lt;/imageId&gt;       &lt;name&gt;matlab-2015a-glnxa64&lt;/name&gt;
+      &lt;imageId&gt;ami-00000057&lt;/imageId&gt;       &lt;name&gt;Win7-Pro-X86_64-ENU&lt;/name&gt;
+      &lt;imageId&gt;ami-00000027&lt;/imageId&gt;       &lt;name&gt;Fedora 23 x86_64&lt;/name&gt;
+      &lt;imageId&gt;ami-00000069&lt;/imageId&gt;       &lt;name&gt;Win7-Photoscan&lt;/name&gt;
+      &lt;imageId&gt;ami-0000002d&lt;/imageId&gt;       &lt;name&gt;photo-slave&lt;/name&gt;
+      &lt;imageId&gt;ami-0000004e&lt;/imageId&gt;       &lt;name&gt;s-medium-snap&lt;/name&gt;
+      &lt;imageId&gt;ami-0000005a&lt;/imageId&gt;       &lt;name&gt;uCernVM 3.6.5&lt;/name&gt;
+      &lt;imageId&gt;ami-000000ae&lt;/imageId&gt;       &lt;name&gt;archlinux&lt;/name&gt;
+      &lt;imageId&gt;ami-000000c6&lt;/imageId&gt;       &lt;name&gt;ubuntu-16.04.1-LTS x86_64&lt;/name&gt;
+      &lt;imageId&gt;ami-000000c9&lt;/imageId&gt;       &lt;name&gt;Fedora 25 x86_64&lt;/name&gt;
+      &lt;imageId&gt;ami-000000d2&lt;/imageId&gt;       &lt;name&gt;x2go-thinclient-server&lt;/name&gt;
+      &lt;imageId&gt;ami-000000d5&lt;/imageId&gt;       &lt;name&gt;Win7-test&lt;/name&gt;
+      &lt;imageId&gt;ami-000000db&lt;/imageId&gt;       &lt;name&gt;matlab-2016b&lt;/name&gt;
+      &lt;imageId&gt;ami-000000d8&lt;/imageId&gt;       &lt;name&gt;ubuntu-16.04.1+Matlab_2016b&lt;/name&gt;
+...
+      Note that items may appear multiple times...
+...
+</screen>
+</para></note>
 
 <para>
   You can also see all the information of an image, e.g.:
