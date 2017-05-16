@@ -328,6 +328,14 @@ scp -P 2002 -i ~/private/my_key  my_local_file.txt  remoteuser@localhost:/remote
 </screen>
 Please note the <literal>remoteuser@localhost</literal> part of the command.
 </para>
+	
+<para>
+If <ulink url="https://github.com/libfuse/sshfs">sshfs</ulink> is installed, you can use it with the tunnel with the following command
+<screen>
+sshfs -p 2002 remoteuser@localhost:/remote/path /local/path -o IdentityFile=~/private/my_key
+</screen>
+It is a file system client that mounts the remote file system locally.
+</para>
 
 <note><para>
 <literal>Tip 1:</literal> if the last part of your VM IP is Z, choosing 2000+Z as the local TCP port
