@@ -169,5 +169,20 @@ All registered users to the Cloud are member of this mailing list.
 </section>
 
 
+<section id="GivingCredit">
+<title>Acknowledge CloudVeneto / Scientific citations</title>
+<para>    
+If you wish to give credit for the use of the CloudVeneto infrastructure in your scientifc publication or elsewhere the following quote can be used:
+</para>
+<para>
+<blockquote>
+<para>"CloudVeneto is acknowledged for the use of computing and storage facilities."</para>
+</blockquote>
+</para>
+<para>
+This technical report can also be used as a reference:
+<ulink url="http://paduaresearch.cab.unipd.it/9653/">Progetto CloudVeneto.it - Status Report.</ulink>
+</para>
+</section>
 
 </chapter>
