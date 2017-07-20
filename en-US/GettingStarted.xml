@@ -446,6 +446,26 @@ interact with an EC2 based cloud.
 The euca2ools require a set of shell environment variables in order to run. 
 These environment variables are different per project that you work on.
 </para>
+
+<para>You can install the <literal>euca2ools</literal> package as
+follows:</para>
+<para>CentOS / Fedora
+<screen>
+  # yum install euca2ools
+</screen>
+</para>
+<para>Ubuntu / Debian
+<screen>
+  # apt-get install euca2ools
+</screen>
+</para>
+
+
+<para>
+The euca2ools are also installed on <literal>cld-blu-gate.cedc.csia.it</literal>.
+</para>
+
+
 <para>
 If you log into the dashboard, you 
 will find an <menuchoice><guimenu>Access &amp; Security</guimenu></menuchoice>
@@ -485,8 +505,7 @@ use a C shell based shell, you would need to adapt this using setenv.
 </para>
 
 <para>
-To test 
-it, you can e.g. try the following:
+To test it, you can e.g. try the following:
 </para>
 
 <screen>
@@ -511,6 +530,18 @@ INSTANCE	i-0004941c	ami-00000057		cld-blu-09.cloud.pd.infn.it-2016-06-02-141417	
 ....
 ....
 </screen>
+
+<warning>
+<para>
+For some euca2ools distributions sourcing the ec2rc.sh script is not enough.
+You need to explictly specify access and secret keys and the endpoint with the
+relevant command line options, e.g.:
+<screen>
+$ euca-describe-instances -I ${EC2_ACCESS_KEY} -S ${EC2_SECRET_KEY} -U ${EC2_URL}
+</screen>
+This is true, as an example, for the tools installed on cld-blu-gate.cedc.csia.unipd.it  
+</para>
+</warning>
 
 </section>
 
